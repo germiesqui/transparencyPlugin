@@ -17,9 +17,6 @@ api = Api(app)
 
 
 def allMethods(article):
-    article.download()
-    article.parse()
-    # article.nlp()
     print('debug')
 
     return {
@@ -32,26 +29,42 @@ def allMethods(article):
         'movies': article.movies
     }
 
-def authors():
-    return {'response': 'Not Yet implemented!'}
+def authors(article):
+    return {
+        'authors': article.authors,
+    }
 
-def publishDate():
-    return {'response': 'Not Yet implemented!'}
+def publishDate(article):
+    return {
+        'pubishDate': article.publish_date.strftime("%m/%d/%Y"),
+    }
 
-def keywords():
+def keywords(article):
     return {'response': 'Not Yet implemented!'}
+    # return {
+    #     'keywords': article.keywords,
+    # }
 
-def summary():
+def summary(article):
     return {'response': 'Not Yet implemented!'}
+    # return {
+    #     'summary': article.summary,
+    # }
     
-def text():
-    return {'response': 'Not Yet implemented!'}
+def text(article):
+    return {
+        'text': article.text,
+    }
 
-def topImg():
-    return {'response': 'Not Yet implemented!'}
+def topImg(article):
+    return {
+        'topImg': article.top_image,
+    }
 
-def movies():
-    return {'response': 'Not Yet implemented!'}
+def movies(article):
+    return {
+        'movies': article.movies
+    }
 
 class BasicData(Resource):
 
@@ -68,9 +81,12 @@ class BasicData(Resource):
             'topImg': topImg,
             'movies': movies
         }
-        articles = Article(url)
+        article = Article(url)
+        article.download()
+        article.parse()
+        # article.nlp()
 
-        return options[option](articles)
+        return options[option](article)
 
 
 api.add_resource(BasicData, '/basicData/<option>',)
