@@ -7,7 +7,6 @@ import os
 import sys
 from flask_cors import CORS
 
-import newspaper
 import nltk
 
 from newspaper import Article
@@ -17,54 +16,60 @@ api = Api(app)
 
 
 def allMethods(article):
-    print('debug')
-
     return {
         'authors': article.authors,
         'pubishDate': article.publish_date.strftime("%m/%d/%Y"),
-        # 'keywords': article.keywords,
-        # 'summary': article.summary,
+        'keywords': article.keywords,
+        'summary': article.summary,
         'text': article.text,
         'topImg': article.top_image,
         'movies': article.movies
     }
+
 
 def authors(article):
     return {
         'authors': article.authors,
     }
 
+
 def publishDate(article):
     return {
         'pubishDate': article.publish_date.strftime("%m/%d/%Y"),
     }
 
+
 def keywords(article):
-    return {'response': 'Not Yet implemented!'}
-    # return {
-    #     'keywords': article.keywords,
-    # }
+    nltk.download('punkt')
+    return {
+        'keywords': article.keywords,
+    }
+
 
 def summary(article):
-    return {'response': 'Not Yet implemented!'}
-    # return {
-    #     'summary': article.summary,
-    # }
-    
+    nltk.download('punkt')
+    return {
+        'summary': article.summary,
+    }
+
+
 def text(article):
     return {
         'text': article.text,
     }
+
 
 def topImg(article):
     return {
         'topImg': article.top_image,
     }
 
+
 def movies(article):
     return {
         'movies': article.movies
     }
+
 
 class BasicData(Resource):
 
@@ -81,10 +86,11 @@ class BasicData(Resource):
             'topImg': topImg,
             'movies': movies
         }
+
         article = Article(url)
         article.download()
         article.parse()
-        # article.nlp()
+        article.nlp()
 
         return options[option](article)
 
