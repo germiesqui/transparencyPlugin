@@ -1,6 +1,6 @@
-<h1>Bienvenido a Transparency Plugin ss</h1>
+<h1>Bienvenido a Transparency Plugin</h1>
 <form action="#" method="post" class='form-inline'>
   <label for="urlInput">Introduzca una URL a analizar</label>
-  <input type="url" name="urlAnalice" id="urlInput" placeholder="Intorduza URL" class='form-control'>
-  <button type="submit" class='btn btn-primary'>Analizar</button>
+  <input type="url" name="urlAnalice" id="urlInput" placeholder="Intorduza URL" [(ngModel)]='url' class='form-control'>
+  <button type="submit" (click)='sendUrl()' class='btn btn-primary'>Analizar</button>
 </form>

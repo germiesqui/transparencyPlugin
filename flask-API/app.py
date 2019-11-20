@@ -5,6 +5,7 @@ from flask import Flask, request
 from flask_restful import Resource, Api
 import os
 import sys
+import json
 from flask_cors import CORS
 
 import nltk
@@ -13,6 +14,10 @@ from newspaper import Article
 
 app = Flask(__name__)
 api = Api(app)
+
+CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
+url = ''
 
 
 def allMethods(article):
@@ -71,11 +76,18 @@ def movies(article):
     }
 
 
+class AnaliceUrl(Resource):
+    def post(self):
+        global url
+        data = request.get_json()
+        url = data['url']
+        return {'url': url}
+
+
 class BasicData(Resource):
 
-    def get(self, option):
-        args = request.args
-        url = args.get('url')
+    def post(self, option):
+        global url
         options = {
             'all': allMethods,
             'authors': authors,
@@ -95,7 +107,8 @@ class BasicData(Resource):
         return options[option](article)
 
 
-api.add_resource(BasicData, '/basicData/<option>',)
+api.add_resource(AnaliceUrl, '/analiceUrl',)
+api.add_resource(BasicData, '/basicInfo/<option>',)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5001, debug=True)

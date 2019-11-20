@@ -1,1 +1,5 @@
-<p>categories works!</p>
+<p>Seleccione una categoria</p>
+
+<a *ngFor='let category of categories' href="{{baseUrl}}{{category.url}}">
+  <img [src]="category.src" [title]='category.title' [alt]="category.alt">
+</a>
