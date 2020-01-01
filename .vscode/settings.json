@@ -1,5 +1,5 @@
 {
-  "python.pythonPath": "/home/germiesqui/Documentos/practicas/transparencyPlugin/env/bin/python3",
+  "python.pythonPath": "venv/bin/python",
 
   "files.watcherExclude": {
     "**/.git/objects/**": true,
@@ -51,6 +51,8 @@
     "**/bower_components": true,
     "**/dist/**": true,
     "**/log/**": true
-  }
+  },
+  "python.linting.pylintEnabled": true,
+  "python.linting.enabled": true
 }
 

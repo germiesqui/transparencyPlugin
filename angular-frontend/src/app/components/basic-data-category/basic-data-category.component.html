@@ -1,1 +1,23 @@
-<p>basic-data-category works!</p>
+<p>Authors</p>
+<span *ngFor='let author of basicData.authors'>
+    {{author}}
+</span>
+
+<p>Pubish Date {{basicData.publishDate}}</p>
+
+<p>Keywords</p>
+<span *ngFor='let keyword of basicData.keywords'>
+    {{keyword}}
+</span>
+
+<p>summary {{basicData.summary}}</p>
+
+<p>Movies {{basicData.summary}}</p>
+<span *ngFor='let movie of basicData.movies'>
+    {{movie}}
+</span>
+
+<p>topImg {{basicData.topImg}}</p>
+
+<p>text {{basicData.text}}</p>
+  

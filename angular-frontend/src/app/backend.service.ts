@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
+import { IBasicData } from './components/basic-data-category/basicData';
 
 @Injectable({
   providedIn: "root"
@@ -17,5 +18,9 @@ export class BackendService {
         "Access-Control-Allow-Origin": '*'
       })
     });
+  }
+
+  getBasicData(): Observable<IBasicData>{
+    return this.http.get<IBasicData>(`${this.backendUrl}basicInfo/all`);
   }
 }

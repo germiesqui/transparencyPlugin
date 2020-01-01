@@ -23,7 +23,7 @@ url = ''
 def allMethods(article):
     return {
         'authors': article.authors,
-        'pubishDate': article.publish_date.strftime("%m/%d/%Y"),
+        'publishDate': article.publish_date.strftime("%m/%d/%Y"),
         'keywords': article.keywords,
         'summary': article.summary,
         'text': article.text,
@@ -40,7 +40,7 @@ def authors(article):
 
 def publishDate(article):
     return {
-        'pubishDate': article.publish_date.strftime("%m/%d/%Y"),
+        'publishDate': article.publish_date.strftime("%m/%d/%Y"),
     }
 
 
@@ -86,12 +86,12 @@ class AnaliceUrl(Resource):
 
 class BasicData(Resource):
 
-    def post(self, option):
+    def get(self, option):
         global url
         options = {
             'all': allMethods,
             'authors': authors,
-            'pubishDate': publishDate,
+            'publishDate': publishDate,
             'keywords': keywords,
             'summary': summary,
             'text': text,
