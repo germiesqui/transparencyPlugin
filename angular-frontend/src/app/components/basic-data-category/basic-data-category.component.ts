@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { IBasicData } from './basicData';
 import { ICategory } from '../categories/category';
+import { BackendService } from 'src/app/backend.service';
 
 @Component({
   selector: 'app-basic-data-category',
@@ -18,16 +19,14 @@ export class BasicDataCategoryComponent implements OnInit, ICategory {
   imgAlt: string = 'Basic information Image';
   
   //@Input() basicData: IBasicData
-  basicData: IBasicData = {
-    authors: ['pedro', 'juan', 'jorge'],
-    publishDate: new Date(),
-    keywords: ['as', 'bs', 'cs'],
-    summary: 'prueba 1',
-    text: 'prueba 2',
-    topImg: new URL("http://www.google.es"),
-    movies: [new URL("http://www.google.es"), new URL("http://www.google.ch")]
+  basicData: IBasicData
+  
+  constructor(private backendService: BackendService) { 
+    this.backendService.getBasicData()
+      .subscribe(data => this.basicData = data,
+                err => console.log(err),
+                () => console.log(this.basicData));
   }
-  constructor() { }
 
   ngOnInit() {
   }

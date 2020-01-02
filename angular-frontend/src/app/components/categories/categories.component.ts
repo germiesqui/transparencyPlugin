@@ -10,18 +10,11 @@ import { IBasicData } from '../basic-data-category/basicData';
   styleUrls: ['./categories.component.scss']
 })
 export class CategoriesComponent implements OnInit {
-  categories:  ICategory[] = [new BasicDataCategoryComponent];
+  categories:  ICategory[] = [new BasicDataCategoryComponent(this.backendService)];
   property: IBasicData;
   constructor(private backendService: BackendService) { }
 
   ngOnInit() {
   }
 
-  clickEvent(event){
-    this.backendService.getBasicData()
-      .subscribe(data => this.property = data,
-                err => console.log(err),
-                () => console.log(this.property));
-    
-  }
 }
