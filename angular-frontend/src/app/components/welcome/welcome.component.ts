@@ -17,8 +17,13 @@ export class WelcomeComponent implements OnInit {
     this.backendService.postAnaliceUrl(this.url).subscribe({
       next: url => {
         console.log(url);
+        this.router.navigate(["./categories"]);
+      },
+      error: err => {
+        console.log('error');
+        
       }
     });
-    this.router.navigate(["./categories"]);
+    
   }
 }
