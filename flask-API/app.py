@@ -6,6 +6,7 @@ from flask_restful import Resource, Api
 import os
 import sys
 import json
+import httplib2
 from flask_cors import CORS
 
 import nltk
@@ -77,10 +78,31 @@ def movies(article):
 
 
 class AnaliceUrl(Resource):
+
     def post(self):
         global url
         data = request.get_json()
         url = data['url']
+
+        try:
+            h = httplib2.Http()
+            resp = h.request(url, 'HEAD')
+
+            if not int(resp[0]['status']) < 400:
+                response = app.response_class(
+                    response='URL invalida',
+                    status=422,
+                    mimetype='application/json'
+                )
+                return response
+        except Exception as e:
+            response = app.response_class(
+                response='URL invalida',
+                status=422,
+                mimetype='application/json'
+            )
+            return response
+
         return {'url': url}
 
 
