@@ -7,23 +7,25 @@ import { Router } from "@angular/router";
   styleUrls: ["./welcome.component.scss"]
 })
 export class WelcomeComponent implements OnInit {
-  private url: string;
+  url: string;
+  postError = false;
+  postErrorMessage = "";
 
   constructor(private backendService: BackendService, private router: Router) {}
 
   ngOnInit() {}
 
-  sendUrl(): void {
+  onSubmit(): void {
     this.backendService.postAnaliceUrl(this.url).subscribe({
-      next: url => {
-        console.log(url);
+      next: () => {
         this.router.navigate(["./categories"]);
       },
       error: err => {
-        console.log('error');
-        
+        this.postError = true;
+        err.status < 500
+          ? (this.postErrorMessage = err.error)
+          : (this.postErrorMessage = "Error inesperado en el servidor");
       }
     });
-    
   }
 }

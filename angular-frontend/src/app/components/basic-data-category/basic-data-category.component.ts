@@ -18,14 +18,12 @@ export class BasicDataCategoryComponent implements OnInit, ICategory {
   imgHght: number;
   imgAlt: string = 'Basic information Image';
   
-  //@Input() basicData: IBasicData
   basicData: IBasicData
   
   constructor(private backendService: BackendService) { 
     this.backendService.getBasicData()
       .subscribe(data => this.basicData = data,
-                err => console.log(err),
-                () => console.log(this.basicData));
+                err => console.log(err));
   }
 
   ngOnInit() {

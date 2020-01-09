@@ -1,6 +1,23 @@
-<h1>Bienvenido a Transparency Plugin</h1>
-<form action="#" method="post" class='form-inline'>
-  <label for="urlInput">Introduzca una URL a analizar</label>
-  <input type="url" name="urlAnalice" id="urlInput" placeholder="Intorduza URL" [(ngModel)]='url' class='form-control'>
-  <button type="submit" (click)='sendUrl()' class='btn btn-primary'>Analizar</button>
-</form>
+<div class="container">
+  <h2>Bienvenido a Transparency Plugin</h2>
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="urlInput">Introduzca una URL a analizar</label>
+      <input type="url" name="urlInput" #urlField="ngModel" placeholder="Intorduza URL" [(ngModel)]='url' 
+      class='form-control'
+      [class.field-error]="postError">
+    </div>
+
+    <div [hidden]="!postError" class="alert alert-danger">
+      {{postErrorMessage}}
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12 text-center">
+        <button type="submit" class='btn btn-primary text-center'>Analizar</button>
+      </div>
+    </div>
+    
+  </form>
+</div>
+
