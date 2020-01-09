@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IBasicData } from './basicData';
 import { ICategory } from '../categories/category';
 import { BackendService } from 'src/app/backend.service';

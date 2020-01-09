@@ -1,5 +1,5 @@
 import { WelcomeComponent } from './welcome.component';
-import { of, Observable, throwError } from 'rxjs';
+import { of, throwError } from 'rxjs';
 
 describe('WelcomeComponent', () => {
   let component: WelcomeComponent;
