@@ -121,9 +121,13 @@ class BasicData(Resource):
             'movies': movies
         }
 
+        
+
         article = Article(url)
         article.download()
         article.parse()
+
+        nltk.download('punkt')
         article.nlp()
 
         return options[option](article)

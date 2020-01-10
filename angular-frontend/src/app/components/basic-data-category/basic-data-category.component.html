@@ -1,23 +1,69 @@
-<p>Authors</p>
-<span *ngFor='let author of basicData.authors'>
-    {{author}}
-</span>
+<article>
+    <h2>Datos Generales de la noticia</h2>
 
-<p>Pubish Date {{basicData.publishDate}}</p>
+    <mat-accordion *ngIf='basicData; else loading' [multi]="true">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            Authors
+          </mat-expansion-panel-header>
+      
+          <span *ngFor='let author of basicData.authors'>
+            {{author}}
+          </span>
+      
+        </mat-expansion-panel>
+      
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            Pubish Date
+          </mat-expansion-panel-header>
+      
+          {{basicData.publishDate}}
+      
+        </mat-expansion-panel>
 
-<p>Keywords</p>
-<span *ngFor='let keyword of basicData.keywords'>
-    {{keyword}}
-</span>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            Keywords
+          </mat-expansion-panel-header>
+      
+          <span *ngFor='let keyword of basicData.keywords'>
+            {{keyword}}
+          </span>
+      
+        </mat-expansion-panel>
 
-<p>summary {{basicData.summary}}</p>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            Summary
+          </mat-expansion-panel-header>
+      
+          {{basicData.summary}}
+      
+        </mat-expansion-panel>
 
-<p>Movies {{basicData.summary}}</p>
-<span *ngFor='let movie of basicData.movies'>
-    {{movie}}
-</span>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            topImg
+          </mat-expansion-panel-header>
+      
+          <img [src]="basicData.topImg">
+      
+        </mat-expansion-panel>
 
-<p>topImg {{basicData.topImg}}</p>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            Movies
+          </mat-expansion-panel-header>
+      
+          <span *ngFor='let movie of basicData.movies'>
+            {{movie}}
+          </span>
+      
+        </mat-expansion-panel>
+      </mat-accordion>
 
-<p>text {{basicData.text}}</p>
+    <ng-template #loading> <span>Espere un momento</span></ng-template>
+</article>
+
   
