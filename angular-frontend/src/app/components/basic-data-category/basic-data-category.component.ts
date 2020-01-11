@@ -20,10 +20,15 @@ export class BasicDataCategoryComponent implements OnInit, ICategory {
   
   basicData: IBasicData
   
+  getError: boolean = false;
+
   constructor(private backendService: BackendService) { 
     this.backendService.getBasicData()
       .subscribe(data => this.basicData = data,
-                err => console.log(err));
+                err => {
+                  this.getError = true;
+                  console.log(err);
+                });
   }
 
   ngOnInit() {

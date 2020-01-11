@@ -1,18 +1,45 @@
-article{
-    padding-bottom: 10px;
+@import "~material-icons/iconfont/material-icons.css";
+$header-color: #2b7a78;
+$border: solid rgb(34, 99, 97) 1px;
+$content-color: rgba(255, 255, 255, 0.2);
+
+article {
+  padding: 10px 0 10px 0;
 }
 
-mat-expansion-panel-header{
-    background-color: #2B7A78;
+mat-expansion-panel-header {
+  background-color: $header-color;
+  color: white;
+  &.mat-expanded {
+    border: $border;
+    margin-bottom: 2%;
+    &:hover {
+      background: $header-color;
+    }
+
+    &:focus {
+      background: $header-color;
+    }
+  }
 }
 
-mat-expansion-panel{
-    margin:0;
-    border: solid rgb(34, 99, 97) 1px;
+.mat-list-item {
+  color: black;
 }
 
-
-.mat-expansion-panel-content{
-    background-color: #8FC1E3;
+mat-expansion-panel {
+  margin: 0;
+  border: $border;
+  background: $content-color;
+  color: black;
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+  width: auto\9; /* ie8 */
+}
+
+.error {
+  margin: 10px 0 10px 0;
+}
