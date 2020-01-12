@@ -3,7 +3,7 @@
 <div class="row">
   <div class="col-sm">
     <a *ngFor='let category of categories' [href]="category.url">
-      <img [src]="category.imgSrc" [title]='category.title' [alt]="category.imgAlt">
+      <img *ngIf="category.imgSrc" [src]="category.imgSrc" [title]='category.title' [alt]="category.imgAlt">
     </a>
   </div>
 </div>
