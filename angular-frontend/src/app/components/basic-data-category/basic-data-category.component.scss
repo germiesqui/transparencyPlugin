@@ -10,6 +10,7 @@ article {
 mat-expansion-panel-header {
   background-color: $header-color;
   color: white;
+  font-size: 1.1rem;
   &.mat-expanded {
     border: $border;
     margin-bottom: 2%;
@@ -42,4 +43,8 @@ img {
 
 .error {
   margin: 10px 0 10px 0;
+}
+
+.cabecera{
+  align-items: flex-start;
 }

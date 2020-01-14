@@ -7,6 +7,7 @@ import { MatExpansionModule, MatButtonModule } from "@angular/material";
 import { MatListModule } from "@angular/material/list";
 import { MatIconModule } from "@angular/material/icon";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { MatSidenavModule } from "@angular/material/sidenav";
 
 import { AppComponent } from "./app.component";
 import { WelcomeComponent } from "./components/welcome/welcome.component";
@@ -31,7 +32,8 @@ import { BasicDataCategoryComponent } from "./components/basic-data-category/bas
     BrowserAnimationsModule,
     MatListModule,
     MatIconModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSidenavModule
   ],
   providers: [],
   bootstrap: [AppComponent]

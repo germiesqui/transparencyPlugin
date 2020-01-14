@@ -13,11 +13,7 @@ export class BasicDataCategoryComponent implements OnInit, ICategory {
   title: string = "Basic Data";
   url: string = "basicData";
   description: string = "Basic information of the article";
-  imgSrc: string =
-    "https://www.google.com/search?q=logo&safe=off&sxsrf=ACYBGNSUYVjldXu6pSvh8AtYOfB-cZH3tA:1578758171411&tbm=isch&source=iu&ictx=1&fir=QeC1lGV7fHDsfM%253A%252CoRx6G8qWHugOeM%252C_&vet=1&usg=AI4_-kS5atSC4k9AbBvVrABQdHunlHIAzQ&sa=X&ved=2ahUKEwj80vi_9PvmAhVFyhoKHUX8C5YQ9QEwAHoECAoQBA&cshid=1578758182119532#imgrc=QeC1lGV7fHDsfM";
-  imgWtht: number;
-  imgHght: number;
-  imgAlt: string = "Basic information Image";
+  icon: string = "description";
 
   basicData: IBasicData;
 

@@ -1,5 +1,13 @@
+
 <article>
-  <h2>Datos Generales de la noticia</h2>
+  <div class="container cabecera">
+    <div class="row">
+      <div class="col col-3 col-sm-2 col-lg-2"><a href="categories" class="btn btn-primary backBtn">Atras</a></div>
+      <div class="col"> <h2 class="title">Datos Generales de la noticia</h2></div>
+      
+    </div>
+    
+  </div>
   <mat-accordion *ngIf="basicData; else loading" [multi]="true">
     <mat-expansion-panel>
       <mat-expansion-panel-header>
