@@ -1,82 +1,73 @@
 
 <article>
-  <div class="container cabecera">
-    <div class="row">
-      <div class="col col-3 col-sm-2 col-lg-2"><a href="categories" class="btn btn-primary backBtn">Atras</a></div>
-      <div class="col"> <h2 class="title">Datos Generales de la noticia</h2></div>
+  <ng-container *ngIf="!getError; else error">
+    <mat-sidenav-container *ngIf="basicData; else loading;">
+      <mat-sidenav mode="side" opened>
+        <mat-nav-list >
+          <a href="categories"><mat-list-item>Atras</mat-list-item></a>
+          <mat-list-item [ngClass]="{'selected' : option === 'author' }" (click)="infoChange('author')">Autores</mat-list-item>
+          <mat-list-item [ngClass]="{'selected' : option === 'date' }" (click)="infoChange('date')">Fecha Publicación</mat-list-item>
+          <mat-list-item [ngClass]="{'selected' : option === 'keyword' }" (click)="infoChange('keyword')">Palabras clave</mat-list-item>
+          <mat-list-item [ngClass]="{'selected' : option === 'summary' }" (click)="infoChange('summary')">Resumen</mat-list-item>
+          <mat-list-item [ngClass]="{'selected' : option === 'image' }" (click)="infoChange('image')">Imagen de portada</mat-list-item>
+          <mat-list-item [ngClass]="{'selected' : option === 'movies' }" (click)="infoChange('movies')">Videos</mat-list-item>
+        </mat-nav-list>
+      </mat-sidenav>
+      <mat-sidenav-content>
+        
+        <ng-container *ngIf="option === 'author'">
+          Autores
       
-    </div>
-    
-  </div>
-  <mat-accordion *ngIf="basicData; else loading" [multi]="true">
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        Autores
-      </mat-expansion-panel-header>
+          <mat-list *ngFor="let author of basicData.authors">
+            <mat-list-item>
+              <mat-icon matListIcon>face</mat-icon>
+              <span matLine>{{ author }}</span>
+            </mat-list-item>
+          </mat-list>
+        </ng-container>
+        
+        <ng-container *ngIf="option === 'date'">
+          Fecha de publicación
+          <span>{{ basicData.publishDate }}</span>
+        </ng-container>
+          
+        <ng-container *ngIf="option === 'keyword'">
+          Palabras clave
+          <mat-list *ngFor="let keyword of basicData.keywords" dense>
+            <mat-list-item>
+              <span>{{ keyword }}</span>
+            </mat-list-item>
+          </mat-list>
+        </ng-container>
 
-      <mat-list *ngFor="let author of basicData.authors">
-        <mat-list-item>
-          <mat-icon matListIcon>face</mat-icon>
-          <span matLine>{{ author }}</span>
-        </mat-list-item>
-      </mat-list>
-    </mat-expansion-panel>
+        <ng-container *ngIf="option === 'summary'">
+          Resumen de la noticia
+          <p>{{ basicData.summary }}</p>
+        </ng-container>
 
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        Fecha de publicación
-      </mat-expansion-panel-header>
+        <ng-container *ngIf="option === 'image'">
+          Imagen titular
+          <img [src]="basicData.topImg" />
+        </ng-container>
+        
+        <ng-container *ngIf="option === 'movies'">
+          Listado de videos
+          <mat-list *ngFor="let movie of basicData.movies">
+            <mat-list-item>
+              <mat-icon matListIcon>movie</mat-icon>
+              <span matLine>{{ movie }}</span>
+            </mat-list-item>
+          </mat-list>
+        </ng-container>
+          
+      </mat-sidenav-content>
+    </mat-sidenav-container>
 
-      <span>{{ basicData.publishDate }}</span>
-    </mat-expansion-panel>
-
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        Palabras clave
-      </mat-expansion-panel-header>
-
-      <mat-list *ngFor="let keyword of basicData.keywords" dense>
-        <mat-list-item>
-          <span>{{ keyword }}</span>
-        </mat-list-item>
-      </mat-list>
-    </mat-expansion-panel>
-
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        Resumen de la noticia
-      </mat-expansion-panel-header>
-
-      <p>{{ basicData.summary }}</p>
-    </mat-expansion-panel>
-
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        Imagen titular
-      </mat-expansion-panel-header>
-
-      <img [src]="basicData.topImg" />
-    </mat-expansion-panel>
-
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        Listado de videos
-      </mat-expansion-panel-header>
-
-      <mat-list *ngFor="let movie of basicData.movies">
-        <mat-list-item>
-          <mat-icon matListIcon>movie</mat-icon>
-          <span matLine>{{ movie }}</span>
-        </mat-list-item>
-      </mat-list>
-    </mat-expansion-panel>
-  </mat-accordion>
-
-  <ng-template #loading>
-    <mat-spinner color="accent"></mat-spinner>
-  </ng-template>
-
-  <div [hidden]="!getError" class="error alert alert-danger">
+    <ng-template #loading>
+      <mat-spinner color="accent"></mat-spinner>
+    </ng-template>
+  </ng-container>
+  <div #error *ngIf="getError" class="error alert alert-danger">
     <span>
       Ha habido un error en el servidor, asegurese de que la URL introducida
       pertece a la noticia o intentelo más tarde

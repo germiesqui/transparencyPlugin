@@ -16,6 +16,7 @@ export class BasicDataCategoryComponent implements OnInit, ICategory {
   icon: string = "description";
 
   basicData: IBasicData;
+  option = "author";
 
   getError: boolean = false;
 
@@ -30,4 +31,8 @@ export class BasicDataCategoryComponent implements OnInit, ICategory {
   }
 
   ngOnInit() {}
+
+  infoChange(param: string): void{
+    this.option = param;
+  }
 }
