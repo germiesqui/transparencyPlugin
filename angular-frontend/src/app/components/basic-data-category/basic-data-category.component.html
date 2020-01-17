@@ -16,7 +16,7 @@
       <mat-sidenav-content>
         
         <ng-container *ngIf="option === 'author'">
-          Autores
+          <h2 class="title">Autores</h2>
       
           <mat-list *ngFor="let author of basicData.authors">
             <mat-list-item>
@@ -27,12 +27,12 @@
         </ng-container>
         
         <ng-container *ngIf="option === 'date'">
-          Fecha de publicación
+          <h2 class="title">Fecha de publicación</h2>
           <span>{{ basicData.publishDate }}</span>
         </ng-container>
           
         <ng-container *ngIf="option === 'keyword'">
-          Palabras clave
+          <h2 class="title">Palabras clave</h2>
           <mat-list *ngFor="let keyword of basicData.keywords" dense>
             <mat-list-item>
               <span>{{ keyword }}</span>
@@ -41,17 +41,17 @@
         </ng-container>
 
         <ng-container *ngIf="option === 'summary'">
-          Resumen de la noticia
+          <h2 class="title">Resumen de la noticia</h2>
           <p>{{ basicData.summary }}</p>
         </ng-container>
 
         <ng-container *ngIf="option === 'image'">
-          Imagen titular
+          <h2 class="title">Imagen titular</h2>
           <img [src]="basicData.topImg" />
         </ng-container>
         
         <ng-container *ngIf="option === 'movies'">
-          Listado de videos
+          <h2 class="title">Listado de videos</h2>
           <mat-list *ngFor="let movie of basicData.movies">
             <mat-list-item>
               <mat-icon matListIcon>movie</mat-icon>

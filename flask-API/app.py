@@ -22,10 +22,16 @@ url = ''
 
 
 def allMethods(article):
+    Input = ['a', 'ante', 'bajo', 'con', 'contra', 'de', 'desde', 'hasta', 'hacia', 'para', 'por', 'segun', 'sin', 'sobre', 'tras', 'durante', 'mediante', 'yo', 'tu', 'el',
+             'ella', 'nosotros', 'nosotras', 'vosotros', 'vosotras', 'ellos', 'ellas', 'mi', 'tu', 'su', 'mis', 'tus', 'sus', 'de', 'en', 'la', 'los', 'las', 'le', 'les', 'ha', 'has', 'y']
+
+    Output = [b for b in article.keywords if
+              all(a not in b for a in Input)]
+    print(Output)
     return {
         'authors': article.authors,
         'publishDate': article.publish_date.strftime("%m/%d/%Y"),
-        'keywords': article.keywords,
+        'keywords': Output,
         'summary': article.summary,
         'text': article.text,
         'topImg': article.top_image,
@@ -47,8 +53,13 @@ def publishDate(article):
 
 def keywords(article):
     nltk.download('punkt')
+    Input = ['a', 'ante', 'bajo', 'con', 'contra', 'de', 'desde', 'hasta', 'hacia', 'para', 'por', 'segun', 'sin', 'sobre', 'tras', 'durante', 'mediante', 'yo', 'tu', 'el',
+             'ella', 'nosotros', 'nosotras', 'vosotros', 'vosotras', 'ellos', 'ellas', 'mi', 'tu', 'su', 'mis', 'tus', 'sus', 'de', 'en', 'la', 'los', 'las', 'le', 'les', 'ha', 'has']
+    Output = [b for b in article.keywords if
+              all(a not in b for a in Input)]
+    print(Output)
     return {
-        'keywords': article.keywords,
+        'keywords': Output,
     }
 
 
@@ -120,8 +131,6 @@ class BasicData(Resource):
             'topImg': topImg,
             'movies': movies
         }
-
-        
 
         article = Article(url)
         article.download()

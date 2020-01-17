@@ -1,7 +1,10 @@
 @import "~material-icons/iconfont/material-icons.css";
-$header-color: #2b7a78;
+$content-font-color: black;
+$navbar-font-color: white;
 $border: solid rgb(34, 99, 97) 1px;
 $content-color: rgba(255, 255, 255, 0.2);
+$background-color:#00BCD4;
+$navbar-backgorund-color: #006064;
 
 article {
   padding: 0;
@@ -10,14 +13,22 @@ article {
   height: 100%;
 }
 
+.title {
+  font-family: 'Helvetica Neue', sans-serif; 
+  font-size: 3rem; 
+  font-weight: bold; 
+  text-align: center; 
+}
+
 img {
   max-width: 100%;
   height: auto;
   width: auto\9; /* ie8 */
 }
 
-.cabecera{
-  align-items: flex-start;
+mat-sidenav{
+  background-color: $navbar-backgorund-color;
+  color: $navbar-font-color;
 }
 
 mat-sidenav-container{
@@ -25,8 +36,11 @@ mat-sidenav-container{
 }
 
 mat-sidenav-content{
-  padding: 2%;
-  background-color: $header-color;
+  padding: 2% 5% 2% 5%;
+  background-color: $background-color;
+  color: $content-font-color;
+  font-size: 1.5rem;
+  text-align: justify;
 }
 
 .selected{
