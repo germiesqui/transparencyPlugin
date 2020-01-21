@@ -1,15 +1,16 @@
 <a href="welcome" class="btn btn-primary backBtn">Atras</a>
 <h2>Seleccione una categoria</h2>
 
-<div class="container">
-  <mat-list *ngFor="let category of categories">
+<ng-container *ngFor="let category of categories">
     <a [href]="category.url">
-      <mat-list-item>
-        <mat-icon matListIcon>¨{{category.icon}}</mat-icon>
-        <span matLine>{{category.title}}</span>
-      </mat-list-item>
+      <div class="card">
+        <mat-icon class="card-img-top">¨{{category.icon}}</mat-icon>
+        <div class="card-body">
+          <h4 class="card-title">{{category.title}}</h4>
+        </div>
+      </div>
     </a>
-  </mat-list>
-</div>
+</ng-container>
+
 
 

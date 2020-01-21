@@ -13,7 +13,7 @@ export class BasicDataCategoryComponent implements OnInit, ICategory {
   title: string = "Basic Data";
   url: string = "basicData";
   description: string = "Basic information of the article";
-  icon: string = "description";
+  icon: string = "insert_drive_file";
 
   basicData: IBasicData;
   option = "author";
