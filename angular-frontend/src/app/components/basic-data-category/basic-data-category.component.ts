@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { IBasicData } from './basicData';
-import { ICategory } from '../categories/category';
-import { BackendService } from 'src/app/backend.service';
+import { Component, OnInit } from "@angular/core";
+import { IBasicData } from "./basicData";
+import { ICategory } from "../categories/category";
+import { BackendService } from "src/app/backend.service";
 
 @Component({
   selector: "app-basic-data-category",
@@ -19,6 +19,7 @@ export class BasicDataCategoryComponent implements OnInit, ICategory {
   option = "author";
 
   getError: boolean = false;
+  options = { autoHide: false, scrollbarMinSize: 100 };
 
   constructor(private backendService: BackendService) {
     this.backendService.getBasicData().subscribe(
@@ -32,7 +33,7 @@ export class BasicDataCategoryComponent implements OnInit, ICategory {
 
   ngOnInit() {}
 
-  infoChange(param: string): void{
+  infoChange(param: string): void {
     this.option = param;
   }
 }

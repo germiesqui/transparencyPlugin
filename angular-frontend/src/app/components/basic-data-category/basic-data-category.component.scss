@@ -1,9 +1,7 @@
 @import "~material-icons/iconfont/material-icons.css";
 $content-font-color: black;
 $navbar-font-color: white;
-$border: solid rgb(34, 99, 97) 1px;
-$content-color: rgba(255, 255, 255, 0.2);
-$background-color:#00BCD4;
+$background-color: #00bcd4;
 $navbar-backgorund-color: #006064;
 
 article {
@@ -14,10 +12,10 @@ article {
 }
 
 .title {
-  font-family: 'Helvetica Neue', sans-serif; 
-  font-size: 3rem; 
-  font-weight: bold; 
-  text-align: center; 
+  font-family: "Helvetica Neue", sans-serif;
+  font-size: 3rem;
+  font-weight: bold;
+  text-align: center;
 }
 
 img {
@@ -26,23 +24,69 @@ img {
   width: auto\9; /* ie8 */
 }
 
-mat-sidenav{
+mat-sidenav {
   background-color: $navbar-backgorund-color;
   color: $navbar-font-color;
+
+  .selected {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+  mat-list-item:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
 }
 
-mat-sidenav-container{
+mat-sidenav-container {
   height: 100%;
 }
 
-mat-sidenav-content{
+mat-sidenav-content {
   padding: 2% 5% 2% 5%;
   background-color: $background-color;
   color: $content-font-color;
-  font-size: 1.5rem;
-  text-align: justify;
+
+  .container {
+    height: 100%;
+  }
+
+  .author {
+    font-size: 1.5rem;
+  }
+
+  .date {
+    font-size: 2rem;
+    text-align: center;
+    p {
+      padding-top: 150px;
+    }
+  }
+
+  .keyword {
+    font-size: 1.6rem;
+  }
+
+  .summary {
+    p {
+      font-size: 1.1rem;
+      padding: 20px 0;
+      text-align: justify;
+    }
+  }
+
+  .image {
+    text-align: center;
+    img {
+      max-width: 500px;
+      max-height: 400px;
+    }
+  }
+
+  .movies {
+    font-size: 1.6rem;
+  }
 }
 
-.selected{
-  background-color: rgba(0, 0, 0, 0.2);
+ngx-simplebar {
+  width: 100%;
+  height: 100%;
 }
