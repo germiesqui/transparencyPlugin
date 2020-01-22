@@ -10,10 +10,10 @@ import { BackendService } from "src/app/backend.service";
 })
 export class BasicDataCategoryComponent implements OnInit, ICategory {
   // Category Data
-  title: string = "Basic Data";
+  title: string = "Datos Básicos";
   url: string = "basicData";
-  description: string = "Basic information of the article";
-  icon: string = "insert_drive_file";
+  description: string = "Datos básicos sobre la noticia.";
+  icon: string = "info";
 
   basicData: IBasicData;
   option = "author";

@@ -5,16 +5,22 @@ import { BackendService } from 'src/app/backend.service';
 import { IBasicData } from '../basic-data-category/basicData';
 
 @Component({
-  selector: 'app-categories',
-  templateUrl: './categories.component.html',
-  styleUrls: ['./categories.component.scss']
+  selector: "app-categories",
+  templateUrl: "./categories.component.html",
+  styleUrls: ["./categories.component.scss"]
 })
 export class CategoriesComponent implements OnInit {
-  categories:  ICategory[] = [new BasicDataCategoryComponent(this.backendService)];
+  categories: ICategory[] = [
+    new BasicDataCategoryComponent(this.backendService),
+    new BasicDataCategoryComponent(this.backendService),
+    new BasicDataCategoryComponent(this.backendService),
+    new BasicDataCategoryComponent(this.backendService),
+    new BasicDataCategoryComponent(this.backendService),
+    new BasicDataCategoryComponent(this.backendService),
+    new BasicDataCategoryComponent(this.backendService)
+  ];
   property: IBasicData;
-  constructor(private backendService: BackendService) { }
+  constructor(private backendService: BackendService) {}
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

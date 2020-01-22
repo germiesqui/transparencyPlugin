@@ -1,7 +1,41 @@
-@import '~@mdi/font/css/materialdesignicons.css';
+@import "~@mdi/font/css/materialdesignicons.css";
 
-.card{
-   width:30%;
-   max-width: 250px;
-   height: 30%;
+.container {
+  padding: 0px 35px;
+  text-align: center;
+}
+
+.flex-container {
+  padding-left: 20px;
+
+  a {
+    text-decoration: none;
+    color: black;
+    width: 200px;
+    max-width: 230px;
+
+    mat-card {
+      border: solid black 1px;
+      background-color: #84ffff;
+      margin: 10px 0;
+      padding: 0;
+
+      mat-card-header {
+        background-color: rgba(0, 0, 0, 0.137);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-top: 15px;
+        font-size: 1.2rem;
+      }
+
+      mat-icon {
+        transform: scale(2.2);
+      }
+
+      mat-card-content {
+        padding: 10px;
+      }
+    }
+  }
 }

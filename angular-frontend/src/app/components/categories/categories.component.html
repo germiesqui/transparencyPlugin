@@ -1,16 +1,22 @@
-<a href="welcome" class="btn btn-primary backBtn">Atras</a>
-<h2>Seleccione una categoria</h2>
+<div class="container">
+  <a href="welcome" class="btn btn-primary backBtn">Atras</a>
+  <h2>Seleccione una categoria</h2>
 
-<ng-container *ngFor="let category of categories">
-    <a [href]="category.url">
-      <div class="card">
-        <mat-icon class="card-img-top">¨{{category.icon}}</mat-icon>
-        <div class="card-body">
-          <h4 class="card-title">{{category.title}}</h4>
-        </div>
-      </div>
-    </a>
-</ng-container>
-
+  <div class="flex-container" fxLayout="row wrap space-around" fxLayoutAlign=”flex-start” fxLayoutGap="10px">
+      <ng-container *ngFor="let category of categories">
+          <a [href]="category.url" fxFlex="1 0 auto">
+            <mat-card >
+              <mat-card-header>
+                <mat-card-title>{{category.title}}</mat-card-title>
+              </mat-card-header>
+              <mat-icon mat-card-image>{{category.icon}} </mat-icon>
+              <mat-card-content>
+                <p>{{category.description}}</p>
+              </mat-card-content>
+            </mat-card >
+          </a>
+      </ng-container>
+</div>
+</div>
 
 
