@@ -3,7 +3,6 @@ import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { AppRoutingModule } from "./app-routing.module";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { MatExpansionModule, MatButtonModule } from "@angular/material";
 import { MatListModule } from "@angular/material/list";
 import { MatIconModule } from "@angular/material/icon";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
@@ -30,8 +29,6 @@ import { BasicDataCategoryComponent } from "./components/basic-data-category/bas
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    MatExpansionModule,
-    MatButtonModule,
     BrowserAnimationsModule,
     MatListModule,
     MatIconModule,

@@ -3,9 +3,6 @@
 
 from flask import Flask, request
 from flask_restful import Resource, Api
-import os
-import sys
-import json
 import httplib2
 from flask_cors import CORS
 
