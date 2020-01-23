@@ -20,14 +20,19 @@ CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 url = ''
 
-non_keywords = ['a', 'ante', 'bajo', 'con', 'contra', 'de', 'desde', 'hasta', 'hacia', 'para', 'por', 'segun', 'sin', 'sobre', 'tras', 'durante', 'mediante', 'yo', 'tu', 'el',
-                'ella', 'nosotros', 'nosotras', 'vosotros', 'vosotras', 'ellos', 'ellas', 'mi', 'tu', 'su', 'mis', 'tus', 'sus', 'de', 'en', 'la', 'los', 'las', 'le', 'les', 'ha', 'has', 'y']
+non_keywords = ['a', 'ante', 'bajo', 'con', 'contra', 'de', 'desde', 'hasta',
+                'hacia', 'para', 'por', 'segun', 'sin', 'sobre', 'tras',
+                'durante', 'mediante', 'yo', 'tu', 'el', 'ella', 'nosotros',
+                'nosotras', 'vosotros', 'vosotras', 'ellos', 'ellas', 'mi',
+                'tu', 'su', 'mis', 'tus', 'sus', 'de', 'en', 'la', 'los',
+                'las', 'le', 'les', 'ha', 'has', 'y']
 
 
 def allMethods(article):
 
     keywords = [b for b in article.keywords if
                 all(a not in b for a in non_keywords)]
+
     return {
         'authors': article.authors,
         'publishDate': article.publish_date.strftime("%m/%d/%Y"),
@@ -52,7 +57,6 @@ def publishDate(article):
 
 
 def keywords(article):
-    nltk.download('punkt')
     keywords = [b for b in article.keywords if
                 all(a not in b for a in non_keywords)]
     return {
@@ -61,7 +65,6 @@ def keywords(article):
 
 
 def summary(article):
-    nltk.download('punkt')
     return {
         'summary': article.summary,
     }
