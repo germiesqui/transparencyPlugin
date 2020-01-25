@@ -11,7 +11,7 @@ import { BackendService } from "src/app/backend.service";
 export class BasicDataCategoryComponent implements OnInit, ICategory {
   // Category Data
   title: string = "Datos Básicos";
-  url: string = "basicData";
+  url: string = "/basicData";
   description: string = "Datos básicos sobre la noticia.";
   icon: string = "info";
 

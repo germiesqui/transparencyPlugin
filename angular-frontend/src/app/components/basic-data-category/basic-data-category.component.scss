@@ -40,6 +40,10 @@ mat-sidenav {
   }
 }
 
+mat-nav-list{
+  overflow: hidden;
+}
+
 mat-sidenav-container {
   height: 100%;
 }

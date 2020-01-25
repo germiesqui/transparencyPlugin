@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col backBtn-col">
-      <a href="welcome" class="btn btn-primary backBtn">Atras</a>
+      <a [routerLink]= "['/welcome']" class="btn btn-primary backBtn">Atras</a>
     </div>
     <div class="col">
       <h2>Seleccione una categoria</h2>
@@ -11,7 +11,7 @@
   <ngx-simplebar>
     <div class="flex-container">
       <ng-container *ngFor="let category of categories">
-        <a [href]="category.url" class="flex-item">
+        <a [routerLink]=[category.url] class="flex-item">
           <mat-card>
             <mat-card-header>
               <mat-card-title>{{ category.title }}</mat-card-title>

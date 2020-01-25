@@ -3,7 +3,7 @@
     <mat-sidenav-container *ngIf="basicData; else loading">
       <mat-sidenav mode="side" opened>
         <mat-nav-list>
-          <a href="categories"><mat-list-item>Atras</mat-list-item></a>
+          <a [routerLink]= "['/categories']"><mat-list-item>Atras</mat-list-item></a>
           <mat-list-item
             [ngClass]="{ selected: option === 'author' }"
             (click)="infoChange('author')"
