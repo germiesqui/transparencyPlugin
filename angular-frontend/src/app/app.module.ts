@@ -7,7 +7,6 @@ import { MatListModule } from "@angular/material/list";
 import { MatIconModule } from "@angular/material/icon";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatSidenavModule } from "@angular/material/sidenav";
-import { FlexLayoutModule } from "@angular/flex-layout";
 import { MatCardModule } from "@angular/material/card";
 import { SimplebarAngularModule } from "simplebar-angular";
 
@@ -35,8 +34,7 @@ import { BasicDataCategoryComponent } from "./components/basic-data-category/bas
     MatProgressSpinnerModule,
     MatSidenavModule,
     SimplebarAngularModule,
-    MatCardModule,
-    FlexLayoutModule
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

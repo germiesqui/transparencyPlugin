@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { BasicDataCategoryComponent } from './components/basic-data-category/basic-data-category.component';
-import { LocationStrategy, HashLocationStrategy } from "@angular/common";
 
 
 
@@ -18,6 +17,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }]
+  providers: []
 })
 export class AppRoutingModule {}
