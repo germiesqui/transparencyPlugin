@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { WelcomeComponent } from './components/welcome/welcome.component';
-import { CategoriesComponent } from './components/categories/categories.component';
-import { BasicDataCategoryComponent } from './components/basic-data-category/basic-data-category.component';
+import { CategoriesComponent } from './categories/components/categories/categories.component';
+import { BasicDataCategoryComponent } from "./categories/components/basic-data-category/basic-data-category.component";
 
 
 
