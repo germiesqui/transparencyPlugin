@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="row">
+    <div class="col backBtn-col">
+      <a [routerLink]= "['/categories']" class="btn btn-primary backBtn">Atras</a>
+    </div>
+    <div class="col">
+    <h2>{{title}}</h2>
+    </div>
+
+    <div class="map"
+     leaflet
+     [leafletOptions]="options"
+     (leafletMapReady)="onMapReady($event)"
+     [leafletLayersControl]="layersControl">
+    </div>
+</div>
+

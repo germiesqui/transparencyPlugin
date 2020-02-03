@@ -3,6 +3,7 @@ import { ICategory } from "./category";
 import { BasicDataCategoryComponent } from "../basic-data-category/basic-data-category.component";
 import { BackendService } from "src/app/backend.service";
 import { IBasicData } from "../basic-data-category/basicData";
+import { LocationCategoryComponent } from '../location-category/location-category.component';
 
 @Component({
   selector: "app-categories",
@@ -11,7 +12,8 @@ import { IBasicData } from "../basic-data-category/basicData";
 })
 export class CategoriesComponent implements OnInit {
   categories: ICategory[] = [
-    new BasicDataCategoryComponent(this.backendService)
+    new BasicDataCategoryComponent(this.backendService),
+    new LocationCategoryComponent()
   ];
   property: IBasicData;
   constructor(private backendService: BackendService) {}

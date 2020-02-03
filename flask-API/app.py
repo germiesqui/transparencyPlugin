@@ -5,6 +5,8 @@ from flask import Flask, request
 from flask_restful import Resource, Api
 import httplib2
 from flask_cors import CORS
+import spacy
+from geopy.geocoders import Nominatim
 
 import nltk
 
@@ -25,7 +27,7 @@ non_keywords = ['a', 'ante', 'bajo', 'con', 'contra', 'de', 'desde', 'hasta',
                 'las', 'le', 'les', 'ha', 'has', 'y']
 
 
-def allMethods(article):
+def allBasicDataMethods(article):
 
     keywords = [b for b in article.keywords if
                 all(a not in b for a in non_keywords)]
@@ -119,7 +121,7 @@ class BasicData(Resource):
     def get(self, option):
         global url
         options = {
-            'all': allMethods,
+            'all': allBasicDataMethods,
             'authors': authors,
             'publishDate': publishDate,
             'keywords': keywords,
@@ -139,8 +141,90 @@ class BasicData(Resource):
         return options[option](article)
 
 
+def allLocationMethods(ents):
+    locations = []
+    orgs = []
+
+    for ent in ents:
+        if ent.label == 'LOC':
+            geolocator = Nominatim(user_agent="specify_your_app_name_here")
+            data = geolocator.geocode(ent.text, timeout=10)
+            if data:
+                location = {
+                    'latitude': data.latitude,
+                    'longitude': data.longitude,
+                    'address': data.address,
+                    'text': ent.text
+                }
+                locations.append(location)
+        elif ent.label == 'ORG':
+            orgs.append(ent.text)
+
+    return {
+        'locations': locations,
+        'organizations': orgs,
+    }
+
+
+def locations(ents):
+
+    locations = []
+    for ent in ents:
+
+        if ent.label_ == 'LOC':
+            geolocator = Nominatim(user_agent="specify_your_app_name_here")
+            data = geolocator.geocode(ent.text, timeout=10)
+            if data:
+                location = {
+                    'latitude': data.latitude,
+                    'longitude': data.longitude,
+                    'address': data.address,
+                    'text': ent.text
+                }
+
+                locations.append(location)
+
+    return {
+        'locations': locations
+    }
+
+
+def organizations(ents):
+
+    orgs = []
+    for ent in ents:
+        if ent.label == 'ORG':
+            orgs.append(ent.text)
+
+    return {
+        'organizations': orgs,
+    }
+
+
+class Location(Resource):
+
+    def get(self, option):
+        global url
+        options = {
+            'all': allLocationMethods,
+            'locations': locations,
+            'organizations': organizations,
+        }
+
+        nlp = spacy.load("es")
+
+        article = Article(url)
+        article.download()
+        article.parse()
+
+        doc = nlp(article.text)
+
+        return options[option](doc.ents)
+
+
 api.add_resource(AnaliceUrl, '/analiceUrl',)
 api.add_resource(BasicData, '/basicInfo/<option>',)
+api.add_resource(Location, '/location/<option>',)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5001, debug=True)

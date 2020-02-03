@@ -6,7 +6,7 @@ import { HttpClientModule } from "@angular/common/http";
 
 import { AppComponent } from "./app.component";
 import { WelcomeComponent } from "./components/welcome/welcome.component";
-import { CategoryModule } from './categories/category.module';
+import { CategoryModule } from './categoryModule/category.module';
 
 @NgModule({
   declarations: [
