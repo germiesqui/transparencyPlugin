@@ -13,7 +13,7 @@ import { LocationCategoryComponent } from '../location-category/location-categor
 export class CategoriesComponent implements OnInit {
   categories: ICategory[] = [
     new BasicDataCategoryComponent(this.backendService),
-    new LocationCategoryComponent()
+    new LocationCategoryComponent(this.backendService)
   ];
   property: IBasicData;
   constructor(private backendService: BackendService) {}

@@ -2,6 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { ICategory } from '../categories/category';
 import { icon, marker, Map, tileLayer } from "leaflet";
 import * as L from 'leaflet';
+import { BackendService } from 'src/app/backend.service';
+import { ILocation } from './location';
 
 @Component({
   selector: "app-location-category",
@@ -79,11 +81,20 @@ export class LocationCategoryComponent implements OnInit, ICategory {
     layers: [this.wMaps, this.cities]
   };
 
+  locations: ILocation[];
+
   onMapReady(map: Map) {
     map.fitBounds(this.bounds);
   }
 
-  constructor() {}
+  constructor(private backendService: BackendService) {
+    this.backendService.getLocations().subscribe(
+      data => {this.locations = data; console.log(this.locations);},
+      err => {
+        console.log(err);
+      }
+    );
+  }
 
   ngOnInit() {}
 }

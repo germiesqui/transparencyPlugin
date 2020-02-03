@@ -173,7 +173,7 @@ def locations(ents):
 
         if ent.label_ == 'LOC':
             geolocator = Nominatim(user_agent="specify_your_app_name_here")
-            data = geolocator.geocode(ent.text, timeout=10)
+            data = geolocator.geocode(ent.text, timeout=20)
             if data:
                 location = {
                     'latitude': data.latitude,
@@ -224,7 +224,7 @@ class Location(Resource):
 
 api.add_resource(AnaliceUrl, '/analiceUrl',)
 api.add_resource(BasicData, '/basicInfo/<option>',)
-api.add_resource(Location, '/location/<option>',)
+api.add_resource(Location, '/geographic/<option>',)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5001, debug=True)
