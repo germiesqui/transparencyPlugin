@@ -25,7 +25,7 @@ export class BackendService {
     return this.http.get<IBasicData>(`${this.backendUrl}basicInfo/all`);
   }
 
-  getLocations(): Observable<ILocation[]> {
-    return this.http.get<ILocation[]>(`${this.backendUrl}geographic/locations`);
+  getLocations(): Observable<ILocation> {
+    return this.http.get<ILocation>(`${this.backendUrl}geographic/locations`);
   }
 }

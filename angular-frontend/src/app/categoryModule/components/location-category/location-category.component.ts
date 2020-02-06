@@ -1,100 +1,80 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, AfterViewInit } from "@angular/core";
 import { ICategory } from '../categories/category';
-import { icon, marker, Map, tileLayer } from "leaflet";
+import { icon, marker, tileLayer } from "leaflet";
 import * as L from 'leaflet';
 import { BackendService } from 'src/app/backend.service';
 import { ILocation } from './location';
+
 
 @Component({
   selector: "app-location-category",
   templateUrl: "./location-category.component.html",
   styleUrls: ["./location-category.component.scss"]
 })
-export class LocationCategoryComponent implements OnInit, ICategory {
+export class LocationCategoryComponent implements AfterViewInit, ICategory {
   // Category Data
   title: string = "Análisis Geográfico";
   url: string = "/location";
   description: string = "Lugares mencionados en la noticia";
   icon: string = "place";
 
-  // Define our base layers so we can reference them multiple times
-  streetMaps = tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    detectRetina: true,
-    attribution:
-      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-  });
+  locations: ILocation;
 
-  wMaps = tileLayer("http://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png", {
-    detectRetina: true,
-    attribution:
-      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-  });
+  private map;
+  loading: boolean;
 
-  // Marker for the parking lot at the base of Mt. Ranier trails
-  paradise = marker([40.545953, -3.63597], {
-    icon: icon({
-      iconSize: [25, 41],
-      iconAnchor: [13, 41],
-      iconUrl: "leaflet/marker-icon.png",
-      shadowUrl: "leaflet/marker-shadow.png"
-    })
-  });
-
-  paradise2 = marker([42.545953, -3.63597], {
-    icon: icon({
-      iconSize: [25, 41],
-      iconAnchor: [13, 41],
-      iconUrl: "leaflet/marker-icon.png",
-      shadowUrl: "leaflet/marker-shadow.png"
-    })
-  });
-
-  paradise3 = marker([35.545953, -3.63597], {
-    icon: icon({
-      iconSize: [25, 41],
-      iconAnchor: [13, 41],
-      iconUrl: "leaflet/marker-icon.png",
-      shadowUrl: "leaflet/marker-shadow.png"
-    })
-  });
-
-  // Layers control object with our two base layers and the three overlay layers
-  layersControl = {
-    baseLayers: {
-      "Street Maps": this.streetMaps,
-      "Wikimedia Maps": this.wMaps
-    },
-    overlays: {
-      "Mt. Rainier Paradise Start": this.paradise
-    }
-  };
-
-  cities = L.layerGroup([this.paradise, this.paradise2, this.paradise3]);
-
-  bounds = new L.LatLngBounds([
-    [40.545953, -3.63597],
-    [42.545953, -3.63597],
-    [35.545953, -3.63597]
-  ]);
   // Set the initial set of displayed layers (we could also use the leafletLayers input binding for this)
-  options = {
-    layers: [this.wMaps, this.cities]
-  };
-
-  locations: ILocation[];
-
-  onMapReady(map: Map) {
-    map.fitBounds(this.bounds);
-  }
 
   constructor(private backendService: BackendService) {
+    this.loading = true;
     this.backendService.getLocations().subscribe(
-      data => {this.locations = data; console.log(this.locations);},
+      data => {
+        this.locations = data;
+        this.addMarkers();
+        this.loading = false;
+      },
       err => {
         console.log(err);
       }
     );
   }
 
-  ngOnInit() {}
+  addMarkers() {
+    let arrayOfLatLng = [];
+    this.locations.locations.forEach(location => {
+      arrayOfLatLng.push([location.latitude, location.longitude]);
+      let mark = marker([location.latitude, location.longitude], {
+        icon: icon({
+          iconSize: [25, 41],
+          iconAnchor: [13, 41],
+          iconUrl: "leaflet/marker-icon.png",
+          shadowUrl: "leaflet/marker-shadow.png"
+        })
+      }).bindPopup(location.address);
+      mark.addTo(this.map);
+    });
+    this.map.fitBounds(new L.LatLngBounds(arrayOfLatLng), {padding: [40,40]});
+  }
+
+  ngAfterViewInit() {
+    this.map = L.map("map", {
+      center: [46.879966, -121.726909],
+      zoom: 12
+    });
+
+    let streetMaps = tileLayer(
+      "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+      {
+        detectRetina: true,
+        attribution:
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }
+    ).addTo(this.map);
+    // Layers control object with our two base layers and the three overlay layers
+
+    let baseMaps = {
+      'Street Maps': streetMaps
+    }
+    L.control.layers(baseMaps).addTo(this.map);
+  }
 }

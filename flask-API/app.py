@@ -140,32 +140,6 @@ class BasicData(Resource):
 
         return options[option](article)
 
-
-def allLocationMethods(ents):
-    locations = []
-    orgs = []
-
-    for ent in ents:
-        if ent.label == 'LOC':
-            geolocator = Nominatim(user_agent="specify_your_app_name_here")
-            data = geolocator.geocode(ent.text, timeout=10)
-            if data:
-                location = {
-                    'latitude': data.latitude,
-                    'longitude': data.longitude,
-                    'address': data.address,
-                    'text': ent.text
-                }
-                locations.append(location)
-        elif ent.label == 'ORG':
-            orgs.append(ent.text)
-
-    return {
-        'locations': locations,
-        'organizations': orgs,
-    }
-
-
 def locations(ents):
 
     locations = []
@@ -206,7 +180,6 @@ class Location(Resource):
     def get(self, option):
         global url
         options = {
-            'all': allLocationMethods,
             'locations': locations,
             'organizations': organizations,
         }

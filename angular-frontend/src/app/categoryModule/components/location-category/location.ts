@@ -1,6 +1,8 @@
 export interface ILocation {
-  latitude : number;
-  longitude: number;
-  address: string;
-  text: string;
+  locations: [{
+    latitude : number;
+    longitude: number;
+    address: string;
+    text: string;
+  }]
 }

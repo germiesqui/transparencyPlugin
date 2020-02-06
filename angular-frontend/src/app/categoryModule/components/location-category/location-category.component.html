@@ -7,13 +7,11 @@
     <h2>{{title}}</h2>
     </div>
 
-    <div class="map"
-     leaflet
-     [leafletOptions]="options"
-     (leafletMapReady)="onMapReady($event)"
-     [leafletLayersControl]="layersControl">
-    </div>
+    <ng-container *ngIf='loading'>
+      <mat-spinner color="accent"></mat-spinner>
+    </ng-container>
 
-  <p>{{locations}}</p>
+    <div id="map">
+    </div>
 </div>
 
