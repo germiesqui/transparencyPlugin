@@ -4,14 +4,18 @@
       <a [routerLink]= "['/categories']" class="btn btn-primary backBtn">Atras</a>
     </div>
     <div class="col">
-    <h2>{{title}}</h2>
+      <h2>{{title}}</h2>
     </div>
+  </div>
+  
+  <div #error *ngIf="loading" class="error alert alert-info">
+      <mat-spinner [color]="accent"></mat-spinner>
+    <span>
+      Estamos analizando el texto. Por favor, espere un momento.
+    </span>
+  </div>
 
-    <ng-container *ngIf='loading'>
-      <mat-spinner color="accent"></mat-spinner>
-    </ng-container>
-
-    <div id="map">
-    </div>
+  <div id="map">
+  </div>
 </div>
 

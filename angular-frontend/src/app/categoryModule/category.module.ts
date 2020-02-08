@@ -15,12 +15,14 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { SimplebarAngularModule } from "simplebar-angular";
 import { MatCardModule } from "@angular/material/card";
+import { EmotionCategoryComponent } from './components/emotion-category/emotion-category.component';
 
 @NgModule({
   declarations: [
     CategoriesComponent,
     BasicDataCategoryComponent,
-    LocationCategoryComponent
+    LocationCategoryComponent,
+    EmotionCategoryComponent
   ],
   imports: [
     CommonModule,

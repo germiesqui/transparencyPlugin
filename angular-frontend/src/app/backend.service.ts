@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { IBasicData } from "./categoryModule/components/basic-data-category/basicData";
 import { ILocation } from "./categoryModule/components/location-category/location";
+import { IEmotion } from "./categoryModule/components/emotion-category/emotion";
 
 @Injectable({
   providedIn: "root"
@@ -27,5 +28,9 @@ export class BackendService {
 
   getLocations(): Observable<ILocation> {
     return this.http.get<ILocation>(`${this.backendUrl}geographic/locations`);
+  }
+
+  getEmotions(): Observable<IEmotion> {
+    return this.http.get<IEmotion>(`${this.backendUrl}emotion`);
   }
 }
