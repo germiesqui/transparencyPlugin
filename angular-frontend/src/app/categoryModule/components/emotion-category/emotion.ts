@@ -9,8 +9,9 @@ export interface IEmotion {
     positive: number;
     sadness: number;
     surprise: number;
-    trust: number
+    trust: number;
   };
   polarity: number;
   subjectivity: number;
+  warning: boolean;
 }

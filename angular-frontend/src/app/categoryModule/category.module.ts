@@ -7,6 +7,8 @@ import { LeafletModule } from "@asymmetrik/ngx-leaflet";
 import { CategoriesComponent } from "./components/categories/categories.component";
 import { BasicDataCategoryComponent } from "./components/basic-data-category/basic-data-category.component";
 import { LocationCategoryComponent } from "./components/location-category/location-category.component";
+import { EmotionCategoryComponent } from "./components/emotion-category/emotion-category.component";
+import { RadarChartComponent } from "./components/radar-chart/radar-chart.component";
 
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatListModule } from "@angular/material/list";
@@ -15,14 +17,19 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { SimplebarAngularModule } from "simplebar-angular";
 import { MatCardModule } from "@angular/material/card";
-import { EmotionCategoryComponent } from './components/emotion-category/emotion-category.component';
+import { ChartsModule } from "ng2-charts";
+import { BarChartComponent } from "./components/bar-chart/bar-chart.component";
+
+
 
 @NgModule({
   declarations: [
     CategoriesComponent,
     BasicDataCategoryComponent,
     LocationCategoryComponent,
-    EmotionCategoryComponent
+    EmotionCategoryComponent,
+    RadarChartComponent,
+    BarChartComponent
   ],
   imports: [
     CommonModule,
@@ -35,7 +42,8 @@ import { EmotionCategoryComponent } from './components/emotion-category/emotion-
     MatProgressSpinnerModule,
     MatSidenavModule,
     SimplebarAngularModule,
-    MatCardModule
+    MatCardModule,
+    ChartsModule
   ]
 })
 export class CategoryModule {}

@@ -39,7 +39,7 @@ def allBasicDataMethods(article):
     return {
         'authors': article.authors,
         'publishDate': article.publish_date.strftime("%m/%d/%Y"),
-        'keywords': article.keywords,
+        'keywords': keywords,
         'summary': article.summary,
         'text': article.text,
         'topImg': article.top_image,
@@ -118,61 +118,6 @@ def processUrl():
     print('end processing')
 
 
-class AnaliceUrl(Resource):
-
-    def post(self):
-        global url
-        data = request.get_json()
-        url = data['url']
-
-        try:
-            h = httplib2.Http()
-            resp = h.request(url, 'HEAD')
-
-            if not int(resp[0]['status']) < 400:
-                response = app.response_class(
-                    response='URL invalida',
-                    status=422,
-                    mimetype='application/json'
-                )
-                return response
-        except Exception as e:
-            response = app.response_class(
-                response='URL invalida',
-                status=422,
-                mimetype='application/json'
-            )
-            return response
-
-        return {'url': url}
-
-
-class BasicData(Resource):
-
-    def get(self, option):
-        global url
-        global article
-        options = {
-            'all': allBasicDataMethods,
-            'authors': authors,
-            'publishDate': publishDate,
-            'keywords': keywords,
-            'summary': summary,
-            'text': text,
-            'topImg': topImg,
-            'movies': movies
-        }
-
-        article = Article(url)
-        article.download()
-        article.parse()
-
-        nltk.download('punkt')
-        article.nlp()
-
-        return options[option](article)
-
-
 def locations(ents):
 
     locations = []
@@ -208,6 +153,63 @@ def organizations(ents):
     }
 
 
+class AnaliceUrl(Resource):
+
+    def post(self):
+        global url
+        global article
+
+        data = request.get_json()
+        url = data['url']
+
+        try:
+            h = httplib2.Http()
+            resp = h.request(url, 'HEAD')
+
+            if not int(resp[0]['status']) < 400:
+                response = app.response_class(
+                    response='URL invalida',
+                    status=422,
+                    mimetype='application/json'
+                )
+                return response
+        except Exception as e:
+            response = app.response_class(
+                response='URL invalida',
+                status=422,
+                mimetype='application/json'
+            )
+            return response
+
+        article = Article(url)
+        article.download()
+        article.parse()
+
+        return {'url': url}
+
+
+class BasicData(Resource):
+
+    def get(self, option):
+        global url
+        global article
+        options = {
+            'all': allBasicDataMethods,
+            'authors': authors,
+            'publishDate': publishDate,
+            'keywords': keywords,
+            'summary': summary,
+            'text': text,
+            'topImg': topImg,
+            'movies': movies
+        }
+
+        nltk.download('punkt')
+        article.nlp()
+
+        return options[option](article)
+
+
 class Location(Resource):
 
     def get(self, option):
@@ -230,10 +232,10 @@ class Emotion(Resource):
     def get(self):
         global article
 
-        my_dic = pd.read_excel(
+        lexicon = pd.read_excel(
             'assets/spanish_emotion_lexicon.xlsx', index_col=0).to_dict()
 
-        dic = {
+        emotions = {
             'Anger': 0,
             'Anticipation': 0,
             'Disgust': 0,
@@ -245,33 +247,42 @@ class Emotion(Resource):
             'Surprise': 0,
             'Trust': 0}
 
-        for word in article.text.split():
-            if my_dic.get('Anger').get(word):
-                dic['Anger'] += 1
-            if my_dic.get('Anticipation').get(word):
-                dic['Anticipation'] += 1
-            if my_dic.get('Disgust').get(word):
-                dic['Disgust'] += 1
-            if my_dic.get('Fear').get(word):
-                dic['Fear'] += 1
-            if my_dic.get('Joy').get(word):
-                dic['Joy'] += 1
-            if my_dic.get('Negative').get(word):
-                dic['Negative'] += 1
-            if my_dic.get('Positive').get(word):
-                dic['Positive'] += 1
-            if my_dic.get('Sadness').get(word):
-                dic['Sadness'] += 1
-            if my_dic.get('Surprise').get(word):
-                dic['Surprise'] += 1
-            if my_dic.get('Trust').get(word):
-                dic['Trust'] += 1
+        wordList = article.text.split()
+
+        for word in wordList:
+            if lexicon.get('Anger').get(word):
+                emotions['Anger'] += 1
+            if lexicon.get('Anticipation').get(word):
+                emotions['Anticipation'] += 1
+            if lexicon.get('Disgust').get(word):
+                emotions['Disgust'] += 1
+            if lexicon.get('Fear').get(word):
+                emotions['Fear'] += 1
+            if lexicon.get('Joy').get(word):
+                emotions['Joy'] += 1
+            if lexicon.get('Negative').get(word):
+                emotions['Negative'] += 1
+            if lexicon.get('Positive').get(word):
+                emotions['Positive'] += 1
+            if lexicon.get('Sadness').get(word):
+                emotions['Sadness'] += 1
+            if lexicon.get('Surprise').get(word):
+                emotions['Surprise'] += 1
+            if lexicon.get('Trust').get(word):
+                emotions['Trust'] += 1
+
+        # numWordList = len(wordList)
+        # for key, item in emotions.items():
+        #     emotions[key] = 10*emotions[key]/numWordList
 
         sentiment = TextBlob(article.text).sentiment
+
+        warning = True if sentiment.subjectivity > 0.6 else False
         obj = {
-            'emotion': dic,
+            'emotion': emotions,
             'polarity': sentiment.polarity,
-            'subjectivity': sentiment.subjectivity
+            'subjectivity': sentiment.subjectivity,
+            'warning': warning
         }
 
         return obj

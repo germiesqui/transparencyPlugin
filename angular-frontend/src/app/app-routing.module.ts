@@ -4,6 +4,7 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 import { CategoriesComponent } from './categoryModule/components/categories/categories.component';
 import { BasicDataCategoryComponent } from "./categoryModule/components/basic-data-category/basic-data-category.component";
 import { LocationCategoryComponent } from './categoryModule/components/location-category/location-category.component';
+import { EmotionCategoryComponent } from './categoryModule/components/emotion-category/emotion-category.component';
 
 
 
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: "categories", component: CategoriesComponent },
   { path: "basicData", component: BasicDataCategoryComponent },
   { path: "location", component: LocationCategoryComponent },
+  { path: "emotion", component: EmotionCategoryComponent },
   { path: "", redirectTo: "welcome", pathMatch: "full" },
   { path: "**", redirectTo: "welcome", pathMatch: "full" }
 ];

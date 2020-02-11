@@ -1,1 +1,20 @@
-<p>emotion-category works!</p>
+<div class="container">
+  <h1>{{title}}</h1>
+  <div class="row">
+    <div class="col">
+      <div class="row text"><p>{{sentimentInfo}}</p></div>
+      <div class="row graph"><app-bar-chart [data]='sentimentData' [barChartLabels]='sentimentLabels' [label]="BarChartlabel"></app-bar-chart></div>
+    </div>
+    <div class="col">
+      <div class="row text"><p>{{emotionInfo}}</p></div>
+      <div class="row graph"><app-radar-chart [data]='emotionData' [radarChartLabels]='emotionNames' [label]="RadarChartlabel" ></app-radar-chart></div>
+    </div>
+  </div>
+
+  <div class="alert alert-warning" role="alert" *ngIf='warning'>
+    {{warningText}}
+  </div>
+
+</div>
+
+
