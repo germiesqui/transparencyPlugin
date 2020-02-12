@@ -22,6 +22,7 @@ export class LocationCategoryComponent implements AfterViewInit, ICategory {
 
   private map;
   loading: boolean;
+  loadingText: string = 'Estamos procesando el texto, por favor espere un momento';
 
   // Set the initial set of displayed layers (we could also use the leafletLayers input binding for this)
 

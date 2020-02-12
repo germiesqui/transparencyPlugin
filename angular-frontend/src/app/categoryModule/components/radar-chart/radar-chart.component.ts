@@ -5,7 +5,7 @@ import {Label} from 'ng2-charts'
 @Component({
   selector: "app-radar-chart",
   templateUrl: "./radar-chart.component.html",
-  styleUrls: ["./radar-chart.component.scss"]
+  styleUrls: []
 })
 export class RadarChartComponent implements OnChanges {
   @Input() radarChartLabels: Label[];

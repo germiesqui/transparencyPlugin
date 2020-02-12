@@ -2,7 +2,7 @@ import { Component, Input, OnChanges } from '@angular/core';
 @Component({
   selector: "app-bar-chart",
   templateUrl: "./bar-chart.component.html",
-  styleUrls: ["./bar-chart.component.scss"]
+  styleUrls: []
 })
 export class BarChartComponent implements OnChanges {
   @Input() barChartLabels: string[] = ["default"];

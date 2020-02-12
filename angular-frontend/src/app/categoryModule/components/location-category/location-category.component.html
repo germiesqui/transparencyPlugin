@@ -9,10 +9,7 @@
   </div>
   
   <div #error *ngIf="loading" class="error alert alert-info">
-      <mat-spinner [color]="accent"></mat-spinner>
-    <span>
-      Estamos analizando el texto. Por favor, espere un momento.
-    </span>
+    <span>{{loadingText}}</span>
   </div>
 
   <div id="map">
