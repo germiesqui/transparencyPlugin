@@ -4,6 +4,7 @@ import { icon, marker, tileLayer } from "leaflet";
 import * as L from 'leaflet';
 import { BackendService } from 'src/app/backend.service';
 import { ILocation } from './location';
+import { faInfoCircle, faTimes } from "@fortawesome/free-solid-svg-icons";
 
 
 @Component({
@@ -21,13 +22,19 @@ export class LocationCategoryComponent implements AfterViewInit, ICategory {
   locations: ILocation;
 
   private map;
-  loading: boolean;
-  loadingText: string = 'Estamos procesando el texto, por favor espere un momento';
 
-  // Set the initial set of displayed layers (we could also use the leafletLayers input binding for this)
+  //Message info data
+  loading: boolean = true;
+  loadingIcon = faInfoCircle;
+  loadingText: string =
+    "Estamos procesando el texto, por favor espere un momento";
+  error: boolean = false;
+  errorIcon = faTimes;
+  errorText: string =
+    "Ha habido un error con el servidor. For favor, inténtelo más tarde.";
+
 
   constructor(private backendService: BackendService) {
-    this.loading = true;
     this.backendService.getLocations().subscribe(
       data => {
         this.locations = data;
@@ -36,6 +43,8 @@ export class LocationCategoryComponent implements AfterViewInit, ICategory {
       },
       err => {
         console.log(err);
+        this.loading = false;
+        this.error = true;
       }
     );
   }
@@ -54,7 +63,9 @@ export class LocationCategoryComponent implements AfterViewInit, ICategory {
       }).bindPopup(location.address);
       mark.addTo(this.map);
     });
-    this.map.fitBounds(new L.LatLngBounds(arrayOfLatLng), {padding: [40,40]});
+    this.map.fitBounds(new L.LatLngBounds(arrayOfLatLng), {
+      padding: [40, 40]
+    });
   }
 
   ngAfterViewInit() {
@@ -71,11 +82,10 @@ export class LocationCategoryComponent implements AfterViewInit, ICategory {
           '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       }
     ).addTo(this.map);
-    // Layers control object with our two base layers and the three overlay layers
 
     let baseMaps = {
-      'Street Maps': streetMaps
-    }
+      "Street Maps": streetMaps
+    };
     L.control.layers(baseMaps).addTo(this.map);
   }
 }

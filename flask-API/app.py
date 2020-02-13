@@ -8,7 +8,7 @@ from flask_cors import CORS
 import spacy
 from geopy.geocoders import Nominatim
 import pandas as pd
-from multiprocessing import Process
+# from multiprocessing import Process
 from textblob import TextBlob
 
 import nltk
@@ -90,15 +90,15 @@ def movies(article):
         'movies': article.movies
     }
 
-
-def runInParallel(*fns):
-    proc = []
-    for fn in fns:
-        p = Process(target=fn)
-        p.start()
-        proc.append(p)
-    for p in proc:
-        p.join()
+# NOT IMPLEMENTED Parallel Process
+# def runInParallel(*fns):
+#     proc = []
+#     for fn in fns:
+#         p = Process(target=fn)
+#         p.start()
+#         proc.append(p)
+#     for p in proc:
+#         p.join()
 
 
 def processUrl():
@@ -124,7 +124,7 @@ def locations(ents):
     for ent in ents:
 
         if ent.label_ == 'LOC':
-            geolocator = Nominatim(user_agent="specify_your_app_name_here")
+            geolocator = Nominatim(user_agent="Transparency_Plugin")
             data = geolocator.geocode(ent.text, timeout=20)
             if data:
                 location = {
@@ -271,12 +271,9 @@ class Emotion(Resource):
             if lexicon.get('Trust').get(word):
                 emotions['Trust'] += 1
 
-        # numWordList = len(wordList)
-        # for key, item in emotions.items():
-        #     emotions[key] = 10*emotions[key]/numWordList
-
         sentiment = TextBlob(article.text).sentiment
 
+        # Subjective News control
         warning = True if sentiment.subjectivity > 0.6 else False
         obj = {
             'emotion': emotions,

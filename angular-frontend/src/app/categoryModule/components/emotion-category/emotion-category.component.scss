@@ -1,15 +1,33 @@
 .text{
   min-height: 160px;
   width: 100%;
+  box-sizing:border-box;
+  padding-left: 15px;
+  padding-top: 10px;
 }
 
 .graph{
-  min-height: 230px;
+  height: 100%;
   width: 100%;
+  padding-top: 40px;
+  padding-bottom: 30px;
+  padding-left: 15px;
+  
+  app-radar-chart{
+    height: 100%;
+    width: 100%;
+  }
+
+  app-bar-chart{
+    height: 100%;
+    width: 100%;
+  }
 }
 
 .container{
   padding: 10px 20px;
-  width: 100%;
-  height: 100%;
+}
+
+.header{
+  padding-top: 10px;
 }

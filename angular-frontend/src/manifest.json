@@ -1,11 +1,14 @@
 {
   "name": "Transparency Plugin",
-  "version": "1.0",
+  "version": "2.0",
   "description": "Build an Extension",
   "manifest_version": 2,
-  "permissions": [],
+  "permissions": [
+    "tabs",
+    "activeTab"
+  ],
   "browser_action": {
     "default_popup": "index.html"
   },
-  "content_security_policy": "script-src 'self' https://code.jquery.com/ https://cdnjs.cloudflare.com/ajax/libs/popper.js/ https://stackpath.bootstrapcdn.com/bootstrap/ 'unsafe-eval'; object-src 'self'"
+  "content_security_policy": "script-src 'self' https://code.jquery.com/ https://cdnjs.cloudflare.com/ajax/libs/popper.js/ https://stackpath.bootstrapcdn.com/bootstrap/ https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js 'unsafe-eval'; object-src 'self'"
 }
