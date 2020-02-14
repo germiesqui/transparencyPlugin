@@ -1,0 +1,10 @@
+<div>
+  <canvas baseChart
+    [datasets]="radarChartData"
+    [options]="radarChartOptions"
+    [labels]="radarChartLabels"
+    [chartType]="radarChartType"
+    [legend]='false'
+    (click)='chartClicked(event)'>
+  </canvas>
+</div>

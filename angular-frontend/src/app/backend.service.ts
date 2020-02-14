@@ -1,7 +1,9 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { IBasicData } from './components/basic-data-category/basicData';
+import { IBasicData } from "./categoryModule/components/basic-data-category/basicData";
+import { ILocation } from "./categoryModule/components/location-category/location";
+import { IEmotion } from "./categoryModule/components/emotion-category/emotion";
 
 @Injectable({
   providedIn: "root"
@@ -11,16 +13,24 @@ export class BackendService {
   constructor(private http: HttpClient) {}
 
   postAnaliceUrl(url: string): Observable<string> {
-    let data = { "url": url };
+    let data = { url: url };
     return this.http.post<string>(`${this.backendUrl}analiceUrl`, data, {
       headers: new HttpHeaders({
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": '*'
+        "Access-Control-Allow-Origin": "*"
       })
     });
   }
 
-  getBasicData(): Observable<IBasicData>{
+  getBasicData(): Observable<IBasicData> {
     return this.http.get<IBasicData>(`${this.backendUrl}basicInfo/all`);
+  }
+
+  getLocations(): Observable<ILocation> {
+    return this.http.get<ILocation>(`${this.backendUrl}geographic/locations`);
+  }
+
+  getEmotions(): Observable<IEmotion> {
+    return this.http.get<IEmotion>(`${this.backendUrl}emotion`);
   }
 }
