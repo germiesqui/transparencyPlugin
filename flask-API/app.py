@@ -205,6 +205,7 @@ class BasicData(Resource):
         }
 
         nltk.download('punkt')
+        article.parse()
         article.nlp()
 
         return options[option](article)
@@ -247,28 +248,30 @@ class Emotion(Resource):
             'Surprise': 0,
             'Trust': 0}
 
-        wordList = article.text.split()
+        sp = spacy.load("es")
 
-        for word in wordList:
-            if lexicon.get('Anger').get(word):
+        sentence = sp(article.text)
+        
+        for word in sentence:
+            if lexicon.get('Anger').get(word.lemma_):
                 emotions['Anger'] += 1
-            if lexicon.get('Anticipation').get(word):
+            if lexicon.get('Anticipation').get(word.lemma_):
                 emotions['Anticipation'] += 1
-            if lexicon.get('Disgust').get(word):
+            if lexicon.get('Disgust').get(word.lemma_):
                 emotions['Disgust'] += 1
-            if lexicon.get('Fear').get(word):
+            if lexicon.get('Fear').get(word.lemma_):
                 emotions['Fear'] += 1
-            if lexicon.get('Joy').get(word):
+            if lexicon.get('Joy').get(word.lemma_):
                 emotions['Joy'] += 1
-            if lexicon.get('Negative').get(word):
+            if lexicon.get('Negative').get(word.lemma_):
                 emotions['Negative'] += 1
-            if lexicon.get('Positive').get(word):
+            if lexicon.get('Positive').get(word.lemma_):
                 emotions['Positive'] += 1
-            if lexicon.get('Sadness').get(word):
+            if lexicon.get('Sadness').get(word.lemma_):
                 emotions['Sadness'] += 1
-            if lexicon.get('Surprise').get(word):
+            if lexicon.get('Surprise').get(word.lemma_):
                 emotions['Surprise'] += 1
-            if lexicon.get('Trust').get(word):
+            if lexicon.get('Trust').get(word.lemma_):
                 emotions['Trust'] += 1
 
         sentiment = TextBlob(article.text).sentiment

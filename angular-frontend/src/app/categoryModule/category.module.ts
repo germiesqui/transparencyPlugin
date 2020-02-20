@@ -12,6 +12,7 @@ import { LocationCategoryComponent } from "./components/location-category/locati
 import { EmotionCategoryComponent } from "./components/emotion-category/emotion-category.component";
 import { RadarChartComponent } from "./components/radar-chart/radar-chart.component";
 import { BarChartComponent } from "./components/bar-chart/bar-chart.component";
+import { HighchartsChartModule } from "highcharts-angular";
 
 // Styles
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -22,6 +23,8 @@ import { MatSidenavModule } from "@angular/material/sidenav";
 import { SimplebarAngularModule } from "simplebar-angular";
 import { MatCardModule } from "@angular/material/card";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { SpiderwebChartComponent } from './components/spiderweb-chart/spiderweb-chart.component';
+import { SolidgaugeChartComponent } from './components/solidgauge-chart/solidgauge-chart.component';
 
 
 @NgModule({
@@ -31,7 +34,9 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
     LocationCategoryComponent,
     EmotionCategoryComponent,
     RadarChartComponent,
-    BarChartComponent
+    BarChartComponent,
+    SpiderwebChartComponent,
+    SolidgaugeChartComponent
   ],
   imports: [
     CommonModule,
@@ -46,7 +51,8 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
     SimplebarAngularModule,
     MatCardModule,
     ChartsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    HighchartsChartModule
   ]
 })
 export class CategoryModule {}

@@ -52,7 +52,7 @@ export class EmotionCategoryComponent {
         this.emotionData = Object.keys(data.emotion).map(
           key => data.emotion[key]
         );
-        this.sentimentData = [data.polarity, data.subjectivity];
+        this.sentimentData = [+(data.polarity*100).toFixed(2), +(data.subjectivity*100).toFixed(2)];
         this.warning = data.warning;
       },
       err => {

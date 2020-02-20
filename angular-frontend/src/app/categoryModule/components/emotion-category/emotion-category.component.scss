@@ -6,17 +6,23 @@
   padding-top: 10px;
 }
 
+.col{
+  max-width: 400px;
+}
+
+app-spiderweb-chart{
+  width: 500px;
+}
+
+app-solidgauge-chart{
+  max-width: 300px;
+}
+
 .graph{
-  height: 100%;
   width: 100%;
   padding-top: 40px;
   padding-bottom: 30px;
   padding-left: 15px;
-  
-  app-radar-chart{
-    height: 100%;
-    width: 100%;
-  }
 
   app-bar-chart{
     height: 100%;

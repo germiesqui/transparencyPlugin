@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 import { BackendService } from "src/app/backend.service";
 import { Router } from "@angular/router";
 
-declare var chrome;
+// declare var chrome;
 
 @Component({
   templateUrl: "./welcome.component.html",
@@ -20,11 +20,11 @@ export class WelcomeComponent {
   postErrorMessage = "";
 
   constructor(private backendService: BackendService, private router: Router) {
-    if (chrome) {
-      chrome.tabs.query({ active: true, lastFocusedWindow: true }, tabs => {
-        this.currentUrl = tabs[0].url;
-      });
-    }
+    // if (chrome) {
+    //   chrome.tabs.query({ active: true, lastFocusedWindow: true }, tabs => {
+    //     this.currentUrl = tabs[0].url;
+    //   });
+    // }
   }
 
   buttonClick(url: string) {

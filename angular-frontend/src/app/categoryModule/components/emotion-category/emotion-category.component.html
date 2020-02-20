@@ -10,11 +10,12 @@
   <div class="row">
     <div class="col">
       <div class="row text"><p>{{sentimentInfo}}</p></div>
-      <div class="row graph"><app-bar-chart [data]='sentimentData' [barChartLabels]='sentimentLabels' [label]="BarChartlabel"></app-bar-chart></div>
+
+      <div class="row graph"><app-solidgauge-chart [data]='sentimentData[1]' [label]="BarChartlabel"></app-solidgauge-chart></div>
     </div>
     <div class="col">
       <div class="row text"><p>{{emotionInfo}}</p></div>
-      <div class="row graph"><app-radar-chart [data]='emotionData' [radarChartLabels]='emotionNames' [label]="RadarChartlabel" ></app-radar-chart></div>
+      <div class="row graph"><app-spiderweb-chart [data]='emotionData' [spiderwebCategories]='emotionNames' [label]="RadarChartlabel"></app-spiderweb-chart></div>
     </div>
   </div>
 
