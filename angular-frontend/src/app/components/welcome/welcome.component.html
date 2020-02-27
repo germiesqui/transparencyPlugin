@@ -1,27 +1,24 @@
 <div class="container">
-  <h2>{{title}}</h2>
-  <form (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <label for="urlInput">Introduzca una URL a analizar</label>
-      <input type="url" name="urlInput" #urlField="ngModel" placeholder="Intorduza URL" [(ngModel)]='url' 
-      class='form-control'
-      [class.field-error]="postError">
-    </div>
+    <h1>{{title}}</h1>
+    <form (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="urlInput">Introduzca una URL a analizar</label>
+            <input type="url" name="urlInput" id="urlInput" #urlField="ngModel" placeholder="Intorduza URL" [(ngModel)]='url' class='form-control' [class.field-error]="postError">
+        </div>
 
-    <div [hidden]="!postError" class="alert alert-danger">
-      {{postErrorMessage}}
-    </div>
+        <div [hidden]="!postError" class="alert alertMsg">
+            {{postErrorMessage}}
+        </div>
 
-    <div class="row">
-      <div class="col-sm-12 row">
-        <div class="col"><button id='form' type="submit" class='btn btn-primary text-center'>Analizar</button></div>
-        <div class="col"><button id='currentTab' type="button" class='btn btn-primary text-center' (click)='onClick()'>Analizar página actual</button></div>
-        
-      </div>
-    </div>
-    
-  </form>
+        <div class="row">
+            <div class="col-sm-12 row">
+                <div class="col"><button id='form' type="submit" class='btn button text-center'>Analizar Url</button></div>
+                <div class="col"><button id='currentTab' type="button" class='btn button text-center' (click)='onClick()'>Analizar página actual</button></div>
 
-  <p class="introduction">{{introductionText}}</p>
+            </div>
+        </div>
+
+    </form>
+
+    <p class="introduction">{{introductionText}}</p>
 </div>
-

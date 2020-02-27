@@ -10,9 +10,9 @@ import { CategoriesComponent } from "./components/categories/categories.componen
 import { BasicDataCategoryComponent } from "./components/basic-data-category/basic-data-category.component";
 import { LocationCategoryComponent } from "./components/location-category/location-category.component";
 import { EmotionCategoryComponent } from "./components/emotion-category/emotion-category.component";
-import { RadarChartComponent } from "./components/radar-chart/radar-chart.component";
-import { BarChartComponent } from "./components/bar-chart/bar-chart.component";
 import { HighchartsChartModule } from "highcharts-angular";
+import { SpiderwebChartComponent } from "./components/spiderweb-chart/spiderweb-chart.component";
+import { SolidgaugeChartComponent } from "./components/solidgauge-chart/solidgauge-chart.component";
 
 // Styles
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -23,8 +23,8 @@ import { MatSidenavModule } from "@angular/material/sidenav";
 import { SimplebarAngularModule } from "simplebar-angular";
 import { MatCardModule } from "@angular/material/card";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
-import { SpiderwebChartComponent } from './components/spiderweb-chart/spiderweb-chart.component';
-import { SolidgaugeChartComponent } from './components/solidgauge-chart/solidgauge-chart.component';
+import { SatisfactionIconsComponent } from './components/satisfaction-icons/satisfaction-icons.component';
+import { AccesibilityCategoryComponent } from './components/accesibility-category/accesibility-category.component';
 
 
 @NgModule({
@@ -33,10 +33,10 @@ import { SolidgaugeChartComponent } from './components/solidgauge-chart/solidgau
     BasicDataCategoryComponent,
     LocationCategoryComponent,
     EmotionCategoryComponent,
-    RadarChartComponent,
-    BarChartComponent,
     SpiderwebChartComponent,
-    SolidgaugeChartComponent
+    SolidgaugeChartComponent,
+    SatisfactionIconsComponent,
+    AccesibilityCategoryComponent
   ],
   imports: [
     CommonModule,

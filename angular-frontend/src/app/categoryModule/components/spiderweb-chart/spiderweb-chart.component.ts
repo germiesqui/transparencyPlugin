@@ -9,7 +9,17 @@ HC_exporting(Highcharts);
 @Component({
   selector: "app-spiderweb-chart",
   templateUrl: "./spiderweb-chart.component.html",
-  styleUrls: ["./spiderweb-chart.component.scss"]
+  styleUrls: ["./spiderweb-chart.component.scss"],
+  host: {
+    // Sets the role for this component to "progressbar"
+    role: "figure",
+
+    // Sets the minimum and maximum values for the progressbar role.
+    "aria-valuemin": "0",
+
+    // Binding that updates the current value of the progressbar.
+    "[attr.aria-valuenow]": "data"
+  }
 })
 export class SpiderwebChartComponent implements OnInit, OnChanges {
   @Input() spiderwebCategories: string[];
@@ -28,7 +38,7 @@ export class SpiderwebChartComponent implements OnInit, OnChanges {
     chart: {
       polar: true,
       type: "line",
-      backgroundColor: "#00BCD4"
+      backgroundColor: "#D6DBD2"
     },
 
     title: {
@@ -55,7 +65,7 @@ export class SpiderwebChartComponent implements OnInit, OnChanges {
     tooltip: {
       shared: true,
       pointFormat:
-        '<span style="color:{series.color}">{series.name}: <b>${point.y:,.0f}</b><br/>'
+        '<span style="color:{series.color}">{series.name}: <b>{point.y:,.0f} palabras</b><br/>'
     },
 
     series: [
@@ -76,7 +86,8 @@ export class SpiderwebChartComponent implements OnInit, OnChanges {
     };
     this.progressTracking.series = [
       {
-        name: "Sentimientos",
+        showInLegend: false,
+        name: this.label,
         data: this.data,
         pointPlacement: "on"
       }

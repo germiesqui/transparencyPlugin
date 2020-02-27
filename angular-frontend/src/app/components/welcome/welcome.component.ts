@@ -33,9 +33,10 @@ export class WelcomeComponent {
         this.router.navigate(["./categories"]);
       },
       error: err => {
+        console.log(err.error)
         this.postError = true;
         err.status < 500
-          ? (this.postErrorMessage = err.error)
+          ? (this.postErrorMessage = "URL inválida")
           : (this.postErrorMessage = "Error inesperado en el servidor");
       }
     });

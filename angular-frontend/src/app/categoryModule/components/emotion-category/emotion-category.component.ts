@@ -15,6 +15,8 @@ export class EmotionCategoryComponent {
   url: string = "/emotion";
   description: string = "Datos básicos sobre la noticia.";
   icon: string = "tag_faces";
+  
+  loading: boolean = true;
 
   //Page Info
   emotionInfo: string =
@@ -52,8 +54,10 @@ export class EmotionCategoryComponent {
         this.emotionData = Object.keys(data.emotion).map(
           key => data.emotion[key]
         );
-        this.sentimentData = [+(data.polarity*100).toFixed(2), +(data.subjectivity*100).toFixed(2)];
+        this.sentimentData = [+(data.polarity*100).toFixed(2), +(0.7*100).toFixed(2)];
         this.warning = data.warning;
+        
+        this.loading = false;
       },
       err => {
         console.log(err);

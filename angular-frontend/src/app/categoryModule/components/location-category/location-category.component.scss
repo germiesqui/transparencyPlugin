@@ -1,32 +1,46 @@
 @import "@angular/material/prebuilt-themes/pink-bluegrey.css";
-
 .container {
-  padding: 20px 35px;
-  margin: 0;
-  min-width: 800px;
+    padding: 20px 35px;
+    margin: 0;
+    min-width: 800px;
 }
 
 .row {
-  margin: 0;
-  padding-bottom: 2%;
+    margin: 0;
+    padding-bottom: 2%;
 }
 
 .backBtn-col {
-  max-width: 200px;
-  padding: 0;
+    max-width: 80px;
+    padding: 0;
+    padding-top: 10px;
 }
 
-#map{
-  height: 450px;
-  width: 100%;
-  padding-top: 4%;
-  text-align: center;
+.title-col {
+    text-align: center;
 }
 
-mat-spinner{
-  height: 10px;
+#map {
+    height: 450px;
+    width: 100%;
+    padding-top: 4%;
+    text-align: center;
 }
 
-fa-icon{
-  padding: 20px;
+fa-icon {
+    padding: 20px;
+}
+
+mat-spinner {
+    background-color: rgb(146, 72, 89);
+    border-radius: 20%;
+    margin-right: 15px;
+}
+
+.loading {
+    display: inline-flex;
+    width: 100%;
+    padding-top: 15px;
+    padding-bottom: 0;
+    margin-bottom: 10px;
 }

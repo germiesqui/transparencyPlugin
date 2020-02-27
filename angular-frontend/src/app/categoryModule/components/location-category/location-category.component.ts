@@ -57,7 +57,7 @@ export class LocationCategoryComponent implements AfterViewInit, ICategory {
         icon: icon({
           iconSize: [25, 41],
           iconAnchor: [13, 41],
-          iconUrl: "leaflet/marker-icon.png",
+          iconUrl: "assets/marker-icon.png",
           shadowUrl: "leaflet/marker-shadow.png"
         })
       }).bindPopup(location.address);

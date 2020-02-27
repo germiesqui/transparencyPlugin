@@ -27,10 +27,14 @@ export class BackendService {
   }
 
   getLocations(): Observable<ILocation> {
-    return this.http.get<ILocation>(`${this.backendUrl}geographic/locations`);
+    return this.http.get<ILocation>(`${this.backendUrl}spacy/locations`);
   }
 
   getEmotions(): Observable<IEmotion> {
     return this.http.get<IEmotion>(`${this.backendUrl}emotion`);
+  }
+
+  getEntities(): Observable<String[]> {
+    return this.http.get<String[]>(`${this.backendUrl}spacy/entities`);
   }
 }

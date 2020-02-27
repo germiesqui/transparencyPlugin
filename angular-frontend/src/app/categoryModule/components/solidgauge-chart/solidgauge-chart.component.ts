@@ -9,7 +9,18 @@ HC_SolidGauge(Highcharts);
 @Component({
   selector: "app-solidgauge-chart",
   templateUrl: "./solidgauge-chart.component.html",
-  styleUrls: ["./solidgauge-chart.component.scss"]
+  styleUrls: ["./solidgauge-chart.component.scss"],
+  host: {
+    // Sets the role for this component to "progressbar"
+    role: "figure",
+
+    // Sets the minimum and maximum values for the progressbar role.
+    "aria-valuemin": "0",
+    "aria-valuemax": "1",
+
+    // Binding that updates the current value of the progressbar.
+    "[attr.aria-valuenow]": "data"
+  }
 })
 export class SolidgaugeChartComponent implements OnChanges {
   constructor() {}
@@ -25,7 +36,8 @@ export class SolidgaugeChartComponent implements OnChanges {
     },
 
     title: {
-      text: this.label
+      text: this.label,
+      x: -130
     },
 
     pane: {
@@ -34,7 +46,7 @@ export class SolidgaugeChartComponent implements OnChanges {
       startAngle: -90,
       endAngle: 90,
       background: {
-        backgroundColor: "#EEE",
+        backgroundColor: "#FFF",
         innerRadius: "60%",
         outerRadius: "100%",
         shape: "arc"
@@ -85,10 +97,9 @@ export class SolidgaugeChartComponent implements OnChanges {
   };
 
   ngOnChanges() {
-    console.log(this.data);
     this.options.series = [
       {
-        name: "Subjetividad",
+        name: this.label,
         data: [this.data],
         dataLabels: {
           format:
@@ -98,8 +109,8 @@ export class SolidgaugeChartComponent implements OnChanges {
         }
       }
     ];
-    
-    this.options.title = this.label;
+
+    this.options.title.text = this.label;
 
     this.update = true;
   }

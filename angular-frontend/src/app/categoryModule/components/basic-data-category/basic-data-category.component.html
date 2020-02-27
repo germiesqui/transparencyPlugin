@@ -1,117 +1,142 @@
 <article>
-  <ng-container *ngIf="!getError; else error">
-    <mat-sidenav-container *ngIf="basicData; else loading">
-      <mat-sidenav mode="side" opened>
-        <mat-nav-list>
-          <a [routerLink]= "['/categories']"><mat-list-item>Atras</mat-list-item></a>
-          <mat-list-item
-            [ngClass]="{ selected: option === 'author' }"
-            (click)="infoChange('author')"
-            >Autores</mat-list-item
-          >
-          <mat-list-item
-            [ngClass]="{ selected: option === 'date' }"
-            (click)="infoChange('date')"
-            >Fecha Publicación</mat-list-item
-          >
-          <mat-list-item
-            [ngClass]="{ selected: option === 'keyword' }"
-            (click)="infoChange('keyword')"
-            >Palabras clave</mat-list-item
-          >
-          <mat-list-item
-            [ngClass]="{ selected: option === 'summary' }"
-            (click)="infoChange('summary')"
-            >Resumen</mat-list-item
-          >
-          <mat-list-item
-            [ngClass]="{ selected: option === 'image' }"
-            (click)="infoChange('image')"
-            >Imagen de portada</mat-list-item
-          >
-          <mat-list-item
-            [ngClass]="{ selected: option === 'movies' }"
-            (click)="infoChange('movies')"
-            >Videos</mat-list-item
-          >
-        </mat-nav-list>
-      </mat-sidenav>
-      <mat-sidenav-content>
-        <ng-container *ngIf="option === 'author'">
-          <ngx-simplebar [options]="options">
-            <div class="container author">
-              <h2 class="title">Autores</h2>
+    <ng-container *ngIf="!getError; else error">
+        <mat-sidenav-container *ngIf="basicData; else loading">
+            <mat-sidenav mode="side" opened>
+                <mat-nav-list role="menubar">
+                    <mat-list-item role="menuitem" [ngClass]="{ selected: option === 'author' }" (click)="infoChange('author')">Autores</mat-list-item>
+                    <mat-list-item role="menuitem" [ngClass]="{ selected: option === 'date' }" (click)="infoChange('date')">Fecha Publicación</mat-list-item>
+                    <mat-list-item role="menuitem" [ngClass]="{ selected: option === 'summary' }" (click)="infoChange('summary')">Resumen</mat-list-item>
+                    <mat-list-item role="menuitem" [ngClass]="{ selected: option === 'keyword' }" (click)="infoChange('keyword')">Palabras clave</mat-list-item>
+                    <mat-list-item role="menuitem" [ngClass]="{ selected: option === 'image' }" (click)="infoChange('image')">Imagen de portada</mat-list-item>
+                    <mat-list-item role="menuitem" [ngClass]="{ selected: option === 'movies' }" (click)="infoChange('movies')">Videos</mat-list-item>
+                </mat-nav-list>
+            </mat-sidenav>
+            <mat-sidenav-content>
+                <ng-container *ngIf="option === 'author'">
+                    <ngx-simplebar [options]="options">
+                        <div class="container author">
+                            <div class="row">
+                                <div class="col title-col">
+                                    <h1 class="title">Autores</h1>
+                                </div>
+                                <div class="col backBtn-col">
+                                    <a [routerLink]="['/categories']" class="btn button">ATRAS</a>
+                                </div>
+                            </div>
 
-              <mat-list *ngFor="let author of basicData.authors">
-                <mat-list-item>
-                  <mat-icon matListIcon>face</mat-icon>
-                  <span matLine>{{ author }}</span>
-                </mat-list-item>
-              </mat-list>
-            </div>
-          </ngx-simplebar>
-        </ng-container>
 
-        <ng-container *ngIf="option === 'date'">
-          <div class="container date">
-            <h2 class="title">Fecha de publicación</h2>
-            <p>{{ basicData.publishDate }}</p>
-          </div>
-        </ng-container>
+                            <mat-list *ngFor="let author of basicData.authors">
+                                <mat-list-item>
+                                    <mat-icon matListIcon>face</mat-icon>
+                                    <span matLine>{{ author }}</span>
+                                </mat-list-item>
+                            </mat-list>
+                        </div>
+                    </ngx-simplebar>
+                </ng-container>
 
-        <ng-container *ngIf="option === 'keyword'">
-          <ngx-simplebar [options]="options">
-            <div class="container keyword">
-              <h2 class="title">Palabras clave</h2>
-              <mat-list *ngFor="let keyword of basicData.keywords" dense>
-                <mat-list-item>
-                  <span>{{ keyword }}</span>
-                </mat-list-item>
-              </mat-list>
-            </div>
-          </ngx-simplebar>
-        </ng-container>
+                <ng-container *ngIf="option === 'date'">
+                    <div class="container date">
+                        <div class="row">
+                            <div class="col title-col">
+                                <h1 class="title">Fecha de publicación</h1>
+                            </div>
+                            <div class="col backBtn-col">
+                                <a [routerLink]="['/categories']" class="btn button">ATRAS</a>
+                            </div>
+                        </div>
 
-        <ng-container *ngIf="option === 'summary'">
-          <ngx-simplebar [options]="options">
-            <div class="container summary">
-              <h2 class="title">Resumen de la noticia</h2>
-              <p>{{ basicData.summary }}</p>
-            </div>
-          </ngx-simplebar>
-        </ng-container>
+                        <p>{{ basicData.publishDate }}</p>
+                    </div>
+                </ng-container>
 
-        <ng-container *ngIf="option === 'image'">
-          <div class="container image">
-            <h2 class="title">Imagen titular</h2>
-            <img [src]="basicData.topImg" />
-          </div>
-        </ng-container>
+                <ng-container *ngIf="option === 'keyword'">
+                    <ngx-simplebar [options]="options">
+                        <div class="container keyword">
+                            <div class="row">
+                                <div class="col title-col">
+                                    <h1 class="title">Palabras clave</h1>
+                                </div>
+                                <div class="col backBtn-col">
+                                    <a [routerLink]="['/categories']" class="btn button">ATRAS</a>
+                                </div>
+                            </div>
 
-        <ng-container *ngIf="option === 'movies'">
-          <ngx-simplebar [options]="options">
-            <div class="container movies">
-              <h2 class="title">Listado de videos</h2>
-              <mat-list *ngFor="let movie of basicData.movies">
-                <mat-list-item>
-                  <mat-icon matListIcon>movie</mat-icon>
-                  <span matLine>{{ movie }}</span>
-                </mat-list-item>
-              </mat-list>
-            </div>
-          </ngx-simplebar>
-        </ng-container>
-      </mat-sidenav-content>
-    </mat-sidenav-container>
+                            <mat-list *ngFor="let keyword of basicData.keywords" dense>
+                                <mat-list-item>
+                                    <span>{{ keyword }}</span>
+                                </mat-list-item>
+                            </mat-list>
+                        </div>
+                    </ngx-simplebar>
+                </ng-container>
+
+                <ng-container *ngIf="option === 'summary'">
+                    <ngx-simplebar [options]="options">
+                        <div class="container summary">
+                            <div class="row">
+                                <div class="col title-col">
+                                    <h1 class="title">Resumen de la noticia</h1>
+                                </div>
+                                <div class="col backBtn-col">
+                                    <a [routerLink]="['/categories']" class="btn button">ATRAS</a>
+                                </div>
+                            </div>
+
+                            <p>{{ basicData.summary }}</p>
+                        </div>
+                    </ngx-simplebar>
+                </ng-container>
+
+                <ng-container *ngIf="option === 'image'">
+                    <div class="container image">
+                        <div class="row">
+                            <div class="col title-col">
+                                <h1 class="title">Imagen titular</h1>
+                            </div>
+                            <div class="col backBtn-col">
+                                <a [routerLink]="['/categories']" class="btn button">ATRAS</a>
+                            </div>
+                        </div>
+
+                        <img [src]="basicData.topImg" alt="Imágen de la noticia" />
+                    </div>
+                </ng-container>
+
+                <ng-container *ngIf="option === 'movies'">
+                    <ngx-simplebar [options]="options">
+                        <div class="container movies">
+                            <div class="row">
+                                <div class="col title-col">
+                                    <h1 class="title">Listado de videos</h1>
+                                </div>
+                                <div class="col backBtn-col">
+                                    <a [routerLink]="['/categories']" class="btn button">ATRAS</a>
+                                </div>
+                            </div>
+
+                            <mat-list *ngFor="let movie of basicData.movies">
+                                <mat-list-item>
+                                    <mat-icon matListIcon>movie</mat-icon>
+                                    <span matLine>{{ movie }}</span>
+                                </mat-list-item>
+                            </mat-list>
+                        </div>
+                    </ngx-simplebar>
+                </ng-container>
+            </mat-sidenav-content>
+        </mat-sidenav-container>
+
+    </ng-container>
+    <div #error *ngIf="getError" class="error alert alert-danger">
+        <span>
+            Ha habido un error en el servidor, asegurese de que la URL introducida
+            pertece a la noticia o intentelo más tarde
+        </span>
+    </div>
 
     <ng-template #loading>
-      <mat-spinner color="accent"></mat-spinner>
+        <span>Cargando ...</span>
+        <mat-spinner color="accent" diameter='20'></mat-spinner>
     </ng-template>
-  </ng-container>
-  <div #error *ngIf="getError" class="error alert alert-danger">
-    <span>
-      Ha habido un error en el servidor, asegurese de que la URL introducida
-      pertece a la noticia o intentelo más tarde
-    </span>
-  </div>
 </article>

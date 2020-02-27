@@ -1,7 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
-html, body { 
-  height: 600px;
-  width: 800px;
-  overflow: hidden;
+
+html,
+body {
+    height: 600px;
+    width: 800px;
+    overflow: hidden;
 }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+body {
+    margin: 0;
+    font-family: "Verdana", sans-serif;
+}
+
+.button {
+    background-color: rgb(196, 79, 106);
+    font-size: medium;
+    color: white;
+}
+
+.alertMsg {
+    background-color: #BBC7A4;
+}
+
+.iconColor {
+    color: rgb(146, 72, 89);
+}

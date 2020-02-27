@@ -1,100 +1,110 @@
 @import "~material-icons/iconfont/material-icons.css";
-$content-font-color: black;
-$navbar-font-color: white;
-$background-color: #00bcd4;
-$navbar-backgorund-color: #006064;
-
+$background-color: #F2F5EA;
+$navbar-backgorund-color: #BBC7A4;
 article {
-  padding: 0;
-  margin: 0;
-  width: 100%;
-  height: 100%;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
 }
 
-.error{
-  font-size: 1.2rem;
+.error {
+    font-size: 1.2rem;
 }
 
 .title {
-  font-family: "Helvetica Neue", sans-serif;
-  font-size: 3rem;
-  font-weight: bold;
-  text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.backBtn-col {
+    max-width: 90px;
+    padding: 10px 0;
+}
+
+.title-col {
+    text-align: center;
+    width: 444px;
+    min-width: 444px;
+    padding-top: 10px;
 }
 
 img {
-  max-width: 100%;
-  height: auto;
-  width: auto\9; /* ie8 */
+    max-width: 100%;
+    height: auto;
+    width: auto\9;
 }
 
 mat-sidenav {
-  background-color: $navbar-backgorund-color;
-  color: $navbar-font-color;
-
-  .selected {
-    background-color: rgba(0, 0, 0, 0.2);
-  }
-  mat-list-item:hover {
-    background-color: rgba(0, 0, 0, 0.2);
-  }
+    background-color: $navbar-backgorund-color;
+    font-size: medium;
+    .selected {
+        background-color: rgba(0, 0, 0, 0.2);
+    }
+    mat-list-item:hover {
+        background-color: rgba(0, 0, 0, 0.2);
+    }
+    .bckBtn {
+        color: white;
+        margin-bottom: 20px;
+        margin-top: 15px;
+    }
 }
 
-mat-nav-list{
-  overflow: hidden;
+mat-nav-list {
+    overflow: hidden;
 }
 
 mat-sidenav-container {
-  height: 100%;
+    height: 100%;
 }
 
 mat-sidenav-content {
-  padding: 2% 5% 2% 5%;
-  background-color: $background-color;
-  color: $content-font-color;
-
-  .container {
-    height: 100%;
-  }
-
-  .author {
-    font-size: 1.5rem;
-  }
-
-  .date {
-    font-size: 2rem;
-    text-align: center;
-    p {
-      padding-top: 150px;
+    padding: 2% 5% 2% 5%;
+    background-color: $background-color;
+    .container {
+        height: 100%;
     }
-  }
-
-  .keyword {
-    font-size: 1.6rem;
-  }
-
-  .summary {
-    p {
-      font-size: 1.1rem;
-      padding: 20px 0;
-      text-align: justify;
+    .author {
+        font-size: 1.5rem;
     }
-  }
-
-  .image {
-    text-align: center;
-    img {
-      max-width: 500px;
-      max-height: 400px;
+    .date {
+        font-size: 2rem;
+        text-align: center;
+        p {
+            padding-top: 150px;
+        }
     }
-  }
-
-  .movies {
-    font-size: 1.6rem;
-  }
+    .keyword {
+        font-size: 1.6rem;
+    }
+    .summary {
+        p {
+            font-size: 1.1rem;
+            padding: 20px 0;
+            text-align: center;
+        }
+    }
+    .image {
+        text-align: center;
+        img {
+            max-width: 500px;
+            max-height: 400px;
+        }
+    }
+    .movies {
+        font-size: 1.6rem;
+    }
 }
 
 ngx-simplebar {
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
+}
+
+mat-spinner {
+    background-color: rgb(146, 72, 89);
+    border-radius: 20%;
+    margin-right: 15px;
 }

@@ -1,29 +1,32 @@
 <div class="container">
-  <div class="row header">
-    <div class="col col-sm-4">
-      <a [routerLink]= "['/categories']" class="btn btn-primary backBtn">Atras</a>
+    <div class="row header">
+        <div class="col col-sm-4">
+            <a [routerLink]="['/categories']" class="btn btn-primary backBtn">Atras</a>
+        </div>
+        <div class="col">
+            <h1>{{title}}</h1>
+        </div>
     </div>
-    <div class="col">
-      <h2>{{title}}</h2>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col">
-      <div class="row text"><p>{{sentimentInfo}}</p></div>
+    <div class="row">
+        <div class="col">
 
-      <div class="row graph"><app-solidgauge-chart [data]='sentimentData[1]' [label]="BarChartlabel"></app-solidgauge-chart></div>
+            <div class="row graph">
+                <app-satisfaction-icons [data]='sentimentData[0]' [attr.aria-busy]='loading'></app-satisfaction-icons>
+                <app-solidgauge-chart [data]='sentimentData[1]' [label]="BarChartlabel" [attr.aria-busy]='loading'></app-solidgauge-chart>
+            </div>
+        </div>
+        <div class="col">
+            <div class="row graph">
+                <app-spiderweb-chart [data]='emotionData' [spiderwebCategories]='emotionNames' [label]="RadarChartlabel" [attr.aria-busy]='loading'></app-spiderweb-chart>
+            </div>
+        </div>
     </div>
-    <div class="col">
-      <div class="row text"><p>{{emotionInfo}}</p></div>
-      <div class="row graph"><app-spiderweb-chart [data]='emotionData' [spiderwebCategories]='emotionNames' [label]="RadarChartlabel"></app-spiderweb-chart></div>
-    </div>
-  </div>
 
-  <div class="alert alert-warning row" role="alert" *ngIf='warning'>
-    <div class="col-sm-1"><fa-icon [icon]="warningIcon" size='2x'></fa-icon></div>
-    <div class="col"><span>{{warningText}}</span></div>
-  </div>
+    <div class="alert alert-warning row" role="alert" *ngIf='warning'>
+        <div class="col-sm-1">
+            <fa-icon [icon]="warningIcon" size='2x'></fa-icon>
+        </div>
+        <div class="col"><span>{{warningText}}</span></div>
+    </div>
 
 </div>
-
-

@@ -1,23 +1,24 @@
 <div class="container">
-  <div class="row">
-    <div class="col backBtn-col">
-      <a [routerLink]= "['/categories']" class="btn btn-primary backBtn">Atras</a>
+    <div class="row">
+        <div class="col title-col">
+            <h1>{{title}}</h1>
+        </div>
+        <div class="col backBtn-col">
+            <a [routerLink]="['/categories']" class="btn button">ATRAS</a>
+        </div>
     </div>
-    <div class="col">
-      <h2>{{title}}</h2>
+
+    <div *ngIf="loading && !error" class="error alert alertMsg loading">
+        <mat-spinner color="accent" diameter='20'></mat-spinner>
+        <p>{{loadingText}}</p>
+
     </div>
-  </div>
-  
-  <div *ngIf="loading && !error" class="error alert alert-info">
-    <fa-icon [icon]="loadingIcon" size='lg'></fa-icon><span>{{loadingText}}</span>
-  </div>
 
-  <div *ngIf="error && !loading" class="error alert alert-danger">
-    <fa-icon [icon]="errorIcon" size='lg'></fa-icon><span>{{errorText}}</span>
-  </div>
+    <div *ngIf="error && !loading" class="error alert alertMsg">
+        <fa-icon [icon]="errorIcon" size='lg' class="iconColor"></fa-icon><span>{{errorText}}</span>
+    </div>
 
-  <div id="map">
-  </div>
+    <div id="map" [attr.aria-busy]='loading' role='map'>
+    </div>
 
 </div>
-
