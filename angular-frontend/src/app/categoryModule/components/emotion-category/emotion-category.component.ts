@@ -40,11 +40,14 @@ export class EmotionCategoryComponent {
   emotions: IEmotion;
   emotionNames: string[] = ["default"];
   emotionData: number[] = [1];
-  RadarChartlabel: string = "emociones";
+  RadarChartlabel: string = "Emociones";
 
   sentimentLabels: string[] = ["Polaridad", "Subjetividad"];
   sentimentData: number[] = [0, 0];
-  BarChartlabel: string = "Sentimientos";
+
+  //Color code. Positive = red to green, Negative = green to red
+  polarityColorCode: number = 1;
+  subjetivityColorCode: number = -1;
 
   constructor(private backendService: BackendService) {
     this.backendService.getEmotions().subscribe(
@@ -54,7 +57,8 @@ export class EmotionCategoryComponent {
         this.emotionData = Object.keys(data.emotion).map(
           key => data.emotion[key]
         );
-        this.sentimentData = [+(data.polarity*100).toFixed(2), +(0.7*100).toFixed(2)];
+
+        this.sentimentData = [+(data.polarity).toFixed(2), +(data.subjectivity).toFixed(2)];
         this.warning = data.warning;
         
         this.loading = false;

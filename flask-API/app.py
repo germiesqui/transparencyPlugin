@@ -141,16 +141,15 @@ def locations(ents):
     }
 
 
-def organizations(ents):
+def entities(ents):
 
-    orgs = []
+    ent_list = []
     for ent in ents:
-        if ent.label == 'ORG':
-            orgs.append(ent.text)
+        if ent.tag_ == 'NNP':
+            ent_list.append(ent.text)
 
-    return {
-        'organizations': orgs,
-    }
+    print(ent_list)
+    return { 'entities': ent_list}
 
 
 class AnaliceUrl(Resource):
@@ -211,21 +210,24 @@ class BasicData(Resource):
         return options[option](article)
 
 
-class Location(Resource):
+class Spacy(Resource):
 
     def get(self, option):
         global url
         global article
         options = {
             'locations': locations,
-            'organizations': organizations,
+            'entities': entities,
         }
 
         nlp = spacy.load("es")
 
         doc = nlp(article.text)
 
-        return options[option](doc.ents)
+        if option == 'locations':
+            return options[option](doc.ents)
+        else:
+            return options[option](doc)
 
 
 class Emotion(Resource):
@@ -236,45 +238,48 @@ class Emotion(Resource):
         lexicon = pd.read_excel(
             'assets/spanish_emotion_lexicon.xlsx', index_col=0).to_dict()
 
-        emotions = {
-            'Anger': 0,
-            'Anticipation': 0,
-            'Disgust': 0,
-            'Fear': 0,
-            'Joy': 0,
-            'Negative': 0,
-            'Positive': 0,
-            'Sadness': 0,
-            'Surprise': 0,
-            'Trust': 0}
+        emotions = { 
+            'Anticipación': 0,
+            'Alegría': 0,
+            'Disgusto': 0,
+            'Ira': 0,
+            'Tristeza': 0,
+            'Negatividad': 0,
+            'Miedo': 0,
+            'Confianza': 0,
+            'Sorpresa': 0,
+            'Positividad': 0}
 
         sp = spacy.load("es")
 
-        sentence = sp(article.text)
-        
-        for word in sentence:
-            if lexicon.get('Anger').get(word.lemma_):
-                emotions['Anger'] += 1
-            if lexicon.get('Anticipation').get(word.lemma_):
-                emotions['Anticipation'] += 1
-            if lexicon.get('Disgust').get(word.lemma_):
-                emotions['Disgust'] += 1
-            if lexicon.get('Fear').get(word.lemma_):
-                emotions['Fear'] += 1
-            if lexicon.get('Joy').get(word.lemma_):
-                emotions['Joy'] += 1
-            if lexicon.get('Negative').get(word.lemma_):
-                emotions['Negative'] += 1
-            if lexicon.get('Positive').get(word.lemma_):
-                emotions['Positive'] += 1
-            if lexicon.get('Sadness').get(word.lemma_):
-                emotions['Sadness'] += 1
-            if lexicon.get('Surprise').get(word.lemma_):
-                emotions['Surprise'] += 1
-            if lexicon.get('Trust').get(word.lemma_):
-                emotions['Trust'] += 1
+        words = sp(article.text)
+        lemma_phrase = ' '
+            
+        for word in words:
+            lemma_phrase += ' ' + word.lemma_
 
-        sentiment = TextBlob(article.text).sentiment
+            if lexicon.get('Anger').get(word.lemma_):
+                emotions['Ira'] += 1
+            if lexicon.get('Anticipation').get(word.lemma_):
+                emotions['Anticipación'] += 1
+            if lexicon.get('Disgust').get(word.lemma_):
+                emotions['Disgusto'] += 1
+            if lexicon.get('Fear').get(word.lemma_):
+                emotions['Miedo'] += 1
+            if lexicon.get('Joy').get(word.lemma_):
+                emotions['Alegría'] += 1
+            if lexicon.get('Negative').get(word.lemma_):
+                emotions['Negatividad'] += 1
+            if lexicon.get('Positive').get(word.lemma_):
+                emotions['Positividad'] += 1
+            if lexicon.get('Sadness').get(word.lemma_):
+                emotions['Tristeza'] += 1
+            if lexicon.get('Surprise').get(word.lemma_):
+                emotions['Sorpresa'] += 1
+            if lexicon.get('Trust').get(word.lemma_):
+                emotions['Confianza'] += 1
+
+        sentiment = TextBlob(lemma_phrase).sentiment
 
         # Subjective News control
         warning = True if sentiment.subjectivity > 0.6 else False
@@ -290,7 +295,7 @@ class Emotion(Resource):
 
 api.add_resource(AnaliceUrl, '/analiceUrl',)
 api.add_resource(BasicData, '/basicInfo/<option>',)
-api.add_resource(Location, '/geographic/<option>',)
+api.add_resource(Spacy, '/spacy/<option>',)
 api.add_resource(Emotion, '/emotion',)
 
 if __name__ == "__main__":

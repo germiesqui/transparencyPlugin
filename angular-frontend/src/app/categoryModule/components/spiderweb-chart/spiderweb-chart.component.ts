@@ -38,40 +38,53 @@ export class SpiderwebChartComponent implements OnInit, OnChanges {
     chart: {
       polar: true,
       type: "line",
-      backgroundColor: "#D6DBD2"
+      backgroundColor: "#F2F5EA",
+      style: {
+        "font-size": "1.6rem"
+      }
     },
 
     title: {
       text: this.label,
-      x: 0
+      x: 200
     },
 
     pane: {
+      center: ["56%", "40%"],
       size: "60%"
     },
 
     xAxis: {
       categories: this.spiderwebCategories,
+      labels: {
+        style: {
+          fontSize: "20px"
+        },
+        distance: 10
+      },
       tickmarkPlacement: "on",
-      lineWidth: 0
+      lineWidth: 0,
+      gridLineColor: "grey"
     },
 
     yAxis: {
       gridLineInterpolation: "polygon",
       lineWidth: 0,
+      gridLineColor: "grey",
       min: 0
     },
 
     tooltip: {
       shared: true,
       pointFormat:
-        '<span style="color:{series.color}">{series.name}: <b>{point.y:,.0f} palabras</b><br/>'
+        '<span style="color:{series.color}; font-size:15px;">{series.name}: <b>{point.y:,.0f} palabras</b><br/>'
     },
 
     series: [
       {
         name: "Sentimientos",
         data: this.data,
+        color: "#924859",
         pointPlacement: "on"
       }
     ]
@@ -82,13 +95,22 @@ export class SpiderwebChartComponent implements OnInit, OnChanges {
     this.progressTracking.xAxis = {
       categories: this.spiderwebCategories,
       tickmarkPlacement: "on",
-      lineWidth: 0
+      lineWidth: 0,
+      labels: {
+        style: {
+          fontSize: "14px",
+          color: "black"
+        },
+        distance: 10
+      },
+      gridLineColor: "grey"
     };
     this.progressTracking.series = [
       {
         showInLegend: false,
         name: this.label,
         data: this.data,
+        color: "#c44f6a",
         pointPlacement: "on"
       }
     ];

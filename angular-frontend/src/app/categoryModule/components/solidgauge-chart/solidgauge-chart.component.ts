@@ -30,18 +30,40 @@ export class SolidgaugeChartComponent implements OnChanges {
   @Input() data;
   @Input() label;
 
+  //Red to green
+  positiveColorCode = [
+    [0, "#FF0000"],
+    [0.2, "#FFA500"],
+    [0.4, "#F0E68C"],
+    [0.6, "#3CB371"],
+    [0.8, "#006400"]
+  ];
+
+  //Green to red
+  negativeColorCode = [
+    [0, "#006400"],
+    [0.2, "#3CB371"],
+    [0.4, "#F0E68C"],
+    [0.6, "#FFA500"],
+    [0.8, "#FF0000"]
+  ];
+
   public options = {
     chart: {
-      type: "solidgauge"
+      type: "solidgauge",
+      backgroundColor: "#F2F5EA",
+      style: {
+        "max-width": "350px"
+      }
     },
 
     title: {
       text: this.label,
-      x: -130
+      x: 0
     },
 
     pane: {
-      center: ["27%", "80%"],
+      center: ["50%", "90%"],
       size: "140%",
       startAngle: -90,
       endAngle: 90,
@@ -49,7 +71,7 @@ export class SolidgaugeChartComponent implements OnChanges {
         backgroundColor: "#FFF",
         innerRadius: "60%",
         outerRadius: "100%",
-        shape: "arc"
+        shape: "solid"
       }
     },
 
@@ -66,9 +88,11 @@ export class SolidgaugeChartComponent implements OnChanges {
       min: 0,
       max: 100,
       lineWidth: 0,
-      tickAmount: 6,
+      gridLineColor: "black",
+      tickAmount: 5,
       labels: {
-        y: 16
+        y: 20,
+        style: '{"font-size": 1.1rem;}'
       }
     },
 
@@ -84,7 +108,7 @@ export class SolidgaugeChartComponent implements OnChanges {
 
     series: [
       {
-        name: "Subjetividad",
+        name: this.label,
         data: [this.data],
         dataLabels: {
           format:
@@ -97,14 +121,23 @@ export class SolidgaugeChartComponent implements OnChanges {
   };
 
   ngOnChanges() {
+    if (this.label === "Subjetividad") {
+      this.options.yAxis.stops = this.negativeColorCode;
+      this.options.yAxis.min = 0;
+      this.options.yAxis.max = 1;
+    } else {
+      this.options.yAxis.stops = this.positiveColorCode;
+      this.options.yAxis.min = -1;
+      this.options.yAxis.max = 1;
+    }
     this.options.series = [
       {
         name: this.label,
         data: [this.data],
         dataLabels: {
           format:
-            '<div style="text-align:center"><span style="font-size:25px;color:' +
-            "black" +
+            '<div style="width:85px; text-align:center;"><span style="font-size:25px;color:' +
+            "black;width:100px;" +
             '">{y}</span><br/></div>'
         }
       }

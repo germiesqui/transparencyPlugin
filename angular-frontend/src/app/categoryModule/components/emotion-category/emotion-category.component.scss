@@ -1,39 +1,67 @@
-.text{
-  min-height: 160px;
-  width: 100%;
-  box-sizing:border-box;
-  padding-left: 15px;
-  padding-top: 10px;
-}
-
-.col{
-  max-width: 400px;
-}
-
-app-spiderweb-chart{
-  width: 500px;
-}
-
-app-solidgauge-chart{
-  max-width: 300px;
-}
-
-.graph{
-  width: 100%;
-  padding-top: 40px;
-  padding-bottom: 30px;
-  padding-left: 15px;
-
-  app-bar-chart{
-    height: 100%;
+.text {
+    min-height: 160px;
     width: 100%;
-  }
+    box-sizing: border-box;
+    padding-left: 15px;
+    padding-top: 10px;
+    padding-right: 0;
 }
 
-.container{
-  padding: 10px 20px;
+.col {
+    padding: 0;
 }
 
-.header{
-  padding-top: 10px;
+.sentiment-col {
+    margin-left: 30px;
+    padding-top: 24px;
+}
+
+.emotion-col {
+    max-width: 350px;
+    margin-top: 25px;
+}
+
+.colorSheme-col {
+    margin-top: 60px;
+    padding: 0;
+    height: 450px;
+    display: inline-block;
+    vertical-align: bottom;
+    width: 100px;
+    z-index: 1;
+    .icon {
+        font-size: 4rem;
+        width: 50px;
+    }
+}
+
+app-spiderweb-chart {
+    width: 500px;
+}
+
+app-solidgauge-chart {
+    z-index: 1;
+}
+
+.graph {
+    width: 100%;
+}
+
+.container {
+    padding: 10px 0px;
+}
+
+.header {
+    padding-top: 10px;
+}
+
+.backBtn-col {
+    max-width: 90px;
+    padding: 0;
+    padding-top: 10px;
+    align-items: center;
+}
+
+.title-col {
+    text-align: center;
 }
