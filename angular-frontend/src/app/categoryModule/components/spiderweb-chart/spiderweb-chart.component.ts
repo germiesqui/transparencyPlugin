@@ -98,7 +98,7 @@ export class SpiderwebChartComponent implements OnInit, OnChanges {
       lineWidth: 0,
       labels: {
         style: {
-          fontSize: "14px",
+          fontSize: "12px",
           color: "black"
         },
         distance: 10

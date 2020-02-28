@@ -244,11 +244,11 @@ class Emotion(Resource):
             'Disgusto': 0,
             'Ira': 0,
             'Tristeza': 0,
-            'Negatividad': 0,
+            'Negativo': 0,
             'Miedo': 0,
             'Confianza': 0,
             'Sorpresa': 0,
-            'Positividad': 0}
+            'Positivo': 0}
 
         sp = spacy.load("es")
 
