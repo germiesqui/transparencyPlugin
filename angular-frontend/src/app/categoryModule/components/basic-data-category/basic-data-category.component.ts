@@ -21,6 +21,8 @@ export class BasicDataCategoryComponent implements ICategory {
   getError: boolean = false;
   options = { autoHide: false, scrollbarMinSize: 100 };
 
+  daltonicMode: boolean;
+
   constructor(private backendService: BackendService) {
     this.backendService.getBasicData().subscribe(
       data => (this.basicData = data),
@@ -28,6 +30,10 @@ export class BasicDataCategoryComponent implements ICategory {
         this.getError = true;
         console.log(err);
       }
+    );
+
+    this.backendService.showDaltonicMode.subscribe(
+      message => (this.daltonicMode = message)
     );
   }
 

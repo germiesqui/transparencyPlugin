@@ -25,3 +25,54 @@ body {
 .iconColor {
     color: rgb(146, 72, 89);
 }
+
+.daltonic-button {
+    background-color: black !important;
+}
+
+.daltonic-background {
+    background-color: whitesmoke !important;
+}
+
+.daltonic-message {
+    background-color: silver !important;
+}
+
+.daltonic-icon {
+    color: #585858 !important;
+}
+
+.daltonic-Vhappy-icon {
+    background-color: #D3D3D3!important;
+    mat-icon {
+        color: black !important;
+    }
+}
+
+.daltonic-happy-icon {
+    background-color: #A9A9A9!important;
+    mat-icon {
+        color: black !important;
+    }
+}
+
+.daltonic-normal-icon {
+    background-color: #808080!important;
+    mat-icon {
+        color: white !important;
+    }
+}
+
+.daltonic-sad-icon {
+    background-color: #505050!important;
+    mat-icon {
+        color: white !important;
+    }
+}
+
+.daltonic-Vsad-icon {
+    background-color: #000000!important;
+    mat-icon {
+        color: white !important;
+    }
+}

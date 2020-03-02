@@ -3,10 +3,12 @@ import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { AppRoutingModule } from "./app-routing.module";
 import { HttpClientModule } from "@angular/common/http";
+import { StoreModule } from "@ngrx/store";
 
 import { AppComponent } from "./app.component";
 import { WelcomeComponent } from "./components/welcome/welcome.component";
 import { CategoryModule } from './categoryModule/category.module';
+import { reducer } from "./app.reducer";
 
 @NgModule({
   declarations: [
@@ -18,7 +20,8 @@ import { CategoryModule } from './categoryModule/category.module';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    CategoryModule
+    CategoryModule,
+    StoreModule.forRoot(reducer, {})
   ],
   providers: [],
   bootstrap: [AppComponent]

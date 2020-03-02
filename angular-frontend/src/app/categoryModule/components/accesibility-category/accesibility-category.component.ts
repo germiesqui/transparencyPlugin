@@ -7,7 +7,8 @@ import { BackendService } from "src/app/backend.service";
   styleUrls: ["./accesibility-category.component.scss"]
 })
 export class AccesibilityCategoryComponent implements OnInit {
-
+  daltonicMode: boolean;
+  
   constructor(private backendService: BackendService) {
     this.backendService.getEntities().subscribe(
       data => {
@@ -16,6 +17,10 @@ export class AccesibilityCategoryComponent implements OnInit {
       err => {
         console.log(err);
       }
+    );
+
+    this.backendService.showDaltonicMode.subscribe(
+      message => (this.daltonicMode = message)
     );
   }
 

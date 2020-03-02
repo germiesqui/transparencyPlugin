@@ -23,18 +23,14 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 url = ''
 article = ''
 
-non_keywords = ['a', 'ante', 'bajo', 'con', 'contra', 'de', 'desde', 'hasta',
-                'hacia', 'para', 'por', 'segun', 'sin', 'sobre', 'tras',
-                'durante', 'mediante', 'yo', 'tu', 'el', 'ella', 'nosotros',
-                'nosotras', 'vosotros', 'vosotras', 'ellos', 'ellas', 'mi',
-                'tu', 'su', 'mis', 'tus', 'sus', 'de', 'en', 'la', 'los',
-                'las', 'le', 'les', 'ha', 'has', 'y']
-
 
 def allBasicDataMethods(article):
 
+    with open('assets/spanish-stopwords.txt') as input_file:
+        stopwords = [line.strip() for line in input_file]
+
     keywords = [b for b in article.keywords if
-                all(a not in b for a in non_keywords)]
+                all(a not in b for a in stopwords)]
 
     return {
         'authors': article.authors,
@@ -269,9 +265,9 @@ class Emotion(Resource):
             if lexicon.get('Joy').get(word.lemma_):
                 emotions['Alegría'] += 1
             if lexicon.get('Negative').get(word.lemma_):
-                emotions['Negatividad'] += 1
+                emotions['Negativo'] += 1
             if lexicon.get('Positive').get(word.lemma_):
-                emotions['Positividad'] += 1
+                emotions['Positivo'] += 1
             if lexicon.get('Sadness').get(word.lemma_):
                 emotions['Tristeza'] += 1
             if lexicon.get('Surprise').get(word.lemma_):

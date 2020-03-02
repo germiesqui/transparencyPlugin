@@ -4,7 +4,7 @@
             <h1>Seleccione una categoria</h1>
         </div>
         <div class="col backBtn-col">
-            <a [routerLink]="['/welcome']" class="btn button">ATRAS</a>
+            <a [routerLink]="['/welcome']" class="btn button" [ngClass]=" { 'daltonic-button' : daltonicMode} ">ATRAS</a>
         </div>
     </div>
 
@@ -12,13 +12,13 @@
         <div class="flex-container">
             <ng-container *ngFor="let category of categories">
                 <a [routerLink]=[category.url] class="flex-item">
-                    <mat-card>
+                    <mat-card [ngClass]="{'daltonic-background' : daltonicMode}">
                         <mat-card-header>
                             <mat-card-title>{{ category.title }}</mat-card-title>
                         </mat-card-header>
 
                         <mat-card-content>
-                            <mat-icon mat-card-image class="iconColor">{{ category.icon }} </mat-icon>
+                            <mat-icon mat-card-image class="iconColor" [ngClass]="{'daltonic-icon' : daltonicMode}">{{ category.icon }}</mat-icon>
                             <p>{{ category.description }}</p>
                         </mat-card-content>
                     </mat-card>

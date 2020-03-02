@@ -1,7 +1,7 @@
 <article>
     <ng-container *ngIf="!getError; else error">
         <mat-sidenav-container *ngIf="basicData; else loading">
-            <mat-sidenav mode="side" opened>
+            <mat-sidenav mode="side" opened [ngClass]="{'daltonic-message' : daltonicMode}">
                 <mat-nav-list role="menubar">
                     <mat-list-item role="menuitem" [ngClass]="{ selected: option === 'author' }" (click)="infoChange('author')">Autores</mat-list-item>
                     <mat-list-item role="menuitem" [ngClass]="{ selected: option === 'date' }" (click)="infoChange('date')">Fecha Publicación</mat-list-item>
@@ -11,7 +11,7 @@
                     <mat-list-item role="menuitem" [ngClass]="{ selected: option === 'movies' }" (click)="infoChange('movies')">Videos</mat-list-item>
                 </mat-nav-list>
             </mat-sidenav>
-            <mat-sidenav-content>
+            <mat-sidenav-content [ngClass]="{'daltonic-background' : daltonicMode}">
                 <ng-container *ngIf="option === 'author'">
                     <ngx-simplebar [options]="options">
                         <div class="container author">
@@ -20,7 +20,7 @@
                                     <h1 class="title">Autores</h1>
                                 </div>
                                 <div class="col backBtn-col">
-                                    <a [routerLink]="['/categories']" class="btn button">ATRAS</a>
+                                    <a [routerLink]="['/categories']" class="btn button" [ngClass]="{'daltonic-button' : daltonicMode}">ATRAS</a>
                                 </div>
                             </div>
 
@@ -42,7 +42,7 @@
                                 <h1 class="title">Fecha de publicación</h1>
                             </div>
                             <div class="col backBtn-col">
-                                <a [routerLink]="['/categories']" class="btn button">ATRAS</a>
+                                <a [routerLink]="['/categories']" class="btn button" [ngClass]="{'daltonic-button' : daltonicMode}">ATRAS</a>
                             </div>
                         </div>
 
@@ -58,7 +58,7 @@
                                     <h1 class="title">Palabras clave</h1>
                                 </div>
                                 <div class="col backBtn-col">
-                                    <a [routerLink]="['/categories']" class="btn button">ATRAS</a>
+                                    <a [routerLink]="['/categories']" class="btn button" [ngClass]="{'daltonic-button' : daltonicMode}">ATRAS</a>
                                 </div>
                             </div>
 
@@ -79,7 +79,7 @@
                                     <h1 class="title">Resumen de la noticia</h1>
                                 </div>
                                 <div class="col backBtn-col">
-                                    <a [routerLink]="['/categories']" class="btn button">ATRAS</a>
+                                    <a [routerLink]="['/categories']" class="btn button" [ngClass]="{'daltonic-button' : daltonicMode}">ATRAS</a>
                                 </div>
                             </div>
 
@@ -95,7 +95,7 @@
                                 <h1 class="title">Imagen titular</h1>
                             </div>
                             <div class="col backBtn-col">
-                                <a [routerLink]="['/categories']" class="btn button">ATRAS</a>
+                                <a [routerLink]="['/categories']" class="btn button" [ngClass]="{'daltonic-button' : daltonicMode}">ATRAS</a>
                             </div>
                         </div>
 
@@ -111,7 +111,7 @@
                                     <h1 class="title">Listado de videos</h1>
                                 </div>
                                 <div class="col backBtn-col">
-                                    <a [routerLink]="['/categories']" class="btn button">ATRAS</a>
+                                    <a [routerLink]="['/categories']" class="btn button" [ngClass]="{'daltonic-button' : daltonicMode}">ATRAS</a>
                                 </div>
                             </div>
 
@@ -128,7 +128,7 @@
         </mat-sidenav-container>
 
     </ng-container>
-    <div #error *ngIf="getError" class="error alert alert-danger">
+    <div #error *ngIf="getError" class="error alert alertMsg" [ngClass]="{'daltonic-message' : daltonicMode}">
         <span>
             Ha habido un error en el servidor, asegurese de que la URL introducida
             pertece a la noticia o intentelo más tarde
@@ -137,6 +137,6 @@
 
     <ng-template #loading>
         <span>Cargando ...</span>
-        <mat-spinner color="accent" diameter='20'></mat-spinner>
+        <mat-spinner color="accent" diameter='20' [ngClass]="{'daltonic-button' : daltonicMode}"></mat-spinner>
     </ng-template>
 </article>

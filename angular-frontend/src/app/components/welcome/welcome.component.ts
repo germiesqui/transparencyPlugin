@@ -1,6 +1,9 @@
 import { Component } from "@angular/core";
 import { BackendService } from "src/app/backend.service";
 import { Router } from "@angular/router";
+import { Store, select } from '@ngrx/store';
+import { State } from 'src/app/app.reducer';
+import { Observable } from 'rxjs';
 
 // declare var chrome;
 
@@ -19,12 +22,20 @@ export class WelcomeComponent {
   postError = false;
   postErrorMessage = "";
 
-  constructor(private backendService: BackendService, private router: Router) {
+  daltonicMode: boolean;
+
+  constructor(private backendService: BackendService, private router: Router, private store: Store<State>) {
     // if (chrome) {
     //   chrome.tabs.query({ active: true, lastFocusedWindow: true }, tabs => {
     //     this.currentUrl = tabs[0].url;
     //   });
     // }
+
+    //this.daltonicMode = store.pipe(select(state => state.showDaltonicMode));
+
+    this.backendService.showDaltonicMode.subscribe(
+      message => (this.daltonicMode = message)
+    );
   }
 
   buttonClick(url: string) {
@@ -48,5 +59,13 @@ export class WelcomeComponent {
 
   onClick(): void {
     this.buttonClick(this.currentUrl);
+  }
+
+  checkChanged(value: boolean): void{
+    this.backendService.changeMessage(value);
+    // this.store.dispatch({
+    //   type: 'TOGGLE_DALTONIC_MODE',
+    //   payload: value
+    // });
   }
 }

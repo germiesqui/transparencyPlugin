@@ -17,5 +17,11 @@ export class CategoriesComponent {
     new EmotionCategoryComponent(this.backendService)
   ];
 
-  constructor(private backendService: BackendService) {}
+  daltonicMode: boolean;
+
+  constructor(private backendService: BackendService) {
+    this.backendService.showDaltonicMode.subscribe(
+      message => (this.daltonicMode = message)
+    );
+  }
 }

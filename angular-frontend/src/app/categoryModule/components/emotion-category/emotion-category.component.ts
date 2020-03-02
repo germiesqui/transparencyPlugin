@@ -15,7 +15,7 @@ export class EmotionCategoryComponent {
   url: string = "/emotion";
   description: string = "Datos básicos sobre la noticia.";
   icon: string = "tag_faces";
-  
+
   loading: boolean = true;
 
   //Page Info
@@ -49,6 +49,8 @@ export class EmotionCategoryComponent {
   polarityColorCode: number = 1;
   subjetivityColorCode: number = -1;
 
+  daltonicMode: boolean;
+
   constructor(private backendService: BackendService) {
     this.backendService.getEmotions().subscribe(
       data => {
@@ -58,14 +60,21 @@ export class EmotionCategoryComponent {
           key => data.emotion[key]
         );
 
-        this.sentimentData = [+(data.polarity).toFixed(2), +(data.subjectivity).toFixed(2)];
+        this.sentimentData = [
+          +data.polarity.toFixed(2),
+          +data.subjectivity.toFixed(2)
+        ];
         this.warning = data.warning;
-        
+
         this.loading = false;
       },
       err => {
         console.log(err);
       }
+    );
+
+    this.backendService.showDaltonicMode.subscribe(
+      message => (this.daltonicMode = message)
     );
   }
 }

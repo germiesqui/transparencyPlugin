@@ -25,6 +25,7 @@ export class SpiderwebChartComponent implements OnInit, OnChanges {
   @Input() spiderwebCategories: string[];
   @Input() data: number[];
   @Input() label: string;
+  @Input() colorblind;
 
   public loadingData: boolean = true;
   public dateProduction: Date = new Date();
@@ -38,7 +39,7 @@ export class SpiderwebChartComponent implements OnInit, OnChanges {
     chart: {
       polar: true,
       type: "line",
-      backgroundColor: "#F2F5EA",
+      backgroundColor: "rgba(0,0,0,0)",
       style: {
         "font-size": "1.6rem"
       }
@@ -84,7 +85,7 @@ export class SpiderwebChartComponent implements OnInit, OnChanges {
       {
         name: "Sentimientos",
         data: this.data,
-        color: "#924859",
+        color: "rgb(196, 79, 106)",
         pointPlacement: "on"
       }
     ]
@@ -105,15 +106,32 @@ export class SpiderwebChartComponent implements OnInit, OnChanges {
       },
       gridLineColor: "grey"
     };
-    this.progressTracking.series = [
-      {
-        showInLegend: false,
-        name: this.label,
-        data: this.data,
-        color: "#c44f6a",
-        pointPlacement: "on"
-      }
-    ];
+
+    if (this.colorblind) {
+      this.progressTracking.series = [
+        {
+          showInLegend: false,
+          name: this.label,
+          data: this.data,
+          color: "#585858",
+          pointPlacement: "on"
+        }
+      ];
+
+      this.progressTracking.tooltip.pointFormat =
+        '<span style="color:{series.color}; font-size:15px;">{series.name}: <b>{point.y:,.0f} palabras</b><br/>';
+    } else {
+      this.progressTracking.series = [
+        {
+          showInLegend: false,
+          name: this.label,
+          data: this.data,
+          color: "#c44f6a",
+          pointPlacement: "on"
+        }
+      ];
+    }
+
     this.progressTracking.title = {
       text: this.label,
       x: 0

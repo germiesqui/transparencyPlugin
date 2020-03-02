@@ -1,19 +1,27 @@
-<div class="container">
+<div class="container" [ngClass]="{'daltonic-background' : daltonicMode}">
     <h1>{{title}}</h1>
+
+    <div class="colorOptions">
+        <label>
+            <input type="checkbox" (change)="checkChanged($event.target.checked)" [checked]="daltonicMode">
+            Modo Daltónico
+        </label>
+    </div>
+
     <form (ngSubmit)="onSubmit()">
         <div class="form-group">
             <label for="urlInput">Introduzca una URL a analizar</label>
             <input type="url" name="urlInput" id="urlInput" #urlField="ngModel" placeholder="Intorduza URL" [(ngModel)]='url' class='form-control' [class.field-error]="postError">
         </div>
 
-        <div [hidden]="!postError" class="alert alertMsg">
+        <div [hidden]="!postError" class="alert alertMsg" [ngClass]="{'daltonic-message' : daltonicMode}">
             {{postErrorMessage}}
         </div>
 
         <div class="row">
             <div class="col-sm-12 row">
-                <div class="col"><button id='form' type="submit" class='btn button text-center'>Analizar Url</button></div>
-                <div class="col"><button id='currentTab' type="button" class='btn button text-center' (click)='onClick()'>Analizar página actual</button></div>
+                <div class="col"><button id='form' type="submit" class='btn button text-center' [ngClass]="{'daltonic-button' : daltonicMode}">Analizar Url</button></div>
+                <div class="col"><button id='currentTab' type="button" class='btn button text-center' [ngClass]="{'daltonic-button' : daltonicMode}" (click)='onClick()'>Analizar página actual</button></div>
 
             </div>
         </div>

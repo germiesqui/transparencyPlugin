@@ -11,3 +11,14 @@ field-error {
 form {
     padding: 60px 10px 20px 10px;
 }
+
+input[type=checkbox] {
+    /* All browsers except webkit*/
+    transform: scale(1.5);
+    /* Webkit browsers*/
+    -webkit-transform: scale(1.5);
+}
+
+.colorOptions {
+    padding-top: 15px;
+}

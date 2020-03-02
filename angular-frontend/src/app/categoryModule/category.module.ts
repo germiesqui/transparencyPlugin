@@ -9,6 +9,7 @@ import { ChartsModule } from "ng2-charts";
 import { CategoriesComponent } from "./components/categories/categories.component";
 import { BasicDataCategoryComponent } from "./components/basic-data-category/basic-data-category.component";
 import { LocationCategoryComponent } from "./components/location-category/location-category.component";
+import { AccesibilityCategoryComponent } from "./components/accesibility-category/accesibility-category.component";
 import { EmotionCategoryComponent } from "./components/emotion-category/emotion-category.component";
 import { HighchartsChartModule } from "highcharts-angular";
 import { SpiderwebChartComponent } from "./components/spiderweb-chart/spiderweb-chart.component";
@@ -23,8 +24,7 @@ import { MatSidenavModule } from "@angular/material/sidenav";
 import { SimplebarAngularModule } from "simplebar-angular";
 import { MatCardModule } from "@angular/material/card";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
-import { SatisfactionIconsComponent } from './components/satisfaction-icons/satisfaction-icons.component';
-import { AccesibilityCategoryComponent } from './components/accesibility-category/accesibility-category.component';
+
 
 
 @NgModule({
@@ -35,7 +35,6 @@ import { AccesibilityCategoryComponent } from './components/accesibility-categor
     EmotionCategoryComponent,
     SpiderwebChartComponent,
     SolidgaugeChartComponent,
-    SatisfactionIconsComponent,
     AccesibilityCategoryComponent
   ],
   imports: [

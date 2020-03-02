@@ -4,18 +4,18 @@
             <h1>{{title}}</h1>
         </div>
         <div class="col backBtn-col">
-            <a [routerLink]="['/categories']" class="btn button">ATRAS</a>
+            <a [routerLink]="['/categories']" class="btn button" [ngClass]="{'daltonic-button' : daltonicMode}">ATRAS</a>
         </div>
     </div>
 
-    <div *ngIf="loading && !error" class="error alert alertMsg loading">
-        <mat-spinner color="accent" diameter='20'></mat-spinner>
+    <div *ngIf="loading && !error" class="error alert alertMsg loading" [ngClass]="{'daltonic-message' : daltonicMode}">
+        <mat-spinner color="accent" diameter='20' [ngClass]="{'daltonic-button' : daltonicMode}"></mat-spinner>
         <p>{{loadingText}}</p>
 
     </div>
 
-    <div *ngIf="error && !loading" class="error alert alertMsg">
-        <fa-icon [icon]="errorIcon" size='lg' class="iconColor"></fa-icon><span>{{errorText}}</span>
+    <div *ngIf="error && !loading" class="error alert alertMsg" [ngClass]="{'daltonic-message' : daltonicMode}">
+        <fa-icon [icon]="errorIcon" size='lg' class="iconColor" [ngClass]="{'daltonic-button' : daltonicMode}"></fa-icon><span>{{errorText}}</span>
     </div>
 
     <div id="map" [attr.aria-busy]='loading' role='map'>

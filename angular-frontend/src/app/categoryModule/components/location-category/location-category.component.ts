@@ -33,7 +33,8 @@ export class LocationCategoryComponent implements AfterViewInit, ICategory {
   errorText: string =
     "Ha habido un error con el servidor. For favor, inténtelo más tarde.";
 
-
+  daltonicMode: boolean;
+  
   constructor(private backendService: BackendService) {
     this.backendService.getLocations().subscribe(
       data => {
@@ -46,6 +47,10 @@ export class LocationCategoryComponent implements AfterViewInit, ICategory {
         this.loading = false;
         this.error = true;
       }
+    );
+
+    this.backendService.showDaltonicMode.subscribe(
+      message => (this.daltonicMode = message)
     );
   }
 
