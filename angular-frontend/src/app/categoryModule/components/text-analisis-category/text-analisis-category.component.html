@@ -3,14 +3,19 @@
         <h1>{{basicData.title}}</h1>
         <div class="row">
             <a [routerLink]=" [ '/categories']" class="btn button" [ngClass]="{'daltonic-button' : daltonicMode}">ATRAS</a>
+            <ng-container *ngIf="showEntities; else entitiesButton">
+                <button class="btn button" [ngClass]="{'daltonic-button' : daltonicMode}" (click)="changeShowEntities(false)">No Resaltar Entidades</button>
+            </ng-container>
+            <ng-template #entitiesButton>
+                <button class="btn button" [ngClass]="{'daltonic-button' : daltonicMode}" (click)="changeShowEntities(true)">Resaltar Entidades</button>
+            </ng-template>
         </div>
-
     </header>
     <ngx-simplebar>
         <section>
             <p>Autores: {{basicData.authors}}</p>
             <p>Fecha de publicación: {{basicData.publishDate}}</p>
-            <p class="text">{{basicData.text}}</p>
+            <p class="text" [innerHTML]="highlightEntities()"></p>
         </section>
     </ngx-simplebar>
 </article>

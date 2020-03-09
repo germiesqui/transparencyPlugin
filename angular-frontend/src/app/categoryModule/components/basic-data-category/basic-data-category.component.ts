@@ -16,7 +16,8 @@ export class BasicDataCategoryComponent implements ICategory {
   icon: string = "info";
 
   basicData: IBasicData;
-  option = "author";
+  option = "image";
+  entities;
 
   getError: boolean = false;
   options = { autoHide: false, scrollbarMinSize: 100 };
@@ -34,6 +35,13 @@ export class BasicDataCategoryComponent implements ICategory {
 
     this.backendService.showDaltonicMode.subscribe(
       message => (this.daltonicMode = message)
+    );
+
+    this.backendService.getEntities().subscribe(
+      data => (this.entities = data),
+      err => {
+        console.log(err);
+      }
     );
   }
 

@@ -1,11 +1,10 @@
 import { Component } from "@angular/core";
 import { BackendService } from "src/app/backend.service";
 import { Router } from "@angular/router";
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { State } from 'src/app/app.reducer';
-import { Observable } from 'rxjs';
 
-// declare var chrome;
+declare var chrome;
 
 @Component({
   templateUrl: "./welcome.component.html",
@@ -30,8 +29,6 @@ export class WelcomeComponent {
     //     this.currentUrl = tabs[0].url;
     //   });
     // }
-
-    //this.daltonicMode = store.pipe(select(state => state.showDaltonicMode));
 
     this.backendService.showDaltonicMode.subscribe(
       message => (this.daltonicMode = message)
@@ -62,10 +59,6 @@ export class WelcomeComponent {
   }
 
   checkChanged(value: boolean): void{
-    this.backendService.changeMessage(value);
-    // this.store.dispatch({
-    //   type: 'TOGGLE_DALTONIC_MODE',
-    //   payload: value
-    // });
+    this.backendService.changeDaltonicMode(value);
   }
 }

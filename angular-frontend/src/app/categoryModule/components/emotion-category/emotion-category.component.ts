@@ -13,7 +13,7 @@ export class EmotionCategoryComponent {
   // Category Data
   title: string = "Análisis Emocional";
   url: string = "/emotion";
-  description: string = "Datos básicos sobre la noticia.";
+  description: string = "Análisis de carga emocional en la noticia.";
   icon: string = "tag_faces";
 
   loading: boolean = true;
@@ -61,9 +61,10 @@ export class EmotionCategoryComponent {
         );
 
         this.sentimentData = [
-          +data.polarity.toFixed(2),
+          ((+data.polarity.toFixed(2) + 1) / 2),
           +data.subjectivity.toFixed(2)
         ];
+
         this.warning = data.warning;
 
         this.loading = false;

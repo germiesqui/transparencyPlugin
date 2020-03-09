@@ -4,13 +4,13 @@
             <h1>{{title}}</h1>
         </div>
         <div class="col backBtn-col">
-            <a [routerLink]=" [ '/categories'] " class="btn button" [ngClass]="{'daltonic-button' : daltonicMode}">ATRAS</a>
+            <a [routerLink]=" [ '/categories']" class="btn button" [ngClass]="{'daltonic-button' : daltonicMode}">ATRAS</a>
         </div>
     </div>
-    <div class="row ">
-        <div class="col ">
-            <div class="row ">
-                <div class="col-2 colorSheme-col" aria-label="Esquema de colores ">
+    <div class="row">
+        <div class="col">
+            <div class="row">
+                <div class="col-2 colorSheme-col" aria-label="Esquema de colores">
                     <div [ngClass]="{'daltonic-Vhappy-icon' : daltonicMode}">
                         <mat-icon class="icon" matListIcon [ngStyle]="{ 'color': 'darkgreen'}">sentiment_very_satisfied</mat-icon>
                     </div>
@@ -29,28 +29,21 @@
 
 
                 </div>
-                <div class="col sentiment-col ">
-                    <div class="row graph ">
-                        <app-solidgauge-chart [data]='sentimentData[0]' [label]="sentimentLabels[0] " [colorblind]="daltonicMode" [attr.aria-busy]='loading'></app-solidgauge-chart>
-                        <app-solidgauge-chart [data]='sentimentData[1]' [label]="sentimentLabels[1] " [colorblind]="daltonicMode" [attr.aria-busy]='loading'></app-solidgauge-chart>
+                <div class="col sentiment-col">
+                    <div class="row graph">
+                        <app-solidgauge-chart [data]='sentimentData[0]' [label]="sentimentLabels[0]" [colorblind]="daltonicMode" [attr.aria-busy]='loading'></app-solidgauge-chart>
+                        <app-solidgauge-chart [data]='sentimentData[1]' [label]="sentimentLabels[1]" [colorblind]="daltonicMode" [attr.aria-busy]='loading'></app-solidgauge-chart>
                     </div>
                 </div>
             </div>
 
 
         </div>
-        <div class="col emotion-col ">
-            <div class="graph ">
-                <app-spiderweb-chart [data]='emotionData' [spiderwebCategories]='emotionNames' [label]="RadarChartlabel " [colorblind]="daltonicMode" [attr.aria-busy]='loading'></app-spiderweb-chart>
+        <div class="col emotion-col">
+            <div class="graph">
+                <app-spiderweb-chart [data]='emotionData' [spiderwebCategories]='emotionNames' [label]="RadarChartlabel" [colorblind]="daltonicMode" [attr.aria-busy]='loading'></app-spiderweb-chart>
             </div>
         </div>
-    </div>
-
-    <div class="alert alert-warning row " role="alert " *ngIf='warning'>
-        <div class="col-sm-1 ">
-            <fa-icon [icon]="warningIcon " size='2x'></fa-icon>
-        </div>
-        <div class="col "><span>{{warningText}}</span></div>
     </div>
 
 </div>

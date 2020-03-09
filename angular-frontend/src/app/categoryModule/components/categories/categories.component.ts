@@ -4,6 +4,8 @@ import { BasicDataCategoryComponent } from "../basic-data-category/basic-data-ca
 import { BackendService } from "src/app/backend.service";
 import { LocationCategoryComponent } from '../location-category/location-category.component';
 import { EmotionCategoryComponent } from '../emotion-category/emotion-category.component';
+import { AccesibilityCategoryComponent } from '../accesibility-category/accesibility-category.component';
+import { TextAnalisisCategoryComponent } from '../text-analisis-category/text-analisis-category.component';
 
 @Component({
   selector: "app-categories",
@@ -14,7 +16,9 @@ export class CategoriesComponent {
   categories: ICategory[] = [
     new BasicDataCategoryComponent(this.backendService),
     new LocationCategoryComponent(this.backendService),
-    new EmotionCategoryComponent(this.backendService)
+    new EmotionCategoryComponent(this.backendService),
+    new AccesibilityCategoryComponent(this.backendService),
+    new TextAnalisisCategoryComponent(this.backendService)
   ];
 
   daltonicMode: boolean;

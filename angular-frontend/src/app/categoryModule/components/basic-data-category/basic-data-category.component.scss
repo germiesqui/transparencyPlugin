@@ -13,7 +13,7 @@ article {
 }
 
 .title {
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: bold;
     text-align: center;
 }
@@ -95,6 +95,17 @@ mat-sidenav-content {
     }
     .movies {
         font-size: 1.6rem;
+    }
+    .entities {
+        section {
+            margin-bottom: 15px;
+        }
+        h2 {
+            font-size: 1.3rem;
+        }
+        .mat-list .mat-list-item {
+            height: 25px;
+        }
     }
 }
 

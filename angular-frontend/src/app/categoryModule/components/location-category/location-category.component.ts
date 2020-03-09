@@ -1,4 +1,4 @@
-import { Component, AfterViewInit } from "@angular/core";
+import { Component, AfterViewInit, OnInit } from "@angular/core";
 import { ICategory } from '../categories/category';
 import { icon, marker, tileLayer } from "leaflet";
 import * as L from 'leaflet';
@@ -12,11 +12,11 @@ import { faInfoCircle, faTimes } from "@fortawesome/free-solid-svg-icons";
   templateUrl: "./location-category.component.html",
   styleUrls: ["./location-category.component.scss"]
 })
-export class LocationCategoryComponent implements AfterViewInit, ICategory {
+export class LocationCategoryComponent implements AfterViewInit, ICategory, OnInit {
   // Category Data
   title: string = "Análisis Geográfico";
   url: string = "/location";
-  description: string = "Lugares mencionados en la noticia";
+  description: string = "Lugares mencionados en la noticia.";
   icon: string = "place";
 
   locations: ILocation;
@@ -36,6 +36,9 @@ export class LocationCategoryComponent implements AfterViewInit, ICategory {
   daltonicMode: boolean;
   
   constructor(private backendService: BackendService) {
+  }
+
+  ngOnInit(){
     this.backendService.getLocations().subscribe(
       data => {
         this.locations = data;

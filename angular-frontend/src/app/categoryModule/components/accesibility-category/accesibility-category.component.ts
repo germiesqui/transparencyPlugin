@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BackendService } from "src/app/backend.service";
+import { IBasicData } from '../basic-data-category/basicData';
 
 @Component({
   selector: "app-accesibility-category",
@@ -7,13 +8,18 @@ import { BackendService } from "src/app/backend.service";
   styleUrls: ["./accesibility-category.component.scss"]
 })
 export class AccesibilityCategoryComponent implements OnInit {
+  // Category Data
+  title: string = "Noticia Accesible";
+  url: string = "/accesibility";
+  description: string = "Provee de accesibilidad a la noticia.";
+  icon: string = "accessibility_new";
+
+  basicData: IBasicData;
   daltonicMode: boolean;
-  
+
   constructor(private backendService: BackendService) {
-    this.backendService.getEntities().subscribe(
-      data => {
-        console.log(data);
-      },
+    this.backendService.getBasicData().subscribe(
+      data => (this.basicData = data),
       err => {
         console.log(err);
       }

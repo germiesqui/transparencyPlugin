@@ -15,7 +15,7 @@
     </div>
 
     <div *ngIf="error && !loading" class="error alert alertMsg" [ngClass]="{'daltonic-message' : daltonicMode}">
-        <fa-icon [icon]="errorIcon" size='lg' class="iconColor" [ngClass]="{'daltonic-button' : daltonicMode}"></fa-icon><span>{{errorText}}</span>
+        <fa-icon [icon]="errorIcon" size='lg' class="iconColor" [ngClass]="{'daltonic-icon' : daltonicMode}"></fa-icon><span>{{errorText}}</span>
     </div>
 
     <div id="map" [attr.aria-busy]='loading' role='map'>

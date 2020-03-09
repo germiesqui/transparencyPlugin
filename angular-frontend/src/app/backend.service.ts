@@ -16,7 +16,7 @@ export class BackendService {
 
   constructor(private http: HttpClient) {}
 
-  changeMessage(message: boolean) {
+  changeDaltonicMode(message: boolean) {
     this.messageSource.next(message);
   }
 
@@ -42,7 +42,19 @@ export class BackendService {
     return this.http.get<IEmotion>(`${this.backendUrl}emotion`);
   }
 
-  getEntities(): Observable<String[]> {
-    return this.http.get<String[]>(`${this.backendUrl}spacy/entities`);
+  getEntities(): Observable<{
+        'persons': string[],
+        'organizations': string[],
+        'locations': string[],
+        'misc': string[]
+    }> {
+    return this.http.get<{
+        'persons': string[],
+        'organizations': string[],
+        'locations': string[],
+        'misc': string[]
+    }>(
+      `${this.backendUrl}spacy/all`
+    );
   }
 }

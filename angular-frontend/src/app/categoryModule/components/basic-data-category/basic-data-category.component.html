@@ -3,12 +3,13 @@
         <mat-sidenav-container *ngIf="basicData; else loading">
             <mat-sidenav mode="side" opened [ngClass]="{'daltonic-message' : daltonicMode}">
                 <mat-nav-list role="menubar">
+                    <mat-list-item role="menuitem" [ngClass]="{ selected: option === 'image' }" (click)="infoChange('image')">Imagen de portada</mat-list-item>
                     <mat-list-item role="menuitem" [ngClass]="{ selected: option === 'author' }" (click)="infoChange('author')">Autores</mat-list-item>
                     <mat-list-item role="menuitem" [ngClass]="{ selected: option === 'date' }" (click)="infoChange('date')">Fecha Publicación</mat-list-item>
                     <mat-list-item role="menuitem" [ngClass]="{ selected: option === 'summary' }" (click)="infoChange('summary')">Resumen</mat-list-item>
                     <mat-list-item role="menuitem" [ngClass]="{ selected: option === 'keyword' }" (click)="infoChange('keyword')">Palabras clave</mat-list-item>
-                    <mat-list-item role="menuitem" [ngClass]="{ selected: option === 'image' }" (click)="infoChange('image')">Imagen de portada</mat-list-item>
                     <mat-list-item role="menuitem" [ngClass]="{ selected: option === 'movies' }" (click)="infoChange('movies')">Videos</mat-list-item>
+                    <mat-list-item role="menuitem" [ngClass]="{ selected: option === 'entities' }" (click)="infoChange('entities')">Entidades</mat-list-item>
                 </mat-nav-list>
             </mat-sidenav>
             <mat-sidenav-content [ngClass]="{'daltonic-background' : daltonicMode}">
@@ -17,7 +18,7 @@
                         <div class="container author">
                             <div class="row">
                                 <div class="col title-col">
-                                    <h1 class="title">Autores</h1>
+                                    <h1 class="title">{{basicData.title}}</h1>
                                 </div>
                                 <div class="col backBtn-col">
                                     <a [routerLink]="['/categories']" class="btn button" [ngClass]="{'daltonic-button' : daltonicMode}">ATRAS</a>
@@ -39,7 +40,7 @@
                     <div class="container date">
                         <div class="row">
                             <div class="col title-col">
-                                <h1 class="title">Fecha de publicación</h1>
+                                <h1 class="title">{{basicData.title}}</h1>
                             </div>
                             <div class="col backBtn-col">
                                 <a [routerLink]="['/categories']" class="btn button" [ngClass]="{'daltonic-button' : daltonicMode}">ATRAS</a>
@@ -55,7 +56,7 @@
                         <div class="container keyword">
                             <div class="row">
                                 <div class="col title-col">
-                                    <h1 class="title">Palabras clave</h1>
+                                    <h1 class="title">{{basicData.title}}</h1>
                                 </div>
                                 <div class="col backBtn-col">
                                     <a [routerLink]="['/categories']" class="btn button" [ngClass]="{'daltonic-button' : daltonicMode}">ATRAS</a>
@@ -76,7 +77,7 @@
                         <div class="container summary">
                             <div class="row">
                                 <div class="col title-col">
-                                    <h1 class="title">Resumen de la noticia</h1>
+                                    <h1 class="title">{{basicData.title}}</h1>
                                 </div>
                                 <div class="col backBtn-col">
                                     <a [routerLink]="['/categories']" class="btn button" [ngClass]="{'daltonic-button' : daltonicMode}">ATRAS</a>
@@ -92,7 +93,7 @@
                     <div class="container image">
                         <div class="row">
                             <div class="col title-col">
-                                <h1 class="title">Imagen titular</h1>
+                                <h1 class="title">{{basicData.title}}</h1>
                             </div>
                             <div class="col backBtn-col">
                                 <a [routerLink]="['/categories']" class="btn button" [ngClass]="{'daltonic-button' : daltonicMode}">ATRAS</a>
@@ -108,7 +109,7 @@
                         <div class="container movies">
                             <div class="row">
                                 <div class="col title-col">
-                                    <h1 class="title">Listado de videos</h1>
+                                    <h1 class="title">{{basicData.title}}</h1>
                                 </div>
                                 <div class="col backBtn-col">
                                     <a [routerLink]="['/categories']" class="btn button" [ngClass]="{'daltonic-button' : daltonicMode}">ATRAS</a>
@@ -124,6 +125,62 @@
                         </div>
                     </ngx-simplebar>
                 </ng-container>
+
+                <ng-container *ngIf="option === 'entities'">
+                    <ngx-simplebar [options]="options">
+                        <div class="container entities">
+                            <div class="row">
+                                <div class="col title-col">
+                                    <h1 class="title">{{basicData.title}}</h1>
+                                </div>
+                                <div class="col backBtn-col">
+                                    <a [routerLink]="['/categories']" class="btn button" [ngClass]="{'daltonic-button' : daltonicMode}">ATRAS</a>
+                                </div>
+                            </div>
+
+                            <section>
+                                <h2>Personas</h2>
+                                <mat-list *ngFor="let ent of entities.persons">
+                                    <mat-list-item>
+                                        <mat-icon matListIcon>fiber_manual_record</mat-icon>
+                                        <span matLine>{{ ent }}</span>
+                                    </mat-list-item>
+                                </mat-list>
+                            </section>
+
+                            <section>
+                                <h2>Organizaciones</h2>
+                                <mat-list *ngFor="let ent of entities.organizations">
+                                    <mat-list-item>
+                                        <mat-icon matListIcon>fiber_manual_record</mat-icon>
+                                        <span matLine>{{ ent }}</span>
+                                    </mat-list-item>
+                                </mat-list>
+                            </section>
+
+                            <section>
+                                <h2>Lugares</h2>
+                                <mat-list *ngFor="let ent of entities.locations">
+                                    <mat-list-item>
+                                        <mat-icon matListIcon>fiber_manual_record</mat-icon>
+                                        <span matLine>{{ ent }}</span>
+                                    </mat-list-item>
+                                </mat-list>
+                            </section>
+
+                            <section>
+                                <h2>Otros</h2>
+                                <mat-list *ngFor="let ent of entities.misc">
+                                    <mat-list-item>
+                                        <mat-icon matListIcon>fiber_manual_record</mat-icon>
+                                        <span matLine>{{ ent }}</span>
+                                    </mat-list-item>
+                                </mat-list>
+                            </section>
+
+                        </div>
+                    </ngx-simplebar>
+                </ng-container>
             </mat-sidenav-content>
         </mat-sidenav-container>
 
@@ -136,7 +193,9 @@
     </div>
 
     <ng-template #loading>
-        <span>Cargando ...</span>
-        <mat-spinner color="accent" diameter='20' [ngClass]="{'daltonic-button' : daltonicMode}"></mat-spinner>
+        <div class="row">
+            <mat-spinner color="accent" diameter='20' [ngClass]="{'daltonic-button' : daltonicMode}"></mat-spinner>
+            <span>Cargando ...</span>
+        </div>
     </ng-template>
 </article>

@@ -6,6 +6,7 @@ import { BasicDataCategoryComponent } from "./categoryModule/components/basic-da
 import { LocationCategoryComponent } from './categoryModule/components/location-category/location-category.component';
 import { EmotionCategoryComponent } from './categoryModule/components/emotion-category/emotion-category.component';
 import { AccesibilityCategoryComponent } from "./categoryModule/components/accesibility-category/accesibility-category.component";
+import { TextAnalisisCategoryComponent } from './categoryModule/components/text-analisis-category/text-analisis-category.component';
 
 
 
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: "location", component: LocationCategoryComponent },
   { path: "emotion", component: EmotionCategoryComponent },
   { path: "accesibility", component: AccesibilityCategoryComponent },
+  { path: "textAnalisis", component: TextAnalisisCategoryComponent },
   { path: "", redirectTo: "welcome", pathMatch: "full" },
   { path: "**", redirectTo: "welcome", pathMatch: "full" }
 ];

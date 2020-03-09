@@ -24,6 +24,7 @@ import { MatSidenavModule } from "@angular/material/sidenav";
 import { SimplebarAngularModule } from "simplebar-angular";
 import { MatCardModule } from "@angular/material/card";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { TextAnalisisCategoryComponent } from './components/text-analisis-category/text-analisis-category.component';
 
 
 
@@ -35,7 +36,8 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
     EmotionCategoryComponent,
     SpiderwebChartComponent,
     SolidgaugeChartComponent,
-    AccesibilityCategoryComponent
+    AccesibilityCategoryComponent,
+    TextAnalisisCategoryComponent
   ],
   imports: [
     CommonModule,

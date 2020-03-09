@@ -60,7 +60,7 @@ export class SolidgaugeChartComponent implements OnChanges {
   ];
 
   negativeColorblindCode = [
-    [0, "	#D3D3D3"],
+    [0, "#D3D3D3"],
     [0.19, "#D3D3D3"],
     [0.2, "#A9A9A9"],
     [0.39, "#A9A9A9"],
@@ -73,7 +73,7 @@ export class SolidgaugeChartComponent implements OnChanges {
   ];
 
   positiveColorblindCode = [
-    [0, "	#000000"],
+    [0, "#000000"],
     [0.19, "#000000"],
     [0.2, "#505050"],
     [0.39, "#505050"],
@@ -96,7 +96,8 @@ export class SolidgaugeChartComponent implements OnChanges {
 
     title: {
       text: this.label,
-      x: 0
+      x: 0,
+      y: 40
     },
 
     pane: {
@@ -119,7 +120,7 @@ export class SolidgaugeChartComponent implements OnChanges {
     yAxis: {
       stops: [[0.1, "#55BF3B"]],
       min: 0,
-      max: 100,
+      max: 1,
       lineWidth: 0,
       gridLineColor: "black",
       tickAmount: 5,
@@ -157,37 +158,44 @@ export class SolidgaugeChartComponent implements OnChanges {
     if (this.colorblind) {
       if (this.label === "Subjetividad") {
         this.options.yAxis.stops = this.negativeColorblindCode;
-        this.options.yAxis.min = 0;
-        this.options.yAxis.max = 1;
       } else {
         this.options.yAxis.stops = this.positiveColorblindCode;
-        this.options.yAxis.min = -1;
-        this.options.yAxis.max = 1;
       }
     } else {
       if (this.label === "Subjetividad") {
         this.options.yAxis.stops = this.negativeColorCode;
-        this.options.yAxis.min = 0;
-        this.options.yAxis.max = 1;
       } else {
         this.options.yAxis.stops = this.positiveColorCode;
-        this.options.yAxis.min = -1;
-        this.options.yAxis.max = 1;
       }
     }
-
-    this.options.series = [
-      {
-        name: this.label,
-        data: [this.data],
-        dataLabels: {
-          format:
-            '<div style="width:85px; text-align:center;"><span style="font-size:25px;color:' +
-            "black;width:100px;" +
-            '">{y}</span><br/></div>'
+    if(this.data === 0){
+      this.options.series = [
+        {
+          name: this.label,
+          data: [0.05],
+          dataLabels: {
+            format:
+              '<div style="width:85px; text-align:center;"><span style="font-size:25px;color:' +
+              "black;width:100px;" +
+              '">0</span><br/></div>'
+          }
         }
-      }
-    ];
+      ];
+    } else{
+      this.options.series = [
+        {
+          name: this.label,
+          data: [this.data],
+          dataLabels: {
+            format:
+              '<div style="width:85px; text-align:center;"><span style="font-size:25px;color:' +
+              "black;width:100px;" +
+              '">{y}</span><br/></div>'
+          }
+        }
+      ];
+    }
+    
 
     this.options.title.text = this.label;
 

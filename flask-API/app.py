@@ -3,19 +3,28 @@
 
 from flask import Flask, request
 from flask_restful import Resource, Api
+from flask_caching import Cache
 import httplib2
 from flask_cors import CORS
 import spacy
 from geopy.geocoders import Nominatim
 import pandas as pd
-# from multiprocessing import Process
 from textblob import TextBlob
 
 import nltk
 
 from newspaper import Article
 
+config = {
+    'DEBUG': True,
+    'CACHE_TYPE': "simple",
+    'CACHE_DEFAULT_TIMEOUT': 300,
+    'CORS_HEADERS': 'Content-Type'
+}
+
 app = Flask(__name__)
+app.config.from_mapping(config)
+cache = Cache(app)
 api = Api(app)
 
 CORS(app)
@@ -33,6 +42,7 @@ def allBasicDataMethods(article):
                 all(a not in b for a in stopwords)]
 
     return {
+        'title': article.title,
         'authors': article.authors,
         'publishDate': article.publish_date.strftime("%m/%d/%Y"),
         'keywords': keywords,
@@ -75,6 +85,12 @@ def text(article):
     }
 
 
+def title(article):
+    return {
+        'text': article.title,
+    }
+
+
 def topImg(article):
     return {
         'topImg': article.top_image,
@@ -86,20 +102,10 @@ def movies(article):
         'movies': article.movies
     }
 
-# NOT IMPLEMENTED Parallel Process
-# def runInParallel(*fns):
-#     proc = []
-#     for fn in fns:
-#         p = Process(target=fn)
-#         p.start()
-#         proc.append(p)
-#     for p in proc:
-#         p.join()
-
 
 def processUrl():
     global article
-    print('start processing')
+
     article = Article(url)
     article.download()
     article.parse()
@@ -111,7 +117,7 @@ def processUrl():
                 all(a not in b for a in non_keywords)]
 
     article.keywords = keywords
-    print('end processing')
+
 
 
 def locations(ents):
@@ -137,15 +143,53 @@ def locations(ents):
     }
 
 
-def entities(ents):
+def organizations(ents):
 
-    ent_list = []
+    orgs = []
     for ent in ents:
-        if ent.tag_ == 'NNP':
-            ent_list.append(ent.text)
+        if ent.label_ == 'ORG':
+            orgs.append(ent.text)
 
-    print(ent_list)
-    return { 'entities': ent_list}
+    return {
+        'organizations': orgs
+    }
+
+
+def persons(ents):
+
+    pers = []
+    for ent in ents:
+
+        if ent.label_ == 'PER':
+            pers.append(ent.text)
+
+    return {
+        'organizations': pers
+    }
+
+
+def allEntities(ents):
+    pers = []
+    orgs = []
+    locs = []
+    miscs = []
+    for ent in ents:
+
+        if ent.label_ == 'PER':
+            pers.append(ent.text)
+        elif ent.label_ == 'ORG':
+            orgs.append(ent.text)
+        elif ent.label_ == 'LOC':
+            locs.append(ent.text)
+        elif ent.label_ == 'MISC':
+            miscs.append(ent.text)
+
+    return {
+        'persons': pers,
+        'organizations': orgs,
+        'locations': locs,
+        'misc': miscs
+    }
 
 
 class AnaliceUrl(Resource):
@@ -185,11 +229,13 @@ class AnaliceUrl(Resource):
 
 class BasicData(Resource):
 
+    @cache.cached(timeout=50, key_prefix=url + '_basicData')
     def get(self, option):
         global url
         global article
         options = {
             'all': allBasicDataMethods,
+            'title': title,
             'authors': authors,
             'publishDate': publishDate,
             'keywords': keywords,
@@ -200,6 +246,7 @@ class BasicData(Resource):
         }
 
         nltk.download('punkt')
+        article.download()
         article.parse()
         article.nlp()
 
@@ -213,17 +260,16 @@ class Spacy(Resource):
         global article
         options = {
             'locations': locations,
-            'entities': entities,
+            'organizations': organizations,
+            'persons': persons,
+            'all': allEntities
         }
 
         nlp = spacy.load("es")
 
         doc = nlp(article.text)
 
-        if option == 'locations':
-            return options[option](doc.ents)
-        else:
-            return options[option](doc)
+        return options[option](doc.ents)
 
 
 class Emotion(Resource):
