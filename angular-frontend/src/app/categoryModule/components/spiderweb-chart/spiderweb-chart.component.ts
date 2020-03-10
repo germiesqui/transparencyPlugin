@@ -143,7 +143,6 @@ export class SpiderwebChartComponent implements OnInit, OnChanges {
   }
 
   public chartCallback(): void {
-    console.log("Production progress");
     this.loadingData = false;
   } // optional function, defaults to null
 }

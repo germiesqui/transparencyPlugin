@@ -2,10 +2,16 @@
     <h1>{{title}}</h1>
 
     <div class="colorOptions">
-        <label>
-            <input type="checkbox" (change)="checkChanged($event.target.checked)" [checked]="daltonicMode">
-            Modo Alto Contraste
-        </label>
+        <button class="btn button dropdown-toggle" type="button" data-toggle="dropdown" [ngClass]="{'daltonic-button' : daltonicMode}">Opciones
+        <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+            <li>
+                <label>
+                    <input type="checkbox" (change)="checkChanged($event.target.checked)" [checked]="daltonicMode">
+                    Modo Alto Contraste
+                </label>
+            </li>
+        </ul>
     </div>
 
     <form (ngSubmit)="onSubmit()">

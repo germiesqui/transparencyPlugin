@@ -14,6 +14,8 @@ export class BackendService {
   private messageSource = new BehaviorSubject(false);
   showDaltonicMode = this.messageSource.asObservable();
 
+  private newsUrl = '';
+
   constructor(private http: HttpClient) {}
 
   changeDaltonicMode(message: boolean) {
@@ -22,39 +24,81 @@ export class BackendService {
 
   postAnaliceUrl(url: string): Observable<string> {
     let data = { url: url };
+    this.newsUrl = url;
+
     return this.http.post<string>(`${this.backendUrl}analiceUrl`, data, {
       headers: new HttpHeaders({
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*"
+        "Access-Control-Allow-Origin": "angular"
       })
     });
   }
 
   getBasicData(): Observable<IBasicData> {
-    return this.http.get<IBasicData>(`${this.backendUrl}basicInfo/all`);
+    return this.http.post<IBasicData>(
+      `${this.backendUrl}basicInfo/all`,
+      { url: this.newsUrl },
+      {
+        headers: new HttpHeaders({
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "angular",
+          "crossorigin": "anonymous"
+        })
+      }
+    );
   }
 
   getLocations(): Observable<ILocation> {
-    return this.http.get<ILocation>(`${this.backendUrl}spacy/locations`);
+    return this.http.post<ILocation>(
+      `${this.backendUrl}spacy/locations`,
+      { url: this.newsUrl },
+      {
+        headers: new HttpHeaders({
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "angular",
+          "crossorigin": "anonymous"
+        })
+      }
+    );
   }
 
   getEmotions(): Observable<IEmotion> {
-    return this.http.get<IEmotion>(`${this.backendUrl}emotion`);
+    return this.http.post<IEmotion>(
+      `${this.backendUrl}emotion`,
+      { url: this.newsUrl },
+      {
+        headers: new HttpHeaders({
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "angular",
+          "crossorigin": "anonymous"
+        })
+      }
+    );
   }
 
   getEntities(): Observable<{
-        'persons': string[],
-        'organizations': string[],
-        'locations': string[],
-        'misc': string[]
-    }> {
-    return this.http.get<{
-        'persons': string[],
-        'organizations': string[],
-        'locations': string[],
-        'misc': string[]
+    persons: string[];
+    organizations: string[];
+    locations: string[];
+    misc: string[];
+  }> {
+    return this.http.post<{
+      persons: string[];
+      organizations: string[];
+      locations: string[];
+      misc: string[];
     }>(
-      `${this.backendUrl}spacy/all`
+      `${this.backendUrl}spacy/all`,
+      {
+        url: this.newsUrl
+      },
+      {
+        headers: new HttpHeaders({
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "angular",
+          "crossorigin": "anonymous"
+        })
+      }
     );
   }
 }

@@ -18,8 +18,7 @@ from newspaper import Article
 config = {
     'DEBUG': True,
     'CACHE_TYPE': "simple",
-    'CACHE_DEFAULT_TIMEOUT': 300,
-    'CORS_HEADERS': 'Content-Type'
+    'CACHE_DEFAULT_TIMEOUT': 100
 }
 
 app = Flask(__name__)
@@ -29,8 +28,14 @@ api = Api(app)
 
 CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
-url = ''
-article = ''
+
+
+def make_cache_key(*args, **kwargs):
+    path = request.path
+    args = str(hash(request.json['url']))
+    params = str(hash(frozenset(request.args.items())))
+    # Should include local language
+    return (path + args + params).encode('UTF-8')
 
 
 def allBasicDataMethods(article):
@@ -66,8 +71,11 @@ def publishDate(article):
 
 
 def keywords(article):
+    with open('assets/spanish-stopwords.txt') as input_file:
+        stopwords = [line.strip() for line in input_file]
+
     keywords = [b for b in article.keywords if
-                all(a not in b for a in non_keywords)]
+                all(a not in b for a in stopwords)]
     return {
         'keywords': keywords,
     }
@@ -101,23 +109,6 @@ def movies(article):
     return {
         'movies': article.movies
     }
-
-
-def processUrl():
-    global article
-
-    article = Article(url)
-    article.download()
-    article.parse()
-
-    nltk.download('punkt')
-    article.nlp()
-
-    keywords = [b for b in article.keywords if
-                all(a not in b for a in non_keywords)]
-
-    article.keywords = keywords
-
 
 
 def locations(ents):
@@ -195,9 +186,6 @@ def allEntities(ents):
 class AnaliceUrl(Resource):
 
     def post(self):
-        global url
-        global article
-
         data = request.get_json()
         url = data['url']
 
@@ -229,10 +217,11 @@ class AnaliceUrl(Resource):
 
 class BasicData(Resource):
 
-    @cache.cached(timeout=50, key_prefix=url + '_basicData')
-    def get(self, option):
-        global url
-        global article
+    @cache.cached(timeout=50, key_prefix=make_cache_key)
+    def post(self, option):
+        data = request.get_json()
+        url = data['url']
+
         options = {
             'all': allBasicDataMethods,
             'title': title,
@@ -246,18 +235,20 @@ class BasicData(Resource):
         }
 
         nltk.download('punkt')
+        article = Article(url)
         article.download()
         article.parse()
-        article.nlp()
 
         return options[option](article)
 
 
 class Spacy(Resource):
+    
+    @cache.cached(timeout=50, key_prefix=make_cache_key)
+    def post(self, option):
+        data = request.get_json()
+        url = data['url']
 
-    def get(self, option):
-        global url
-        global article
         options = {
             'locations': locations,
             'organizations': organizations,
@@ -266,6 +257,10 @@ class Spacy(Resource):
         }
 
         nlp = spacy.load("es")
+        nltk.download('punkt')
+        article = Article(url)
+        article.download()
+        article.parse()
 
         doc = nlp(article.text)
 
@@ -274,8 +269,14 @@ class Spacy(Resource):
 
 class Emotion(Resource):
 
-    def get(self):
-        global article
+    def post(self):
+        data = request.get_json()
+        url = data['url']
+
+        nltk.download('punkt')
+        article = Article(url)
+        article.download()
+        article.parse()
 
         lexicon = pd.read_excel(
             'assets/spanish_emotion_lexicon.xlsx', index_col=0).to_dict()
