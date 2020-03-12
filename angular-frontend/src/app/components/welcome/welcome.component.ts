@@ -24,11 +24,11 @@ export class WelcomeComponent {
   daltonicMode: boolean;
 
   constructor(private backendService: BackendService, private router: Router, private store: Store<State>) {
-    // if (chrome) {
-    //   chrome.tabs.query({ active: true, lastFocusedWindow: true }, tabs => {
-    //     this.currentUrl = tabs[0].url;
-    //   });
-    // }
+    if (chrome) {
+      chrome.tabs.query({ active: true, lastFocusedWindow: true }, tabs => {
+        this.currentUrl = tabs[0].url;
+      });
+    }
 
     this.backendService.showDaltonicMode.subscribe(
       message => (this.daltonicMode = message)
