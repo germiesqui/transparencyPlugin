@@ -18,6 +18,8 @@ export class TextAnalisisCategoryComponent implements OnInit {
   showEntities: boolean = false;
   daltonicMode: boolean;
 
+  disabled:boolean = true; 
+
   constructor(private backendService: BackendService) {}
 
   ngOnInit() {
@@ -33,7 +35,10 @@ export class TextAnalisisCategoryComponent implements OnInit {
     );
 
     this.backendService.getEntities().subscribe(
-      data => (this.entities = data),
+      data => {
+        this.entities = data;
+        this.disabled = false;
+      },
       err => {
         console.log(err);
       }
@@ -41,29 +46,94 @@ export class TextAnalisisCategoryComponent implements OnInit {
   }
 
   changeShowEntities(param: boolean): void {
-    this.showEntities = param;
+    if (this.entities) {
+      this.showEntities = param;
+    } else {
+      this.showEntities = false;
+    }
   }
 
   highlightEntities(): string {
     if (!this.showEntities) {
       return this.basicData.text;
     }
-    var text = this.basicData.text;
 
-    this.basicData.text.split(" ").forEach(word => {
-      if (
-        this.entities.persons.includes(word) ||
-        this.entities.organizations.includes(word) ||
-        this.entities.locations.includes(word) ||
-        this.entities.misc.includes(word)
-      ) {
+    var text = this.basicData.text;
+    if (!this.daltonicMode) {
+      this.entities.persons.forEach(word => {
         text = text.replace(
           RegExp("\\b" + word + "\\b", "g"),
-          "<b>" + word + "</b>"
+          '<div class="entity person"><span>' +
+            word +
+            "</span><div class='ent-category'><span>PERSON</span></div></div>"
         );
-      }
-    });
+      });
 
-    return text;
+      this.entities.organizations.forEach(word => {
+        text = text.replace(
+          RegExp("\\b" + word + "\\b", "g"),
+          '<div class="entity org"><span>' +
+            word +
+            "</span><div class='ent-category'><span>ORG</span></div></div>"
+        );
+      });
+
+      this.entities.locations.forEach(word => {
+        text = text.replace(
+          RegExp("\\b" + word + "\\b", "g"),
+          "<div class='entity loc'><span>" +
+            word +
+            "</span><div class='ent-category'><span>LOC</span></div></div>"
+        );
+      });
+
+      this.entities.misc.forEach(word => {
+        text = text.replace(
+          RegExp("\\b" + word + "\\b", "g"),
+          "<div class='entity misc'><span>" +
+            word +
+            "</span><div class='ent-category'><span>MISC</span></div></div>"
+        );
+      });
+      return text;
+    }else{
+      this.entities.persons.forEach(word => {
+        text = text.replace(
+          RegExp("\\b" + word + "\\b", "g"),
+          '<div class="entity person daltonic-message"><span>' +
+            word +
+            "</span><div class='ent-category'><span>PERSON</span></div></div>"
+        );
+      });
+
+      this.entities.organizations.forEach(word => {
+        text = text.replace(
+          RegExp("\\b" + word + "\\b", "g"),
+          '<div class="entity org daltonic-message"><span>' +
+            word +
+            "</span><div class='ent-category'><span>ORG</span></div></div>"
+        );
+      });
+
+      this.entities.locations.forEach(word => {
+        text = text.replace(
+          RegExp("\\b" + word + "\\b", "g"),
+          "<div class='entity loc daltonic-message'><span>" +
+            word +
+            "</span><div class='ent-category'><span>LOC</span></div></div>"
+        );
+      });
+
+      this.entities.misc.forEach(word => {
+        text = text.replace(
+          RegExp("\\b" + word + "\\b", "g"),
+          "<div class='entity misc daltonic-message'><span>" +
+            word +
+            "</span><div class='ent-category'><span>MISC</span></div></div>"
+        );
+      });
+      return text;  
+    }
   }
+    
 }

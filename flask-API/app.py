@@ -175,6 +175,27 @@ def allEntities(ents):
         elif ent.label_ == 'MISC':
             miscs.append(ent.text)
 
+    pers = list(dict.fromkeys(pers))
+    orgs = list(dict.fromkeys(orgs))
+    locs = list(dict.fromkeys(locs))
+    miscs = list(dict.fromkeys(miscs))
+
+    pers = [x for x in pers if x not in orgs]
+    pers = [x for x in pers if x not in locs]
+    pers = [x for x in pers if x not in miscs]
+
+    orgs = [x for x in orgs if x not in pers]
+    orgs = [x for x in orgs if x not in locs]
+    orgs = [x for x in orgs if x not in miscs]
+
+    locs = [x for x in locs if x not in pers]
+    locs = [x for x in locs if x not in orgs]
+    locs = [x for x in locs if x not in miscs]
+
+    miscs = [x for x in miscs if x not in pers]
+    miscs = [x for x in miscs if x not in orgs]
+    miscs = [x for x in miscs if x not in locs]
+
     return {
         'persons': pers,
         'organizations': orgs,

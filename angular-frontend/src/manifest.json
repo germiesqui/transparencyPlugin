@@ -1,7 +1,7 @@
 {
     "name": "Transparency Plugin",
-    "version": "2.0",
-    "description": "Build an Extension",
+    "version": "3.0",
+    "description": "Extension que analiza noticias y provee de accesibilidad a dicha noticia.",
     "manifest_version": 2,
     "permissions": [
         "tabs",

@@ -81,3 +81,35 @@ body {
         color: white !important;
     }
 }
+
+.entity {
+    display: inline-flex;
+    margin: 2px;
+    padding: 5px;
+    border-radius: 10px;
+    .ent-category {
+        background-color: white;
+        margin: 2px;
+        padding: 4px;
+        border-radius: 7px;
+        max-height: 32px;
+        font-size: 0.8rem;
+        align-self: center;
+    }
+}
+
+.org {
+    background-color: rgb(102, 185, 236);
+}
+
+.person {
+    background-color: rgb(144, 212, 41);
+}
+
+.loc {
+    background-color: rgb(230, 149, 0);
+}
+
+.misc {
+    background-color: rgb(165, 165, 165);
+}

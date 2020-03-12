@@ -7,7 +7,7 @@
                 <button class="btn button" [ngClass]="{'daltonic-button' : daltonicMode}" (click)="changeShowEntities(false)">No Resaltar Entidades</button>
             </ng-container>
             <ng-template #entitiesButton>
-                <button class="btn button" [ngClass]="{'daltonic-button' : daltonicMode}" (click)="changeShowEntities(true)">Resaltar Entidades</button>
+                <button id="entityButton" class="btn button" [disabled]="disabled" [ngClass]="{'daltonic-button' : daltonicMode}" (click)="changeShowEntities(true)">Resaltar Entidades</button>
             </ng-template>
         </div>
     </header>
