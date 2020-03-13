@@ -229,10 +229,6 @@ class AnaliceUrl(Resource):
             )
             return response
 
-        article = Article(url)
-        article.download()
-        article.parse()
-
         return {'url': url}
 
 
