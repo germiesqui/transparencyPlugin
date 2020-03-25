@@ -3,7 +3,7 @@ field-error {
 }
 
 .container {
-    padding: 70px 100px;
+    padding: 70px;
     font-size: 1.1rem;
     text-align: center;
 }
@@ -20,9 +20,30 @@ input[type=checkbox] {
 }
 
 .colorOptions {
-    padding-top: 15px;
-    padding-left: 375px;
     li {
         padding: 0 10px;
     }
+}
+
+.colorOptions-col {
+    max-width: 90px;
+    padding: 0;
+    padding-left: 70px;
+}
+
+.title-col {
+    padding-right: 0;
+    margin-right: 0;
+    margin-left: 75px;
+}
+
+.iconStyle {
+    font-size: 2.5rem;
+}
+
+.colorOptions-btn {
+    padding-top: 2px;
+    padding-left: 5px;
+    padding-right: 20px;
+    padding-bottom: 0px;
 }

@@ -10,13 +10,14 @@ import spacy
 from geopy.geocoders import Nominatim
 import pandas as pd
 from textblob import TextBlob
+import re
 
 import nltk
 
 from newspaper import Article
 
 config = {
-    'DEBUG': True,
+    'DEBUG': False,
     'CACHE_TYPE': "simple",
     'CACHE_DEFAULT_TIMEOUT': 100
 }
@@ -43,8 +44,8 @@ def allBasicDataMethods(article):
     with open('assets/spanish-stopwords.txt') as input_file:
         stopwords = [line.strip() for line in input_file]
 
-    keywords = [b for b in article.keywords if
-                all(a not in b for a in stopwords)]
+    keywords = [
+        word for word in article.keywords if not word in stopwords]
 
     return {
         'title': article.title,
@@ -74,8 +75,9 @@ def keywords(article):
     with open('assets/spanish-stopwords.txt') as input_file:
         stopwords = [line.strip() for line in input_file]
 
-    keywords = [b for b in article.keywords if
-                all(a not in b for a in stopwords)]
+    keywords = [
+        word for word in article.keywords if not word in stopwords]
+        
     return {
         'keywords': keywords,
     }
@@ -229,6 +231,8 @@ class AnaliceUrl(Resource):
             )
             return response
 
+        nltk.download('punkt')
+
         return {'url': url}
 
 
@@ -251,10 +255,10 @@ class BasicData(Resource):
             'movies': movies
         }
 
-        nltk.download('punkt')
         article = Article(url)
         article.download()
         article.parse()
+        article.nlp()
 
         return options[option](article)
 
@@ -274,12 +278,32 @@ class Spacy(Resource):
         }
 
         nlp = spacy.load("es")
-        nltk.download('punkt')
         article = Article(url)
         article.download()
         article.parse()
 
-        doc = nlp(article.text)
+        # Preprocess text
+
+        with open('assets/spanish-stopwords.txt') as input_file:
+            stopwords = [line.strip() for line in input_file]
+
+        wordlist = nlp(article.text)
+
+        # Lemmatize text
+        lemma_list = []
+        for word in wordlist:
+            lemma_list.append(word.lemma_)
+
+        # Remove stopwords
+        resultwords = [
+            word for word in lemma_list if not word in stopwords]
+
+        text = ' '.join(resultwords)
+
+        # Remove symbols non alfanumeric
+        processed_text = re.sub(r'[^\w]', ' ', text)
+
+        doc = nlp(processed_text)
 
         return options[option](doc.ents)
 
@@ -290,7 +314,6 @@ class Emotion(Resource):
         data = request.get_json()
         url = data['url']
 
-        nltk.download('punkt')
         article = Article(url)
         article.download()
         article.parse()
@@ -359,4 +382,4 @@ api.add_resource(Spacy, '/spacy/<option>',)
 api.add_resource(Emotion, '/emotion',)
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5001, debug=True)
+    app.run(host='0.0.0.0', port=5001, debug=False)

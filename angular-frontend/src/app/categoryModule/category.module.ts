@@ -14,6 +14,7 @@ import { EmotionCategoryComponent } from "./components/emotion-category/emotion-
 import { HighchartsChartModule } from "highcharts-angular";
 import { SpiderwebChartComponent } from "./components/spiderweb-chart/spiderweb-chart.component";
 import { SolidgaugeChartComponent } from "./components/solidgauge-chart/solidgauge-chart.component";
+import { TextAnalisisCategoryComponent } from "./components/text-analisis-category/text-analisis-category.component";
 
 // Styles
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -24,8 +25,7 @@ import { MatSidenavModule } from "@angular/material/sidenav";
 import { SimplebarAngularModule } from "simplebar-angular";
 import { MatCardModule } from "@angular/material/card";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
-import { TextAnalisisCategoryComponent } from './components/text-analisis-category/text-analisis-category.component';
-
+import { MatExpansionModule } from "@angular/material/expansion";
 
 
 @NgModule({
@@ -53,7 +53,8 @@ import { TextAnalisisCategoryComponent } from './components/text-analisis-catego
     MatCardModule,
     ChartsModule,
     FontAwesomeModule,
-    HighchartsChartModule
+    HighchartsChartModule,
+    MatExpansionModule
   ]
 })
 export class CategoryModule {}

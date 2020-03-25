@@ -127,7 +127,7 @@
                 </ng-container>
 
                 <ng-container *ngIf="option === 'entities'">
-                    <ngx-simplebar [options]="options">
+                    <ng-container *ngIf="entities; else entityLoading">
                         <div class="container entities">
                             <div class="row">
                                 <div class="col title-col">
@@ -138,48 +138,85 @@
                                 </div>
                             </div>
 
-                            <section>
-                                <h2>Personas</h2>
-                                <mat-list *ngFor="let ent of entities.persons">
-                                    <mat-list-item>
-                                        <mat-icon matListIcon>fiber_manual_record</mat-icon>
-                                        <span matLine>{{ ent }}</span>
-                                    </mat-list-item>
-                                </mat-list>
-                            </section>
+                            <mat-accordion class="alertMsg" [ngClass]="{'daltonic-message' : daltonicMode}">
+                                <mat-expansion-panel>
+                                    <mat-expansion-panel-header>
+                                        Personas
+                                    </mat-expansion-panel-header>
+                                    <ngx-simplebar [options]="options" class="entitiesBar">
+                                        <mat-list *ngFor="let ent of entities.persons">
+                                            <mat-list-item>
+                                                <mat-icon matListIcon>fiber_manual_record</mat-icon>
+                                                <span matLine>{{ ent }}</span>
+                                            </mat-list-item>
+                                        </mat-list>
+                                    </ngx-simplebar>
 
-                            <section>
-                                <h2>Organizaciones</h2>
-                                <mat-list *ngFor="let ent of entities.organizations">
-                                    <mat-list-item>
-                                        <mat-icon matListIcon>fiber_manual_record</mat-icon>
-                                        <span matLine>{{ ent }}</span>
-                                    </mat-list-item>
-                                </mat-list>
-                            </section>
+                                </mat-expansion-panel>
 
-                            <section>
-                                <h2>Lugares</h2>
-                                <mat-list *ngFor="let ent of entities.locations">
-                                    <mat-list-item>
-                                        <mat-icon matListIcon>fiber_manual_record</mat-icon>
-                                        <span matLine>{{ ent }}</span>
-                                    </mat-list-item>
-                                </mat-list>
-                            </section>
+                                <mat-expansion-panel>
+                                    <mat-expansion-panel-header>
+                                        Organizaciones
+                                    </mat-expansion-panel-header>
 
-                            <section>
-                                <h2>Otros</h2>
-                                <mat-list *ngFor="let ent of entities.misc">
-                                    <mat-list-item>
-                                        <mat-icon matListIcon>fiber_manual_record</mat-icon>
-                                        <span matLine>{{ ent }}</span>
-                                    </mat-list-item>
-                                </mat-list>
-                            </section>
+                                    <ngx-simplebar [options]="options">
+                                        <div class="entities">
+                                            <mat-list *ngFor="let ent of entities.organizations">
+                                                <mat-list-item>
+                                                    <mat-icon matListIcon>fiber_manual_record</mat-icon>
+                                                    <span matLine>{{ ent }}</span>
+                                                </mat-list-item>
+                                            </mat-list>
+                                        </div>
+                                    </ngx-simplebar>
 
+                                </mat-expansion-panel>
+
+                                <mat-expansion-panel>
+                                    <mat-expansion-panel-header>
+                                        Lugares
+                                    </mat-expansion-panel-header>
+
+                                    <ngx-simplebar [options]="options">
+                                        <div class="entities">
+                                            <mat-list *ngFor="let ent of entities.locations">
+                                                <mat-list-item>
+                                                    <mat-icon matListIcon>fiber_manual_record</mat-icon>
+                                                    <span matLine>{{ ent }}</span>
+                                                </mat-list-item>
+                                            </mat-list>
+                                        </div>
+                                    </ngx-simplebar>
+
+                                </mat-expansion-panel>
+
+                                <mat-expansion-panel>
+                                    <mat-expansion-panel-header>
+                                        Otros
+                                    </mat-expansion-panel-header>
+
+                                    <ngx-simplebar [options]="options">
+                                        <div class="entities">
+                                            <mat-list *ngFor="let ent of entities.misc">
+                                                <mat-list-item>
+                                                    <mat-icon matListIcon>fiber_manual_record</mat-icon>
+                                                    <span matLine>{{ ent }}</span>
+                                                </mat-list-item>
+                                            </mat-list>
+                                        </div>
+                                    </ngx-simplebar>
+
+                                </mat-expansion-panel>
+
+                            </mat-accordion>
                         </div>
-                    </ngx-simplebar>
+                    </ng-container>
+                    <ng-template #entityLoading>
+                        <div class="row loading">
+                            <mat-spinner color="accent" diameter='20' [ngClass]="{'daltonic-button' : daltonicMode}"></mat-spinner>
+                            <span>Cargando ...</span>
+                        </div>
+                    </ng-template>
                 </ng-container>
             </mat-sidenav-content>
         </mat-sidenav-container>

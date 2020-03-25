@@ -1,38 +1,41 @@
 <div class="container" [ngClass]="{'daltonic-background' : daltonicMode}">
-    <h1>{{title}}</h1>
+    <div class="row">
+        <h1 class="col title-col">{{title}}</h1>
 
-    <div class="colorOptions">
-        <button class="btn button dropdown-toggle" type="button" data-toggle="dropdown" [ngClass]="{'daltonic-button' : daltonicMode}">Opciones
-        <span class="caret"></span></button>
-        <ul class="dropdown-menu">
-            <li>
-                <label>
+        <div class="col colorOptions-col colorOptions">
+            <button class="btn button colorOptions-btn" type="button" data-toggle="dropdown" [ngClass]="{'daltonic-button' : daltonicMode}"><mat-icon class="icon iconStyle" matListIcon>menu</mat-icon>
+        </button>
+            <ul class="dropdown-menu dropdown-menu-right">
+                <li class="dropdown-item">
+                    <label>
                     <input type="checkbox" (change)="checkChanged($event.target.checked)" [checked]="daltonicMode">
                     Modo Alto Contraste
                 </label>
-            </li>
-        </ul>
+                </li>
+            </ul>
+        </div>
     </div>
+
+
 
     <form (ngSubmit)="onSubmit()">
         <div class="form-group">
             <label for="urlInput">Introduzca una URL a analizar</label>
-            <input type="url" name="urlInput" id="urlInput" #urlField="ngModel" placeholder="Intorduza URL" [(ngModel)]='url' class='form-control' [class.field-error]="postError">
+            <input type="url" name="urlInput" id="urlInput " #urlField="ngModel" placeholder="Intorduza URL" [(ngModel)]='url' class='form-control' [class.field-error]="postError ">
         </div>
 
-        <div [hidden]="!postError" class="alert alertMsg" [ngClass]="{'daltonic-message' : daltonicMode}">
+        <div [hidden]="!postError " class="alert alertMsg" [ngClass]="{ 'daltonic-message' : daltonicMode} ">
             {{postErrorMessage}}
         </div>
 
         <div class="row">
             <div class="col-sm-12 row">
-                <div class="col"><button id='form' type="submit" class='btn button text-center' [ngClass]="{'daltonic-button' : daltonicMode}">Analizar Url</button></div>
-                <div class="col"><button id='currentTab' type="button" class='btn button text-center' [ngClass]="{'daltonic-button' : daltonicMode}" (click)='onClick()'>Analizar página actual</button></div>
-
+                <div class="col"><button id='form' type="submit" class='btn button text-center' [ngClass]="{ 'daltonic-button' : daltonicMode} ">Analizar Url</button></div>
+                <div class="col"><button id='currentTab' type="button" class='btn button text-center' [ngClass]="{ 'daltonic-button' : daltonicMode}" (click)='onClick()'>Analizar página actual</button></div>
             </div>
         </div>
 
     </form>
 
-    <p class="introduction">{{introductionText}}</p>
+    <p class="introduction ">{{introductionText}}</p>
 </div>

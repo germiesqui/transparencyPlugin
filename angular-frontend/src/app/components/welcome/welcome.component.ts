@@ -1,8 +1,6 @@
 import { Component } from "@angular/core";
 import { BackendService } from "src/app/backend.service";
 import { Router } from "@angular/router";
-import { Store } from '@ngrx/store';
-import { State } from 'src/app/app.reducer';
 
 declare var chrome;
 
@@ -23,7 +21,7 @@ export class WelcomeComponent {
 
   daltonicMode: boolean;
 
-  constructor(private backendService: BackendService, private router: Router, private store: Store<State>) {
+  constructor(private backendService: BackendService, private router: Router) {
     if (chrome) {
       chrome.tabs.query({ active: true, lastFocusedWindow: true }, tabs => {
         this.currentUrl = tabs[0].url;

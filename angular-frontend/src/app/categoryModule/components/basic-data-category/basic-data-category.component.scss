@@ -60,6 +60,11 @@ mat-sidenav-container {
     height: 100%;
 }
 
+ngx-simplebar {
+    width: 100%;
+    height: 100%;
+}
+
 mat-sidenav-content {
     padding: 2% 5% 2% 5%;
     background-color: $background-color;
@@ -97,21 +102,18 @@ mat-sidenav-content {
         font-size: 1.6rem;
     }
     .entities {
-        section {
-            margin-bottom: 15px;
+        overflow: hidden;
+        max-height: 600px;
+        .entitiesBar {
+            max-height: 220px;
         }
-        h2 {
-            font-size: 1.3rem;
+        mat-expansion-panel {
+            background-color: rgba(0, 0, 0, 0.137);
         }
         .mat-list .mat-list-item {
             height: 25px;
         }
     }
-}
-
-ngx-simplebar {
-    width: 100%;
-    height: 100%;
 }
 
 mat-spinner {
