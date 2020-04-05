@@ -22,6 +22,7 @@ describe("BasicDataCategoryComponent", () => {
 
     it("should data be equal to the return of getBasicData", () => {
       response = {
+        title: "",
         authors: ["Peter", "Jhon"],
         publishDate: new Date(),
         keywords: ["example", "example2"],

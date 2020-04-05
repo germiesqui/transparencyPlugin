@@ -21,56 +21,58 @@ describe('WelcomeComponent', () => {
     component = new WelcomeComponent(mockBackendService, mockRouter);
   });
 
-  describe('onSubmit', () => {
-    it('should call postAnaliceUrl with correct url', () => {
+  describe("buttonClick", () => {
+    it("should call postAnaliceUrl with correct url", () => {
       component.url = URL;
       mockBackendService.postAnaliceUrl.and.returnValue(of(true));
 
-      component.onSubmit();
+      component.buttonClick(URL);
 
       expect(mockBackendService.postAnaliceUrl).toHaveBeenCalledWith(URL);
     });
 
-    it('should call router.navigate if url is correct', () => {
+    it("should call router.navigate if url is correct", () => {
       response = URL;
       mockBackendService.postAnaliceUrl.and.returnValue(of(response));
 
-      component.onSubmit();
+      component.buttonClick(URL);
 
       expect(mockRouter.navigate).toHaveBeenCalled();
     });
 
-    it('should postError be true if postAnaliceUrl return error', () => {
-      component.url = 'bad url';
+    it("should postError be true if postAnaliceUrl return error", () => {
+      component.url = "bad url";
       component.postError = PostError;
-      response = {status: 422, error: 'Url incorrecta'};
+      response = { status: 422, error: "URL inválida" };
       mockBackendService.postAnaliceUrl.and.returnValue(throwError(response));
 
-      component.onSubmit();
+      component.buttonClick("bad url");
 
       expect(component.postError).toBe(true);
     });
 
-    it('should postErrorMessage be equal to the error message thrown by the service if the status error is under 500', () => {
-      component.url = 'bad url';
+    it("should postErrorMessage be equal to the error message thrown by the service if the status error is under 500", () => {
+      component.url = "bad url";
       component.postErrorMessage = PostErrorMessage;
-      response = {status: 422, error: 'Url incorrecta'};
+      response = { status: 422, error: "URL inválida" };
       mockBackendService.postAnaliceUrl.and.returnValue(throwError(response));
 
-      component.onSubmit();
+      component.buttonClick("bad url");
 
-      expect(component.postErrorMessage).toBe('Url incorrecta');
+      expect(component.postErrorMessage).toBe("URL inválida");
     });
 
-    it('should postErrorMessage be equal to Error inesperado en el servidor if the status error is over 500', () => {
-      component.url = 'bad url';
+    it("should postErrorMessage be equal to Error inesperado en el servidor if the status error is over 500", () => {
+      component.url = "bad url";
       component.postErrorMessage = PostErrorMessage;
-      response = {status: 522, error: 'Url incorrecta'};
+      response = { status: 522, error: "URL inválida" };
       mockBackendService.postAnaliceUrl.and.returnValue(throwError(response));
 
-      component.onSubmit();
+      component.buttonClick("bad url");
 
-      expect(component.postErrorMessage).toBe('Error inesperado en el servidor');
+      expect(component.postErrorMessage).toBe(
+        "Error inesperado en el servidor"
+      );
     });
   });
 });

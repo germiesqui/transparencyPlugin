@@ -50,7 +50,7 @@ def allBasicDataMethods(article):
     return {
         'title': article.title,
         'authors': article.authors,
-        'publishDate': article.publish_date.strftime("%m/%d/%Y"),
+        'publishDate': article.publish_date.strftime("%d/%m/%Y"),
         'keywords': keywords,
         'summary': article.summary,
         'text': article.text,
