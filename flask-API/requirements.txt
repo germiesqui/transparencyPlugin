@@ -16,7 +16,7 @@ feedfinder2==0.0.4
 feedparser==5.2.1
 flake8==3.7.9
 Flask==1.1.1
-Flask-Cors==3.0.8
+Flask-Cors==3.0.9
 Flask-RESTful==0.3.7
 future==0.18.2
 geographiclib==1.50
