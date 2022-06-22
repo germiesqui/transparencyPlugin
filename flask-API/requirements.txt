@@ -37,7 +37,7 @@ mediacloud-cliff==2.6.0
 murmurhash==1.0.2
 newspaper3k==0.2.8
 nltk==3.4.5
-numpy==1.18.1
+numpy==1.22.0
 openpyxl==2.6.4
 pandas==0.24.2
 Pillow==6.2.1
